@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">article title | nana</title>
+  <title itemprop="name">springDataRedis入门 | nana</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -277,6 +277,30 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
 <div class="pattern-center-blank"></div>
 
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(http://ptl06lbd4.bkt.clouddn.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E8%83%8C%E6%99%AF%E5%9B%BE.jpg);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="http://ptl06lbd4.bkt.clouddn.com/%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E8%83%8C%E6%99%AF%E5%9B%BE.jpg">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      springDataRedis入门</h1>
+      <p class="entry-census">
+        <span>
+          <a href="nana.cn">
+            <img src="https://wx1.sinaimg.cn/large/006bYVyvgy1ftand2qurdj303c03cdfv.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="nana.cn">nana</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2019-7-21<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
@@ -284,15 +308,238 @@
         <div class="toc"></div>
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
-          <header class="entry-header">
-            <h1 class="entry-title">article title</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2019-7-9&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
-
-            <hr>
-          </header>
-        
         <div class="entry-content">
-          
+          <h2 id="一-：springDataRedis概述"><a href="#一-：springDataRedis概述" class="headerlink" title="一 ：springDataRedis概述"></a>一 ：springDataRedis概述</h2><h4 id="1-1-概述-："><a href="#1-1-概述-：" class="headerlink" title="1.1 概述 ："></a>1.1 概述 ：</h4><ol>
+<li>Spring-data-redis 是 spring 大家族的一部分</li>
+<li>提供了在 srping 应用中通过简单的配置访问 redis 服务，</li>
+<li>对 reids 底层开发包(Jedis, JRedis, and RJC)进行了高度封装</li>
+<li>RedisTemplate 提供了 redis 各种操作、异常处理及序列化，支持发布订阅，并对 spring 3.1 cache 进行了实现</li>
+</ol>
+<h4 id="1-2-针对-jedis-提供的功能"><a href="#1-2-针对-jedis-提供的功能" class="headerlink" title="1.2 针对 jedis 提供的功能"></a>1.2 针对 jedis 提供的功能</h4><ol>
+<li>连接池自动管理，提供了一个高度封装的“RedisTemplate”类    </li>
+<li>针对 jedis 客户端中大量 api 进行了归类封装,将同一类型操作封装为 operation 接口   </li>
+</ol>
+<pre><code class="java">ValueOperations：简单 K-V 操作
+
+SetOperations： set 类型数据操作 
+
+ZSetOperations： zset 类型数据操作 
+
+HashOperations：针对 map 类型的数据操作     
+
+ListOperations：针对 list 类型的数据操作</code></pre>
+<h2 id="二-：入门案例"><a href="#二-：入门案例" class="headerlink" title="二 ：入门案例"></a>二 ：入门案例</h2><h4 id="2-1-准备工作"><a href="#2-1-准备工作" class="headerlink" title="2.1 准备工作"></a>2.1 准备工作</h4><h5 id="2-1-1-引入redis（jedis-springdataredis）相关依赖，且引入-Junit-依赖-（为后续测试准备）"><a href="#2-1-1-引入redis（jedis-springdataredis）相关依赖，且引入-Junit-依赖-（为后续测试准备）" class="headerlink" title="2.1.1 引入redis（jedis,springdataredis）相关依赖，且引入 Junit 依赖 （为后续测试准备）"></a>2.1.1 引入redis（jedis,springdataredis）相关依赖，且引入 Junit 依赖 （为后续测试准备）</h5><pre><code class="xml">&lt;!-- 缓存 --&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;redis.clients&lt;/groupId&gt;
+&lt;artifactId&gt;jedis&lt;/artifactId&gt;
+&lt;version&gt;2.8.1&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.springframework.data&lt;/groupId&gt;
+&lt;artifactId&gt;spring-data-redis&lt;/artifactId&gt;
+&lt;version&gt;1.7.2.RELEASE&lt;/version&gt;
+&lt;/dependency</code></pre>
+<h5 id="2-1-2建立redis端口和ip地址相关连接（创建properties文件）"><a href="#2-1-2建立redis端口和ip地址相关连接（创建properties文件）" class="headerlink" title="2.1.2建立redis端口和ip地址相关连接（创建properties文件）"></a>2.1.2建立redis端口和ip地址相关连接（创建properties文件）</h5><pre><code class="properties">redis.host=192.168.66.66
+redis.port=6379
+redis.pass=
+redis.database=0
+redis.maxIdle=300
+redis.maxWait=3000
+redis.testOnBorrow=true</code></pre>
+<ul>
+<li>maxIdle ：最大空闲数 </li>
+<li>maxWaitMillis:连接时的最大等待毫秒数</li>
+<li>testOnBorrow：在提取一个 jedis 实例时，是否提前进行验证操作；如果为 true，则得到的 jedis示例均是可用的。</li>
+</ul>
+<h5 id="2-1-3配置spring-和-redis-的整合文件"><a href="#2-1-3配置spring-和-redis-的整合文件" class="headerlink" title="2.1.3配置spring 和 redis 的整合文件"></a>2.1.3配置spring 和 redis 的整合文件</h5><pre><code class="xml">&lt;context:property-placeholder location=&quot;classpath*:properties/*.properties&quot; /&gt;
+&lt;!-- redis 相关配置 获取的是上面的properties 中配置的文件--&gt;
+&lt;bean id=&quot;poolConfig&quot; class=&quot;redis.clients.jedis.JedisPoolConfig&quot;&gt;
+&lt;property name=&quot;maxIdle&quot; value=&quot;${redis.maxIdle}&quot; /&gt;
+&lt;property name=&quot;maxWaitMillis&quot; value=&quot;${redis.maxWait}&quot; /&gt;
+&lt;property name=&quot;testOnBorrow&quot; value=&quot;${redis.testOnBorrow}&quot; /&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;JedisConnectionFactory&quot;
+lass=&quot;org.springframework.data.redis.connection.jedis.JedisConnectionFactory&quot;
+p:host-name=&quot;${redis.host}&quot; p:port=&quot;${redis.port}&quot; p:password=&quot;${redis.pass}&quot;
+:pool-config-ref=&quot;poolConfig&quot;/&gt;
+&lt;bean id=&quot;redisTemplate&quot;
+lass=&quot;org.springframework.data.redis.core.RedisTemplate&quot;&gt;
+&lt;property name=&quot;connectionFactory&quot; ref=&quot;JedisConnectionFactory&quot; /&gt;
+&lt;/bean&gt;</code></pre>
+<h2 id="三-：不同值类型的操作"><a href="#三-：不同值类型的操作" class="headerlink" title="三 ：不同值类型的操作"></a>三 ：不同值类型的操作</h2><h5 id="3-1-搭建好环境之后，书写一个测试类"><a href="#3-1-搭建好环境之后，书写一个测试类" class="headerlink" title="3.1 搭建好环境之后，书写一个测试类"></a>3.1 搭建好环境之后，书写一个测试类</h5><h5 id="3-2-普通值类型操作"><a href="#3-2-普通值类型操作" class="headerlink" title="3.2 普通值类型操作"></a>3.2 普通值类型操作</h5><pre><code class="java">/**
+ *  测试相关的依赖注入
+ * */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations=&quot;classpath:spring/applicationContext-redis.xml&quot;)
+public class TestValue {
+    //注入 redisTemplate
+    @Autowired
+    private RedisTemplate redisTemplate;
+    // 进行赋值的操作
+    @Test
+    public void setValue(){
+        redisTemplate.boundValueOps(&quot;name&quot;).set(&quot;itcast&quot;);
+    }
+    //获取值的操作
+    @Test
+    public void getValue(){
+        String str = (String) redisTemplate.boundValueOps(&quot;name&quot;).get();
+        System.out.println(str);
+    }
+    // 删除值的操作
+    @Test
+    public void deleteValue(){
+        redisTemplate.delete(&quot;name&quot;);;
+    }
+}</code></pre>
+<h5 id="3-3-set-类型值操作"><a href="#3-3-set-类型值操作" class="headerlink" title="3.3 set 类型值操作"></a>3.3 set 类型值操作</h5><pre><code class="java">@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations=&quot;classpath:spring/applicationContext-redis.xml&quot;)
+public class TestSet {
+    @Autowired
+    private RedisTemplate redisTemplate;
+    /**
+     * 存入值
+     */
+    @Test
+    public void setValue(){
+        redisTemplate.boundSetOps(&quot;nameset&quot;).add(&quot;曹操&quot;);
+        redisTemplate.boundSetOps(&quot;nameset&quot;).add(&quot;刘备&quot;);
+        redisTemplate.boundSetOps(&quot;nameset&quot;).add(&quot;孙权&quot;);
+    }
+    /**
+     * 提取值
+     */
+    @Test
+    public void getValue(){Set members = redisTemplate.boundSetOps(&quot;nameset&quot;).members();
+        System.out.println(members);
+    }
+    /**
+     * 删除集合中的某一个值
+     */
+    @Test
+    public void deleteValue(){
+        redisTemplate.boundSetOps(&quot;nameset&quot;).remove(&quot;孙权&quot;);
+    }
+    /**
+     * 删除整个集合
+     */
+    @Test
+    public void deleteAllValue(){
+        redisTemplate.delete(&quot;nameset&quot;);
+    }
+}</code></pre>
+<h5 id="3-4-List-类型值操作"><a href="#3-4-List-类型值操作" class="headerlink" title="3.4 List 类型值操作"></a>3.4 List 类型值操作</h5><ul>
+<li>右压栈</li>
+</ul>
+<pre><code class="java">/**
+ * 右压栈：后添加的对象排在后边
+ */
+@Test
+public void testSetValue1(){
+        redisTemplate.boundListOps(&quot;namelist1&quot;).rightPush(&quot;刘备&quot;);
+        redisTemplate.boundListOps(&quot;namelist1&quot;).rightPush(&quot;关羽&quot;);
+        redisTemplate.boundListOps(&quot;namelist1&quot;).rightPush(&quot;张飞&quot;);
+        }
+/**
+ * 显示右压栈集合
+ */
+@Test
+public void testGetValue1(){
+        List list=redisTemplate.boundListOps(&quot;namelist1&quot;).range(0,10);
+        System.out.println(list);
+        }</code></pre>
+<p>运行结果 ：[刘备, 关羽, 张飞]    </p>
+<ul>
+<li>左压栈</li>
+</ul>
+<pre><code class="java">/** 左压栈：后添加的对象排在前边
+        */
+@Test
+public void testSetValue2(){
+        redisTemplate.boundListOps(&quot;namelist2&quot;).leftPush(&quot;刘备&quot;);
+        redisTemplate.boundListOps(&quot;namelist2&quot;).leftPush(&quot;关羽&quot;);
+        redisTemplate.boundListOps(&quot;namelist2&quot;).leftPush(&quot;张飞&quot;);
+        }
+/**
+ * 显示左压栈集合
+ */
+@Test
+public void testGetValue2(){
+        List list = redisTemplate.boundListOps(&quot;namelist2&quot;).range(0, 10);
+        System.out.println(list);
+        }</code></pre>
+<p>运行结果 ：[张飞, 关羽, 刘备]    </p>
+<ul>
+<li>根据索引查询元素</li>
+</ul>
+<pre><code class="java">/**
+ *  查询某个元素
+ * 
+ */
+*/
+@Test
+public void testSearchByIndex(){
+        String s = (String)redisTemplate.boundListOps(&quot;namelist1&quot;).index(1);
+        System.out.println(s);
+        }</code></pre>
+<ul>
+<li>移除某个元素</li>
+</ul>
+<pre><code class="java">/**
+ * 移除集合某个元素
+ */
+@Test
+public void testRemoveByIndex(){
+        redisTemplate.boundListOps(&quot;namelist1&quot;).remove(1, &quot;关羽&quot;);
+        }</code></pre>
+<h5 id="3-5-Hash-类型值操作"><a href="#3-5-Hash-类型值操作" class="headerlink" title="3.5 Hash 类型值操作"></a>3.5 Hash 类型值操作</h5><p>创建测试类</p>
+<ul>
+<li>存入值</li>
+</ul>
+<pre><code class="java">@Test
+public void testSetValue(){
+        redisTemplate.boundHashOps(&quot;namehash&quot;).put(&quot;a&quot;, &quot;唐僧&quot;);
+        redisTemplate.boundHashOps(&quot;namehash&quot;).put(&quot;b&quot;, &quot;悟空&quot;);
+        redisTemplate.boundHashOps(&quot;namehash&quot;).put(&quot;c&quot;, &quot;八戒&quot;);
+        redisTemplate.boundHashOps(&quot;namehash&quot;).put(&quot;d&quot;, &quot;沙僧&quot;);
+}</code></pre>
+<ul>
+<li>提取所有的key</li>
+</ul>
+<pre><code class="java">@Test
+public void testGetKeys(){
+        Set s = redisTemplate.boundHashOps(&quot;namehash&quot;).keys();
+        System.out.println(s);
+        }</code></pre>
+<p>运行结果 ：[a, b, c, d]    </p>
+<ul>
+<li>提取所有的值</li>
+</ul>
+<pre><code class="java">@Test
+public void testGetValues(){
+        List values = redisTemplate.boundHashOps(&quot;namehash&quot;).values();
+        System.out.println(values);
+        }</code></pre>
+<p>运行结果 ：[唐僧, 悟空, 八戒, 沙僧]    </p>
+<ul>
+<li>根据key提取值</li>
+</ul>
+<pre><code class="java">@Test
+public void testGetValueByKey(){
+        Object object = redisTemplate.boundHashOps(&quot;namehash&quot;).get(&quot;b&quot;);
+        System.out.println(object);
+        }</code></pre>
+<p>运行结果 ：悟空</p>
+<ul>
+<li>根据key移除值</li>
+</ul>
+<pre><code class="java">@Test
+public void testRemoveValueByKey(){
+redisTemplate.boundHashOps(&quot;namehash&quot;).delete(&quot;c&quot;);
+}</code></pre>
+<p>运行后再次查看集合内容： [唐僧, 悟空, 沙僧]    </p>
+
         </div>
         <!-- .entry-content -->
         <div class="single-reward">
@@ -319,28 +566,11 @@
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2019/07/10/hello-world/" rel="prev">
-              <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                Hello World</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
         
           
-            <div class="post-nepre half next">
+            <div class="post-nepre full next">
           
-            <a href="/2018/12/12/Hexo-Theme-Sakura/" rel="next">
+            <a href="/2019/07/11/AngularJS入门/" rel="next">
               <div class="background">
                 <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png">
               </div>
@@ -348,7 +578,7 @@
               Next Post</span>
               <div class="info">
                 <h3>
-                Hexo-Theme-Sakura</h3>
+                a</h3>
                 <hr>
               </div>
             </a>
@@ -372,16 +602,16 @@
 
       <section class="author-profile">
         <div class="info" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="" height="70" width="70"></a>
+          <a href="nana.cn" class="profile gravatar"><img src="https://wx1.sinaimg.cn/large/006bYVyvgy1ftand2qurdj303c03cdfv.jpg" itemprop="image" alt="nana" height="70" width="70"></a>
           <div class="meta">
             <span class="title">Author</span>
             <h3 itemprop="name">
-            <a href="" itemprop="url" rel="author"></a>
+            <a href="nana.cn" itemprop="url" rel="author">nana</a>
             </h3>
           </div>
         </div>
         <hr>
-        <p><i class="iconfont icon-write"></i></p>
+        <p><i class="iconfont icon-write"></i>一个好奇的人</p>
       </section>
     </main><!-- #main -->
   </div><!-- #primary -->
