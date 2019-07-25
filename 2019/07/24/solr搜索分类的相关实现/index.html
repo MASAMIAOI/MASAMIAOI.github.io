@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Tag: 悦读 | nana</title>
+  <title itemprop="name">solr搜素分类的相关实现 | nana</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -249,229 +249,191 @@
   </div>
 </header>
 
-      
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
 <div class="pattern-center-blank"></div>
-<div class="pattern-center ">
-  <div class="pattern-attachment-img">
-    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/banner/reading.jpg" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      solr搜素分类的相关实现</h1>
+      <p class="entry-census">
+        <span>
+          <a href="nana.cn">
+            <img src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="nana.cn">nana</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2019-7-24<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
   </div>
-  <header class="pattern-header ">
-    <h1 class="cat-title">悦读</h1>
-  </header>
-</div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h2 id="一-：效果概述"><a href="#一-：效果概述" class="headerlink" title="一 ：效果概述"></a>一 ：效果概述</h2><p><img src="http://tva1.sinaimg.cn/large/0060lm7Tly1g5cc920y81j30os06iaax.jpg" alt></p>
+<h2 id="二-：相关步骤"><a href="#二-：相关步骤" class="headerlink" title="二 ：相关步骤"></a>二 ：相关步骤</h2><h4 id="2-1-分组展示的字段展示"><a href="#2-1-分组展示的字段展示" class="headerlink" title="2.1 分组展示的字段展示"></a>2.1 分组展示的字段展示</h4><p><img src="http://tva1.sinaimg.cn/large/0060lm7Tly1g5cc9278umj30mc0c3ta6.jpg" alt></p>
+<h4 id="2-2-分组的数据格式展示"><a href="#2-2-分组的数据格式展示" class="headerlink" title="2.2 分组的数据格式展示"></a>2.2 分组的数据格式展示</h4><p><img src="http://tva1.sinaimg.cn/large/0060lm7Tly1g5cc92gz87j305m04vweg.jpg" alt></p>
+<h4 id="2-3-后台页面代码实现（在之前的高亮显示中添加如下内容）"><a href="#2-3-后台页面代码实现（在之前的高亮显示中添加如下内容）" class="headerlink" title="2.3 后台页面代码实现（在之前的高亮显示中添加如下内容）"></a>2.3 后台页面代码实现（在之前的高亮显示中添加如下内容）</h4><pre><code class="java">  // 使用分组查询获取商品的分类并展示
+        // 创建一个对象 ，其中需要放入 分组查询的条件
+       SimpleQuery groupQuery = new SimpleQuery();
+        // 设置查询条件 和高亮条件一致， 保证查询结果最终是一致的
+        groupQuery.addCriteria(criteria);
+        // 赋值分组查询的参数
+        // 创建分组条件
+        GroupOptions groupOptions = new GroupOptions();
+        // 设置分组域名
+        groupOptions.addGroupByField(&quot;item_category&quot;);
+        groupQuery.setGroupOptions(groupOptions);
+        GroupPage&lt;TbItem&gt; groupPage = solrTemplate.queryForGroupPage(groupQuery, TbItem.class);
+        // 获取分组域名的结果
+        GroupResult&lt;TbItem&gt; groupResult = groupPage.getGroupResult(&quot;item_category&quot;);
+        // 获取数据格式的数组
+        Page&lt;GroupEntry&lt;TbItem&gt;&gt; groupEntries = groupResult.getGroupEntries();
+        List&lt;GroupEntry&lt;TbItem&gt;&gt; content = groupEntries.getContent();
+        // 创建一个集合。讲循环获取的值放入到集合中
+        ArrayList&lt;String&gt; categoryList = new ArrayList&lt;&gt;();
+        // 循环多个对象 ，获取其中的内容
+        for (GroupEntry&lt;TbItem&gt; groupEntry : content) {
+            // 获取到其中的每一个值，创建一个集合，将内容放入其中，并且返会内容
+            categoryList.add(groupEntry.getGroupValue());
+        }
+
+  map.put(&quot;categoryList&quot;,categoryList);//分类名的集合
+        return map;</code></pre>
+<h4 id="2-4-前台页面的代码实现"><a href="#2-4-前台页面的代码实现" class="headerlink" title="2.4 前台页面的代码实现"></a>2.4 前台页面的代码实现</h4><pre><code class="html">&lt;div class=&quot;type-wrap&quot;&gt;
+                    &lt;div class=&quot;fl key&quot;&gt;类别&lt;/div&gt;
+                    &lt;div class=&quot;fl value&quot;&gt;
+                        &lt;ul class=&quot;type-list&quot;&gt;
+                        &lt;li ng-repeat=&quot;category in searchResult.categoryList&quot;&gt;&lt;a&gt;{{category}}&lt;/a&gt;
+                        &lt;/ul&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;fl ext&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;</code></pre>
+<h2 id="三-：操作大致步骤"><a href="#三-：操作大致步骤" class="headerlink" title="三 ：操作大致步骤"></a>三 ：操作大致步骤</h2><ol>
+<li>分组展示需要用到   SimpleQuery ，所以需要创建一个 SimpleQuery 对象</li>
+<li>设置查询条件 ，需要和高亮显示内容一致，所以需要将高亮内容的条件也添加到这次创建的对象之中</li>
+<li>创建分组查询的函数   groupOptions</li>
+<li>需要设置分组的域名   groupOptions.addGroupByField(“item_category”);   【里面是需要分组的字段】</li>
+<li>然后将设置好的内容复制到  groupOptions 中</li>
+<li>调用solrTemplate.queryForGroupPage(groupQuery, TbItem.class);  进行分组</li>
+<li>获取分组好的结果  groupResult.getGroupEntries();  【表示真个结果的内容】</li>
+<li>获取好其中的每一个对象  groupEntries.getContent(); 【获取的是其中对象集合】</li>
+<li>需要创建一个集合，将循环的每一个对象的里面的 value 内容进行分组</li>
+<li>对获取对象集合进行循环，将里面的所有 value 内容放入到集合中。</li>
+<li>最终返回给 map ，然后将map 集合返回</li>
+</ol>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏<div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/custom/donate/nana.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/custom/donate/nana.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2019/07/24/solr搜素高亮的相关实现/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                solr搜素高亮的相关实现</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2019/07/22/solr以及springDataSolr入门/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                solr以及springDataSolr入门</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
       
-  <!-- 首页默认取最最新文章集 -->
-  
-    <article class="post post-list" itemscope="" itemtype="http://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2019/07/24/solr搜素高亮的相关实现/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2019/07/24/solr搜素高亮的相关实现/">
-    solr搜素高亮的相关实现</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2019-7-24</div>
-    <p>
-    solr搜素高亮的相关实现</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2019/07/24/solr搜素高亮的相关实现/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="http://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2019/07/24/solr搜索分类的相关实现/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2019/07/24/solr搜索分类的相关实现/">
-    solr搜素分类的相关实现</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2019-7-24</div>
-    <p>
-    solr搜素分类的相关实现</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2019/07/24/solr搜索分类的相关实现/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="http://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2019/07/22/solr以及springDataSolr入门/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2019/07/22/solr以及springDataSolr入门/">
-    solr以及springDataSolr入门</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2019-7-22</div>
-    <p>
-    SpringDataSolr个人总结</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2019/07/22/solr以及springDataSolr入门/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="http://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2019/07/21/springDataRedis入门/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2019/07/21/springDataRedis入门/">
-    springDataRedis入门</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2019-7-21</div>
-    <p>
-    SpringDataRedis个人入门总结</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2019/07/21/springDataRedis入门/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="http://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2019/07/11/AngularJS入门/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2019/07/11/AngularJS入门/">
-    AngularJs入门使用</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2019-7-11</div>
-    <p>
-    AngularJs入门使用</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2019/07/11/AngularJS入门/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="http://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2018/12/12/Hexo-Theme-Sakura/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2018/12/12/Hexo-Theme-Sakura/">
-    Hexo-Theme-Sakura</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2018-12-12</div>
-    <p>
-    hexo-sakura主题使用教程</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2018/12/12/Hexo-Theme-Sakura/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "GyC3NzMvd0hT9Yyd2hYIC0MN-gzGzoHsz",
+        appKey: "mgOpfzbkHYqU92CV4IDlAUHQ",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
 
-
-      <div class="clearer">
-      </div>
-    </main>
-    <!--  -->
-    
-  </div>
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <a href="nana.cn" class="profile gravatar"><img src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg" itemprop="image" alt="nana" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="nana.cn" itemprop="url" rel="author">nana</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>一个好奇的人</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
+
+
+
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>
