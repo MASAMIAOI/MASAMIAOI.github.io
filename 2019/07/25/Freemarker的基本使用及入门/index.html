@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">solr搜素高亮的相关实现 | nana</title>
+  <title itemprop="name">Freemarker的基本使用及入门 | nana</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -259,7 +259,7 @@
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
-      solr搜素高亮的相关实现</h1>
+      Freemarker的基本使用及入门</h1>
       <p class="entry-census">
         <span>
           <a href="nana.cn">
@@ -271,7 +271,7 @@
         </span>
         <span class="bull">
         ·</span>
-        2019-7-24<span class="bull">
+        2019-7-25<span class="bull">
         ·</span>
       <span id="busuanzi_value_page_pv"></span>次阅读</p>
     </header>
@@ -285,161 +285,289 @@
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h2 id="一-：搜索关键字高亮化的显示"><a href="#一-：搜索关键字高亮化的显示" class="headerlink" title="一 ：搜索关键字高亮化的显示"></a>一 ：搜索关键字高亮化的显示</h2><h3 id="1-1-效果概述"><a href="#1-1-效果概述" class="headerlink" title="1.1 效果概述"></a>1.1 效果概述</h3><p><img src="https://ae01.alicdn.com/kf/H9a619eb7ac964c738a9f68de85a3f790W.jpg" alt></p>
-<h3 id="1-2相关步骤"><a href="#1-2相关步骤" class="headerlink" title="1.2相关步骤"></a>1.2相关步骤</h3><h4 id="1-2-1-高亮数据格式详图"><a href="#1-2-1-高亮数据格式详图" class="headerlink" title="1.2.1 高亮数据格式详图"></a>1.2.1 高亮数据格式详图</h4><pre><code class="json">{
-    &quot;allFacets&quot;:[
-        null
-    ],
-    &quot;content&quot;:[
-        {
-            &quot;brand&quot;:&quot;小米&quot;,
-            &quot;category&quot;:&quot;手机&quot;,
-            &quot;goodsId&quot;:1,
-            &quot;id&quot;:1231490,
-            &quot;image&quot;:&quot;http://img14.360buyimg.com/n1/s450x450_jfs/t4135/297/388153057/335769/45cf4be5/58b3fa6eN2602572e.jpg&quot;,
-            &quot;price&quot;:1999.0,
-            &quot;seller&quot;:&quot;小米&quot;,
-            &quot;specMap&quot;:{
-                &quot;网络&quot;:&quot;联通3G&quot;,
-                &quot;机身内存&quot;:&quot;16G&quot;
-            },
-            &quot;title&quot;:&quot;白色 联通3G手机&quot;
-        },
+          <h2 id="一-：-Freemarker-的概述"><a href="#一-：-Freemarker-的概述" class="headerlink" title="一 ： Freemarker 的概述"></a>一 ： Freemarker 的概述</h2><p>l  FreeMarker 是一个用 Java 语言编写的模板引擎，它基于模板来生成文本输出。</p>
+<p>l  Freemarker可以用作表现层的实现技术，还可以用于生成 XML、Html、或 Java 等。</p>
+<p><img src="https://ae01.alicdn.com/kf/Hef4db65a9b1240e7947b3a4802d8c0cbZ.jpg" alt></p>
+<h2 id="二-：Freemarker-的基本使用步骤"><a href="#二-：Freemarker-的基本使用步骤" class="headerlink" title="二 ：Freemarker  的基本使用步骤"></a>二 ：Freemarker  的基本使用步骤</h2><h4 id="2-1-项目基本结构"><a href="#2-1-项目基本结构" class="headerlink" title="2.1 项目基本结构"></a>2.1 项目基本结构</h4><p><img src="https://ae01.alicdn.com/kf/He6cd73796c794cd38c8e0d209d4271c0r.jpg" alt></p>
+<h4 id="2-2-基本使用步骤"><a href="#2-2-基本使用步骤" class="headerlink" title="2.2 基本使用步骤"></a>2.2 基本使用步骤</h4><h5 id="2-2-1-导入相关依赖-Freemarker依赖"><a href="#2-2-1-导入相关依赖-Freemarker依赖" class="headerlink" title="2.2.1 导入相关依赖 Freemarker依赖"></a>2.2.1 导入相关依赖 Freemarker依赖</h5><pre><code class="xml">&lt;dependency&gt;
+        &lt;groupId&gt;org.freemarker&lt;/groupId&gt;
+        &lt;artifactId&gt;freemarker&lt;/artifactId&gt;
+        &lt;version&gt;2.3.23&lt;/version&gt;
+&lt;/dependency&gt;  </code></pre>
+<h5 id="2-2-2-模板结构"><a href="#2-2-2-模板结构" class="headerlink" title="2.2.2 模板结构"></a>2.2.2 模板结构</h5><p>模板文件中四种元素</p>
+<p>l  文本：直接输出的部分</p>
+<p>l  注释：即&lt;#–…–&gt;格式不会输出  </p>
+<p>l  插值（Interpolation）：即${..}部分,将使用数据模型中的部分替代输出</p>
+<p>l  FTL指令：FreeMarker指令，和HTML标记类似，名字前加#予以区分，不会输出。</p>
+<h5 id="2-2-3-创建模板文件"><a href="#2-2-3-创建模板文件" class="headerlink" title="2.2.3 创建模板文件"></a>2.2.3 创建模板文件</h5><pre><code class="html">&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Freemarker入门小DEMO &lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;#--我只是一个注释，我不会有任何输出  --&gt;
+${name},你好。${message}
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h5 id="2-2-4-生成文件"><a href="#2-2-4-生成文件" class="headerlink" title="2.2.4 生成文件"></a>2.2.4 生成文件</h5><p>使用步骤：</p>
+<p>第一步：创建一个 Configuration 对象，直接 new 一个对象。构造方法的参数就是freemarker的版本号。</p>
+<p>第二步：设置模板文件所在的路径。</p>
+<p>第三步：设置模板文件使用的字符集。一般就是 utf-8.</p>
+<p>第四步：加载一个模板，创建一个模板对象。</p>
+<p>第五步：创建一个模板使用的数据集，可以是 pojo 也可以是 map。一般是 Map。</p>
+<p>第六步：创建一个 Writer 对象，一般创建一 FileWriter 对象，指定生成的文件名。</p>
+<p>第七步：调用模板对象的 process 方法输出文件。</p>
+<p>第八步：关闭流</p>
+<p>代码：</p>
+<p>创建Test类 main方法如下：</p>
+<pre><code class="java">  //1.创建配置类
+        Configuration configuration=new Configuration(Configuration.getVersion());
+        //2.设置模板所在的目录 
+        configuration.setDirectoryForTemplateLoading(new File(&quot;D:/pinyougou_work/freemarkerDemo/src/main/resources/&quot;));
+        //3.设置字符集
+        configuration.setDefaultEncoding(&quot;utf-8&quot;);
+        //4.加载模板
+        Template template = configuration.getTemplate(&quot;test.ftl&quot;);
+        //5.创建数据模型
+        Map map=new HashMap();
+        map.put(&quot;name&quot;, &quot;张三 &quot;);
+        map.put(&quot;message&quot;, &quot;欢迎来到神奇的品优购世界！&quot;);
+        //6.创建Writer对象
+        Writer out =new FileWriter(new File(&quot;d:\\test.html&quot;));
+        //7.输出
+        template.process(map, out);
+        //8.关闭Writer对象
+        out.close();</code></pre>
+<p>执行后，在D盘根目录即可看到生成的test.html ，打开看看 </p>
+<p><img src="https://ae01.alicdn.com/kf/Ha36be34768c84186abe38d8d08401dbcj.jpg" alt></p>
+<h2 id="三-：相关指令"><a href="#三-：相关指令" class="headerlink" title="三 ：相关指令"></a>三 ：相关指令</h2><h4 id="3-1-FTL指令"><a href="#3-1-FTL指令" class="headerlink" title="3.1 FTL指令"></a>3.1 FTL指令</h4><h5 id="3-1-1-assign-指令"><a href="#3-1-1-assign-指令" class="headerlink" title="3.1.1 assign 指令"></a>3.1.1 assign 指令</h5><p>此指令用于在页面上定义一个变量 </p>
+<ul>
+<li>定义简单类型 ：</li>
+</ul>
+<pre><code class="html">&lt;#assign linkman=&quot;周先生&quot;&gt;
+联系人：${linkman}</code></pre>
+<ul>
+<li>定义对象类型 ：</li>
+</ul>
+<pre><code class="html">&lt;#assign info={&quot;mobile&quot;:&quot;13301231212&quot;,&#39;address&#39;:&#39;北京市昌平区王府街&#39;} &gt;
+电话：${info.mobile}  地址：${info.address}</code></pre>
+<p>运行效果 ：</p>
+<p><img src="https://ae01.alicdn.com/kf/H528a2bcc2e0f49098a3c90e50cd2db7bn.jpg" alt></p>
+<h5 id="3-1-2-include-指令"><a href="#3-1-2-include-指令" class="headerlink" title="3.1.2 include 指令"></a>3.1.2 include 指令</h5><p>此指令用于模板文件的嵌套</p>
+<p>创建模板文件head.ftl</p>
+<pre><code class="html">&lt;h1&gt;黑马信息网&lt;/h1&gt;</code></pre>
+<p>我们修改test.ftl，在模板文件中使用include指令引入刚才我们建立的模板 </p>
+<pre><code class="html">&lt;#include &quot;head.ftl&quot;&gt;</code></pre>
+<h5 id="3-1-3-if-指令"><a href="#3-1-3-if-指令" class="headerlink" title="3.1.3 if 指令"></a>3.1.3 if 指令</h5><p>在模板文件上添加</p>
+<pre><code class="html">&lt;#if success=true&gt;
+  你已通过实名认证
+&lt;#else&gt;  
+  你未通过实名认证
+&lt;/#if&gt;</code></pre>
+<p>在代码中对str变量赋值</p>
+<pre><code class="java">map.put(&quot;success&quot;, true);</code></pre>
+<p>在freemarker的判断中，可以使用= 也可以使用== </p>
+<h5 id="3-1-4-List-指令"><a href="#3-1-4-List-指令" class="headerlink" title="3.1.4 List 指令"></a>3.1.4 List 指令</h5><p>需求，实现商品价格表，如下图： </p>
+<p><img src="https://ae01.alicdn.com/kf/H2ec3b2f362d04e788e5baa5c6826e401E.jpg" alt></p>
+<p>代码中对变量goodsList赋值</p>
+<pre><code class="java">    List goodsList=new ArrayList();
+        Map goods1=new HashMap();
+        goods1.put(&quot;name&quot;, &quot;苹果&quot;);
+        goods1.put(&quot;price&quot;, 5.8);
+        Map goods2=new HashMap();
+        goods2.put(&quot;name&quot;, &quot;香蕉&quot;);
+        goods2.put(&quot;price&quot;, 2.5);
+        Map goods3=new HashMap();
+        goods3.put(&quot;name&quot;, &quot;橘子&quot;);
+        goods3.put(&quot;price&quot;, 3.2);
+        goodsList.add(goods1);
+        goodsList.add(goods2);
+        goodsList.add(goods3);
+        map.put(&quot;goodsList&quot;, goodsList);</code></pre>
+<p>在模板文件上添加 </p>
+<pre><code class="html">----商品价格表----&lt;br&gt;
+&lt;#list goodsList as goods&gt;
+  ${goods_index+1} 商品名称： ${goods.name} 价格：${goods.price}&lt;br&gt;
+&lt;/#list&gt;</code></pre>
+<p>如果想在循环中得到索引，使用循环变量+_index就可以得到。 </p>
+<h4 id="3-2-内嵌函数"><a href="#3-2-内嵌函数" class="headerlink" title="3.2 内嵌函数"></a>3.2 内嵌函数</h4><p>内建函数语法格式： 变量+?+函数名称</p>
+<h5 id="3-2-1-获取集合大小"><a href="#3-2-1-获取集合大小" class="headerlink" title="3.2.1 获取集合大小"></a>3.2.1 获取集合大小</h5><p>我们通常要得到某个集合的大小，如下图：</p>
+<p><img src="https://ae01.alicdn.com/kf/H13a6fb0dca3947c4a5dbb0169e934788i.jpg" alt></p>
+<p>我们使用size函数来实现，代码如下：</p>
+<pre><code class="html">共  ${goodsList?size}  条记录</code></pre>
+<h5 id="3-2-2-转换-Json-字符串为对象"><a href="#3-2-2-转换-Json-字符串为对象" class="headerlink" title="3.2.2 转换 Json 字符串为对象"></a>3.2.2 转换 Json 字符串为对象</h5><p>我们通常需要将json字符串转换为对象，那如何处理呢？看代码 </p>
+<pre><code class="html">    &lt;#assign text=&quot;{&#39;bank&#39;:&#39;工商银行&#39;,&#39;account&#39;:&#39;10101920201920212&#39;}&quot; /&gt;
+    &lt;#assign data=text?eval /&gt;
+    开户行：${data.bank}  账号：${data.account}</code></pre>
+<h5 id="3-2-3-日期格式化"><a href="#3-2-3-日期格式化" class="headerlink" title="3.2.3 日期格式化"></a>3.2.3 日期格式化</h5><p>代码中对变量赋值：</p>
+<pre><code class="java">dataModel.put(&quot;today&quot;, new Date());</code></pre>
+<p>在模板文件中加入</p>
+<pre><code class="html">当前日期：${today?date} &lt;br&gt;
+当前时间：${today?time} &lt;br&gt;   
+当前日期+时间：${today?datetime} &lt;br&gt;        
+日期格式化：  ${today?string(&quot;yyyy年MM月&quot;)}</code></pre>
+<p>运行效果如下：</p>
+<p><img src="https://ae01.alicdn.com/kf/H17454a997d4f4c4783cd8ab33c1fc90f9.jpg" alt></p>
+<h5 id="3-2-4-数字转换为字符串"><a href="#3-2-4-数字转换为字符串" class="headerlink" title="3.2.4 数字转换为字符串"></a>3.2.4 数字转换为字符串</h5><p>代码中对变量赋值：</p>
+<pre><code class="java">map.put(&quot;point&quot;, 102920122);</code></pre>
+<p>修改模板：</p>
+<pre><code class="html">累计积分：${point}</code></pre>
+<p>页面显示：</p>
+<p><img src="https://ae01.alicdn.com/kf/H55f065c7bdd84a38b40a77c0f7140bf04.jpg" alt></p>
+<p>我们会发现数字会以每三位一个分隔符显示，有些时候我们不需要这个分隔符，就需要将数字转换为字符串,使用内建函数c </p>
+<pre><code class="html">累计积分：${point?c}</code></pre>
+<p>页面显示效果如下： </p>
+<p><img src="https://ae01.alicdn.com/kf/H3c0e2fcd585240449899cda4cd2ad8e1U.jpg" alt></p>
+<h4 id="3-3-空值处理运算符"><a href="#3-3-空值处理运算符" class="headerlink" title="3.3 空值处理运算符"></a>3.3 空值处理运算符</h4><p>如果你在模板中使用了变量但是在代码中没有对变量赋值，那么运行生成时会抛出异常。但是有些时候，有的变量确实是null，怎么解决这个问题呢？ </p>
+<h5 id="3-3-1-判断某变量是否存在-“-”"><a href="#3-3-1-判断某变量是否存在-“-”" class="headerlink" title="3.3.1 判断某变量是否存在 “??”"></a>3.3.1 判断某变量是否存在 “??”</h5><p>用法为:variable??,如果该变量存在,返回true,否则返回false  </p>
+<pre><code class="html">&lt;#if aaa??&gt;
+  aaa变量存在
+&lt;#else&gt;
+  aaa变量不存在
+&lt;/#if&gt;</code></pre>
+<h5 id="3-3-2-缺失变量默认值-：-“！”"><a href="#3-3-2-缺失变量默认值-：-“！”" class="headerlink" title="3.3.2 缺失变量默认值 ： “！”"></a>3.3.2 缺失变量默认值 ： “！”</h5><p>我们除了可以判断是否为空值，也可以使用!对null值做转换处理</p>
+<p>在模板文件中加入</p>
+<pre><code class="html">  ${aaa!&#39;-&#39;}</code></pre>
+<p>在代码中不对aaa赋值，也不会报错了 ，当aaa为null则返回！后边的内容-</p>
+<h4 id="3-4-运算符"><a href="#3-4-运算符" class="headerlink" title="3.4 运算符"></a>3.4 运算符</h4><h5 id="3-4-1-算数运算符"><a href="#3-4-1-算数运算符" class="headerlink" title="3.4.1 算数运算符"></a>3.4.1 算数运算符</h5><p>FreeMarker表达式中完全支持算术运算,FreeMarker支持的算术运算符包括:+, - , * , / , % </p>
+<h5 id="3-4-2-逻辑运算符"><a href="#3-4-2-逻辑运算符" class="headerlink" title="3.4.2 逻辑运算符"></a>3.4.2 逻辑运算符</h5><p>逻辑运算符有如下几个: </p>
+<p>l  逻辑与：&amp;&amp; </p>
+<p>l  逻辑或：|| </p>
+<p>l  逻辑非：! </p>
+<p>注意：逻辑运算符只能作用于布尔值,否则将产生错误 </p>
+<h5 id="3-4-3-比较运算符"><a href="#3-4-3-比较运算符" class="headerlink" title="3.4.3 比较运算符"></a>3.4.3 比较运算符</h5><p>表达式中支持的比较运算符有如下几个: </p>
+<p>l  =或者==：判断两个值是否相等. </p>
+<p>l  !=：判断两个值是否不等. </p>
+<p>l  &gt;或者gt：判断左边值是否大于右边值 </p>
+<p>l  &gt;=或者gte：判断左边值是否大于等于右边值 </p>
+<p>l  &lt;或者lt：判断左边值是否小于右边值 </p>
+<p>l  &lt;=或者lte：判断左边值是否小于等于右边值 </p>
+<p><strong>注意</strong>:  </p>
+<p>=和!=可以用于字符串,数值和日期来比较是否相等,</p>
+<p>但=和!=两边必须是相同类型的值,否则会产生错误,</p>
+<p>FreeMarker是精确比较,,”x “,”X”是不等的.</p>
+<p>其它的运行符可以作用于数字和日期,但不能作用于字符串,</p>
+<p>使用gt等字母运算符代替&gt;会有更好的效果,因为 FreeMarker会把&gt;解释成FTL标签的结束字符,当然,也可以使用括号来避免这种情况,如:&lt;#if (x&gt;y)&gt; </p>
+<h2 id="四-：整体代码的实现"><a href="#四-：整体代码的实现" class="headerlink" title="四 ：整体代码的实现"></a>四 ：整体代码的实现</h2><h4 id="4-1-FreemarkerTest-相关代码"><a href="#4-1-FreemarkerTest-相关代码" class="headerlink" title="4.1 FreemarkerTest  相关代码"></a>4.1 FreemarkerTest  相关代码</h4><pre><code class="java">package com.pinyougou.freemarker.test;
 
-    ],
+import freemarker.template.Configuration;
+import freemarker.template.Template;
 
-    &quot;highlighted&quot;:[
-        {
-            &quot;entity&quot;:{&quot;$ref&quot;:&quot;$.content[0]&quot;},
-            &quot;highlights&quot;:[
-                {
-                    &quot;field&quot;:{
-                        &quot;name&quot;:&quot;item_title&quot;
-                    },
-                    &quot;snipplets&quot;:[
-                        &quot;白色 &lt;font color=&#39;red&#39;&gt;联通&lt;/font&gt;3G手机&quot;
-                    ]
-                }
-            ]
-        },
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.*;
 
-    ],
+public class FreemarkerTest {
 
-}</code></pre>
-<h4 id="1-2-2-书写后台相关代码"><a href="#1-2-2-书写后台相关代码" class="headerlink" title="1.2.2 书写后台相关代码"></a>1.2.2 书写后台相关代码</h4><h5 id="关键方法概述-："><a href="#关键方法概述-：" class="headerlink" title="关键方法概述 ："></a>关键方法概述 ：</h5><pre><code class="java">solrTemplate . SimpleHighlightQuery（）；
-SimpleHighlightQuery 方法 ： 高亮操作显示需要用到的方法
-highlightOptions 调用的三个相关参数 ：
-    addField ：中间的域名或者参数
-    setSimplePrefix ：设置参数的前缀
-    setSimplePostfix ：设置参数的后缀</code></pre>
-<h5 id="代码展示-："><a href="#代码展示-：" class="headerlink" title="代码展示 ："></a>代码展示 ：</h5><pre><code class="java">@Service
-@Transactional
-public class SearchServiceImpl implements SearchService {
+    public static void main(String[] args) throws Exception {
+        //1.创建配置对象，设置版本号
+        Configuration configuration = new Configuration(Configuration.getVersion());
+        //2.设置加载模板的目录
+        configuration.setDirectoryForTemplateLoading(new File(&quot;D:\\Work\\workspaces\\pinyougou\\pyg_91\\pyg_freemarker_demo\\src\\main\\resources\\&quot;));
+        //3.设置加载编码格式：utf-8
+        configuration.setDefaultEncoding(&quot;utf-8&quot;);
+        //4.从模板目录下加载模板文件
+        Template template = configuration.getTemplate(&quot;test.ftl&quot;);
+        //5.准备数据map
+        Map map = new HashMap&lt;String, String&gt;();
+        map.put(&quot;name&quot;,&quot;九纹龙&quot;);
+        map.put(&quot;message&quot;,&quot;你真牛！&quot;);
+        map.put(&quot;isMarketable&quot;,true);
+        List&lt;Map&lt;String, String&gt;&gt; courseList = new ArrayList();
+        Map coursemap = new HashMap&lt;String, String&gt;();
+        coursemap.put(&quot;name&quot;,&quot;基础课程&quot;);
+        coursemap.put(&quot;price&quot;,500);
+        coursemap.put(&quot;days&quot;, 11);
+        courseList.add(coursemap);
+        coursemap = new HashMap&lt;String, String&gt;();
+        coursemap.put(&quot;name&quot;,&quot;web课程&quot;);
+        coursemap.put(&quot;price&quot;,7000);
+        coursemap.put(&quot;days&quot;, 12);
+        courseList.add(coursemap);
+        coursemap = new HashMap&lt;String, String&gt;();
+        coursemap.put(&quot;name&quot;,&quot;框架课程&quot;);
+        coursemap.put(&quot;price&quot;,7000);
+        coursemap.put(&quot;days&quot;, 15);
+        coursemap = new HashMap&lt;String, String&gt;();
+        coursemap.put(&quot;name&quot;,&quot;项目课程&quot;);
+        coursemap.put(&quot;price&quot;,14000);
+        coursemap.put(&quot;days&quot;, 40);
+        courseList.add(coursemap);
+        map.put(&quot;courseList&quot;, courseList);
 
-    @Autowired
-    private SolrTemplate solrTemplate;
-
-    @Override
-    public Map search(Map searchEntity) {
-        // 高亮显示需要用到的 SimpleHighlightQuery
-        SimpleHighlightQuery query = new SimpleHighlightQuery();
-        // 根据关键字查询
-        Criteria criteria = new Criteria(&quot;item_keywords&quot;).is(searchEntity.get(&quot;keywords&quot;));
-        query.addCriteria(criteria);
-
-        //给返回的关键字进行高亮显示    setHighlightOptions  ：高亮显示的方法
-        HighlightOptions highlightOptions = new HighlightOptions();
-        // 设置需要高亮显示的域名
-        highlightOptions.addField(&quot;item_title&quot;);
-        // 设置高亮显示的前缀和后缀
-        //标签样式前缀
-        highlightOptions.setSimplePrefix(&quot;&lt;font style=&#39;color:red&#39;&gt;&quot;);
-        // 标签样式后缀
-        highlightOptions.setSimplePostfix(&quot;&lt;/font&gt;&quot;);
-
-        // 需要一个  highlightOptions ， 所以创建 一个  highlightOptions
-        query.setHighlightOptions(highlightOptions);
-        /*
-        *   queryForHighlightPage  高亮显示需要用到的 方法
-        *       返回值对象时 一个原来的集合 和 一个 高亮集合对象
-        * */
-        HighlightPage&lt;TbItem&gt; tbItems = solrTemplate.queryForHighlightPage(query, TbItem.class);
-        // 获取到所有的 高亮集合对象
-        List&lt;HighlightEntry&lt;TbItem&gt;&gt; highlighted = tbItems.getHighlighted();
-        // 进行遍历
-        for (HighlightEntry&lt;TbItem&gt; tbItemHighlightEntry : highlighted) {
-            // 获取到原对象 中的 title 属性 进行替换
-            TbItem entity = tbItemHighlightEntry.getEntity();
-            List&lt;HighlightEntry.Highlight&gt; highlights = tbItemHighlightEntry.getHighlights();
-            // 判断 高亮集合对象下的  Highlights 对象是否为空 并且判断长度是否大于 0
-            // 并且判断当前对象下的第一个下标值对象中的Snipplets 是否为空 并且 长度大于0
-            if (highlights != null &amp;&amp; highlights.size() &gt; 0
-                    &amp;&amp; highlights.get(0).getSnipplets() != null &amp;&amp; highlights.get(0).getSnipplets().size()&gt;0) {
-                // 获取当前对象下的第一个下标值中的第一个对象
-                // 将获取的值 赋值到 entity中的 title 中
-                entity.setTitle(highlights.get(0).getSnipplets().get(0));
-            }
-
-        }
-        Map map = new HashMap();
-        map.put(&quot;total&quot;, tbItems.getTotalElements());//总条数
-        map.put(&quot;itemList&quot;, tbItems.getContent());//总条数
-        return map;
+        map.put(&quot;today&quot;, new Date());
+//        map.put(&quot;abc&quot;, new Date());
+        //6.将模板和数据整合输出到指定的位置
+        Writer out = new FileWriter(new File(&quot;D:\\Work\\appdata\\htmls\\91\\test.html&quot;));
+        template.process(map, out);
+        //7.关闭资源
+        out.close();
     }
-
 }</code></pre>
-<h4 id="1-2-3-前台的相关代码"><a href="#1-2-3-前台的相关代码" class="headerlink" title="1.2.3 前台的相关代码"></a>1.2.3 前台的相关代码</h4><h5 id="注意要点-："><a href="#注意要点-：" class="headerlink" title="注意要点 ："></a>注意要点 ：</h5><pre><code class="js">后台返回的元素最终会带着标签显示到页面上 ：因为 angularjs 会因为安全问题原样输出
-所以我们需要使用 过滤器 对当前返回值中的 html 元素过滤掉</code></pre>
-<h5 id="过滤器展示-："><a href="#过滤器展示-：" class="headerlink" title="过滤器展示 ："></a>过滤器展示 ：</h5><pre><code class="js">/*$sce 服务写成过滤器   html 页面过滤器*/
-app.filter(&#39;trustHtml&#39;, function ($sce) {
-    return function (text) {
-        return $sce.trustAsHtml(text);
-    }
-})</code></pre>
-<h5 id="代码展示-：-1"><a href="#代码展示-：-1" class="headerlink" title="代码展示 ："></a>代码展示 ：</h5><pre><code class="html">&lt;div class=&quot;goods-list&quot;&gt;
-                    &lt;ul class=&quot;yui3-g&quot;&gt;
-                        &lt;li class=&quot;yui3-u-1-5&quot; ng-repeat=&quot;item in searchResult.itemList&quot;&gt;
-                            &lt;div class=&quot;list-wrap&quot;&gt;
-                                &lt;div class=&quot;p-img&quot;&gt;
-                                    &lt;a href=&quot;item.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;{{item.image}}&quot; /&gt;&lt;/a&gt;
-                                &lt;/div&gt;
-                                &lt;div class=&quot;price&quot;&gt;
-                                    &lt;strong&gt;
-                                        &lt;em&gt;¥&lt;/em&gt;
-                                        &lt;i&gt;{{item.price}}&lt;/i&gt;
-                                    &lt;/strong&gt;
-                                &lt;/div&gt;
-                                &lt;!--ng-bind-html=&quot;item.title | trustHtml&quot;    使用管道流的方式   将内容过滤--&gt;
-                                &lt;div class=&quot;attr&quot; ng-bind-html=&quot;item.title | trustHtml&quot;&gt;
-                                &lt;/div&gt;
-                                &lt;div class=&quot;cu&quot;&gt;
-                                    &lt;em&gt;&lt;span&gt;促&lt;/span&gt;满一件可参加超值换购&lt;/em&gt;
-                                &lt;/div&gt;
-                                &lt;div class=&quot;commit&quot;&gt;
-                                    &lt;i class=&quot;command&quot;&gt;已有2000人评价&lt;/i&gt;
-                                &lt;/div&gt;
-                                &lt;div class=&quot;operate&quot;&gt;
-                                    &lt;a href=&quot;success-cart.html&quot; target=&quot;_blank&quot; class=&quot;sui-btn btn-bordered btn-danger&quot;&gt;加入购物车&lt;/a&gt;
-                                    &lt;a href=&quot;javascript:void(0);&quot; class=&quot;sui-btn btn-bordered&quot;&gt;对比&lt;/a&gt;
-                                    &lt;a href=&quot;javascript:void(0);&quot; class=&quot;sui-btn btn-bordered&quot;&gt;关注&lt;/a&gt;
-                                &lt;/div&gt;
-                            &lt;/div&gt;
-                        &lt;/li&gt;
-                    &lt;/ul&gt;
-                &lt;/div&gt;</code></pre>
-<h4 id="1-3-步骤总结"><a href="#1-3-步骤总结" class="headerlink" title="1.3 步骤总结"></a>1.3 步骤总结</h4><ol>
-<li>通过高亮数据格式 我们认知到需要用到 高亮展示中的 title 文本 替换掉 content 中 title 文本，返回到页面中展示</li>
-<li>调取高亮展示的相关方法，最终传入到 map 中，并且返回     queryForHighlightPage</li>
-<li>因为 queryForHighlightPage 方法需要用到 query 参数，所以创建 query 参数</li>
-<li>query 中需要赋值一个高亮展示的内容    HighlightOptions  所以需要创建改对象， 并且对其中的内容进行赋值</li>
-<li>创建高亮展示需要用到的方法  HighlightOptions</li>
-<li>设置需要高亮显示的 内容 | 域</li>
-<li>设置高亮显示的前缀 | 后缀</li>
-<li>通过  solr 调用方法，返回对象   solrTemplate.queryForHighlightPage(query, TbItem.class);  返回的是  tbItems</li>
-<li>在通过格式的概念，我们需要获取到其中的所有  高亮显示内容，然后获取到其中的文本  tbItems.getHighlighted（）</li>
-<li>然后进行遍历集合中的内容 ，在其中 创建 原文本内容   tbItemHighlightEntry.getEntity(); </li>
-<li>然后将content 对象中的 title 赋值     entity.setTitle(highlights.get(0).getSnipplets().get(0));</li>
-</ol>
+<h4 id="4-2-前台页面代码实现"><a href="#4-2-前台页面代码实现" class="headerlink" title="4.2 前台页面代码实现"></a>4.2 前台页面代码实现</h4><p>head.ftl  相关代码实现</p>
+<pre><code class="html">&lt;html&gt;
+&lt;#include &quot;head.ftl&quot;&gt;
+&lt;body&gt;
+&lt;#--我只是一个注释，我不会有任何输出  --&gt;
+${name},你好。${message}&lt;br&gt;
+&lt;#assign linkman = &quot;传智播客&quot;&gt;
+公司名：${linkman}&lt;br&gt;
+&lt;#assign company = {&#39;address&#39;:&#39;北京顺义黑马程序员基地&#39;,&#39;telephone&#39;:&#39;010-8008202&#39;}&gt;
+公司地址：${company.address}&lt;br&gt;
+公司电话：${company.telephone}&lt;br&gt;
+&lt;#if isMarketable&gt;
+公司是否上市：上市&lt;br&gt;
+&lt;#else &gt;
+公司是否上市：未上市&lt;br&gt;
+&lt;/#if&gt;
+公司课程：&lt;br&gt;
+课程序号  课程名称  课程价格   课程时间 &lt;br&gt;
+&lt;#list courseList as course&gt;
+ ${course_index + 1}   ${course.name}  ${course.price?c}  ${course.days} &lt;br&gt;
+&lt;/#list&gt;
+公司课程总共几段：${courseList?size} &lt;br&gt;
+&lt;#assign jsonStrData = &quot;{&#39;name&#39;:&#39;大老王&#39;,&#39;telephone&#39;:&#39;13838389483&#39;,&#39;address&#39;:&#39;北京昌平区平西府村&#39;}&quot;&gt;
+&lt;#assign jsonObjectData = jsonStrData?eval&gt;
+公司主管信息： &lt;br&gt;
+姓名：${jsonObjectData.name}&lt;br&gt;
+电话：${jsonObjectData.telephone}&lt;br&gt;
+地址：${jsonObjectData.address}&lt;br&gt;
+日期：&lt;br&gt;
+年月日：${today?date}&lt;br&gt;
+时分秒：${today?time}&lt;br&gt;
+年月日时分秒：${today?datetime}&lt;br&gt;
+自定义格式：${today?string(&#39;yyyy年MM月dd日 hh小时mm分钟ss秒&#39;)}&lt;br&gt;
+空值判断：&lt;br&gt;
+&lt;#if abc??&gt;
+    abc存在
+&lt;#else &gt;
+    abc不存在，默认值是${abc!&#39;无&#39;}
+&lt;/#if&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4 id="4-3-pom-xml-文件相关代码"><a href="#4-3-pom-xml-文件相关代码" class="headerlink" title="4.3 pom.xml 文件相关代码"></a>4.3 pom.xml 文件相关代码</h4><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;parent&gt;
+        &lt;artifactId&gt;pyg_91&lt;/artifactId&gt;
+        &lt;groupId&gt;cn.itcast&lt;/groupId&gt;
+        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;/parent&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;artifactId&gt;pyg_freemarker_demo&lt;/artifactId&gt;
+
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.freemarker&lt;/groupId&gt;
+        &lt;artifactId&gt;freemarker&lt;/artifactId&gt;
+        &lt;version&gt;2.3.23&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+&lt;/project&gt;</code></pre>
 
         </div>
         <!-- .entry-content -->
@@ -467,36 +595,19 @@ app.filter(&#39;trustHtml&#39;, function ($sce) {
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
+        
           
-            <div class="post-nepre half previous">
+            <div class="post-nepre full next">
           
-            <a href="/2019/07/25/搜索相关的整体内容实现/" rel="prev">
+            <a href="/2019/07/25/搜索相关的整体内容实现/" rel="next">
               <div class="background">
                 <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpgyi" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpgyi">
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                搜索相关的整体内容实现</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
-        
-          
-            <div class="post-nepre half next">
-          
-            <a href="/2019/07/24/solr搜索分类的相关实现/" rel="next">
-              <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                solr搜素分类的相关实现</h3>
+                搜索相关的整体内容实现</h3>
                 <hr>
               </div>
             </a>
