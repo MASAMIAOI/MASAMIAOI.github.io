@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Freemarker的基本使用及入门 | nana</title>
+  <title itemprop="name">WebService的基本使用 | nana</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -259,19 +259,19 @@
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
-      Freemarker的基本使用及入门</h1>
+      WebService的基本使用</h1>
       <p class="entry-census">
         <span>
-          <a href="nana.cn">
+          <a href="hojun.cn">
             <img src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
           </a>
         </span>
         <span>
-          <a href="nana.cn">nana</a>
+          <a href="hojun.cn">nana</a>
         </span>
         <span class="bull">
         ·</span>
-        2019-7-25<span class="bull">
+        2019-7-11<span class="bull">
         ·</span>
       <span id="busuanzi_value_page_pv"></span>次阅读</p>
     </header>
@@ -285,289 +285,426 @@
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h2 id="一-：-Freemarker-的概述"><a href="#一-：-Freemarker-的概述" class="headerlink" title="一 ： Freemarker 的概述"></a>一 ： Freemarker 的概述</h2><p>l  FreeMarker 是一个用 Java 语言编写的模板引擎，它基于模板来生成文本输出。</p>
-<p>l  Freemarker可以用作表现层的实现技术，还可以用于生成 XML、Html、或 Java 等。</p>
-<p><img src="https://ae01.alicdn.com/kf/Hef4db65a9b1240e7947b3a4802d8c0cbZ.jpg" alt></p>
-<h2 id="二-：Freemarker-的基本使用步骤"><a href="#二-：Freemarker-的基本使用步骤" class="headerlink" title="二 ：Freemarker  的基本使用步骤"></a>二 ：Freemarker  的基本使用步骤</h2><h4 id="2-1-项目基本结构"><a href="#2-1-项目基本结构" class="headerlink" title="2.1 项目基本结构"></a>2.1 项目基本结构</h4><p><img src="https://ae01.alicdn.com/kf/He6cd73796c794cd38c8e0d209d4271c0r.jpg" alt></p>
-<h4 id="2-2-基本使用步骤"><a href="#2-2-基本使用步骤" class="headerlink" title="2.2 基本使用步骤"></a>2.2 基本使用步骤</h4><h5 id="2-2-1-导入相关依赖-Freemarker依赖"><a href="#2-2-1-导入相关依赖-Freemarker依赖" class="headerlink" title="2.2.1 导入相关依赖 Freemarker依赖"></a>2.2.1 导入相关依赖 Freemarker依赖</h5><pre><code class="xml">&lt;dependency&gt;
-        &lt;groupId&gt;org.freemarker&lt;/groupId&gt;
-        &lt;artifactId&gt;freemarker&lt;/artifactId&gt;
-        &lt;version&gt;2.3.23&lt;/version&gt;
-&lt;/dependency&gt;  </code></pre>
-<h5 id="2-2-2-模板结构"><a href="#2-2-2-模板结构" class="headerlink" title="2.2.2 模板结构"></a>2.2.2 模板结构</h5><p>模板文件中四种元素</p>
-<p>l  文本：直接输出的部分</p>
-<p>l  注释：即&lt;#–…–&gt;格式不会输出  </p>
-<p>l  插值（Interpolation）：即${..}部分,将使用数据模型中的部分替代输出</p>
-<p>l  FTL指令：FreeMarker指令，和HTML标记类似，名字前加#予以区分，不会输出。</p>
-<h5 id="2-2-3-创建模板文件"><a href="#2-2-3-创建模板文件" class="headerlink" title="2.2.3 创建模板文件"></a>2.2.3 创建模板文件</h5><pre><code class="html">&lt;html&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot;&gt;
-    &lt;title&gt;Freemarker入门小DEMO &lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;#--我只是一个注释，我不会有任何输出  --&gt;
-${name},你好。${message}
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h5 id="2-2-4-生成文件"><a href="#2-2-4-生成文件" class="headerlink" title="2.2.4 生成文件"></a>2.2.4 生成文件</h5><p>使用步骤：</p>
-<p>第一步：创建一个 Configuration 对象，直接 new 一个对象。构造方法的参数就是freemarker的版本号。</p>
-<p>第二步：设置模板文件所在的路径。</p>
-<p>第三步：设置模板文件使用的字符集。一般就是 utf-8.</p>
-<p>第四步：加载一个模板，创建一个模板对象。</p>
-<p>第五步：创建一个模板使用的数据集，可以是 pojo 也可以是 map。一般是 Map。</p>
-<p>第六步：创建一个 Writer 对象，一般创建一 FileWriter 对象，指定生成的文件名。</p>
-<p>第七步：调用模板对象的 process 方法输出文件。</p>
-<p>第八步：关闭流</p>
-<p>代码：</p>
-<p>创建Test类 main方法如下：</p>
-<pre><code class="java">  //1.创建配置类
-        Configuration configuration=new Configuration(Configuration.getVersion());
-        //2.设置模板所在的目录 
-        configuration.setDirectoryForTemplateLoading(new File(&quot;D:/pinyougou_work/freemarkerDemo/src/main/resources/&quot;));
-        //3.设置字符集
-        configuration.setDefaultEncoding(&quot;utf-8&quot;);
-        //4.加载模板
-        Template template = configuration.getTemplate(&quot;test.ftl&quot;);
-        //5.创建数据模型
-        Map map=new HashMap();
-        map.put(&quot;name&quot;, &quot;张三 &quot;);
-        map.put(&quot;message&quot;, &quot;欢迎来到神奇的品优购世界！&quot;);
-        //6.创建Writer对象
-        Writer out =new FileWriter(new File(&quot;d:\\test.html&quot;));
-        //7.输出
-        template.process(map, out);
-        //8.关闭Writer对象
-        out.close();</code></pre>
-<p>执行后，在D盘根目录即可看到生成的test.html ，打开看看 </p>
-<p><img src="https://ae01.alicdn.com/kf/Ha36be34768c84186abe38d8d08401dbcj.jpg" alt></p>
-<h2 id="三-：相关指令"><a href="#三-：相关指令" class="headerlink" title="三 ：相关指令"></a>三 ：相关指令</h2><h4 id="3-1-FTL指令"><a href="#3-1-FTL指令" class="headerlink" title="3.1 FTL指令"></a>3.1 FTL指令</h4><h5 id="3-1-1-assign-指令"><a href="#3-1-1-assign-指令" class="headerlink" title="3.1.1 assign 指令"></a>3.1.1 assign 指令</h5><p>此指令用于在页面上定义一个变量 </p>
-<ul>
-<li>定义简单类型 ：</li>
+          <h2 id="一-：概述"><a href="#一-：概述" class="headerlink" title="一 ：概述"></a>一 ：概述</h2><p>Web Service(WEB 服务)能够快捷和方便地综合结合各种系统、商务和任何应用平台。利用最新的 Web Service 标准能够使任何软件系统和系统之间的应用互通互联，方便，而且更加廉价。   </p>
+<p><img src="https://ae01.alicdn.com/kf/Hb219646280ff4f38b3ea296daa5d085eH.png" alt> </p>
+<h2 id="二-：应用场景"><a href="#二-：应用场景" class="headerlink" title="二 ：应用场景"></a>二 ：应用场景</h2><ul>
+<li>跨越防火墙通信</li>
+<li>应用程序集成</li>
+<li>软件复用</li>
 </ul>
-<pre><code class="html">&lt;#assign linkman=&quot;周先生&quot;&gt;
-联系人：${linkman}</code></pre>
-<ul>
-<li>定义对象类型 ：</li>
+<h2 id="三-：web-service-的三个规范"><a href="#三-：web-service-的三个规范" class="headerlink" title="三 ：web_service 的三个规范"></a>三 ：web_service 的三个规范</h2><p>JAVA 中共有三种 WebService 规范，分别是 JAX-WS、 JAX-RS、 JAXM&amp;SAAJ(废弃)    </p>
+<p><img src="https://ae01.alicdn.com/kf/He52c18b9c369449eac8e32923553e12cM.png" alt></p>
+<h4 id="3-1-JAX-WS-概述"><a href="#3-1-JAX-WS-概述" class="headerlink" title="3.1 JAX-WS 概述"></a>3.1 JAX-WS 概述</h4><ul>
+<li>采用标准 SOAP(Simple Object Access Protocol) 协议传输， soap 属于 w3c 标准。 Soap 协议是基于 http 的应用层协议， soap 协议传输是 xml 数据。    </li>
+<li>采用 wsdl 作为描述语言即 webservice 使用说明书， wsdl 属 w3c 标准。    </li>
+<li>xml 是 webservice 的跨平台的基础， XML 主要的优点在于它既与平台无关，又与厂商无关    </li>
+<li>XSD， W3C 为 webservice 制定了一套传输数据类型，使用 xml 进行描述，即 XSD(XML Schema Datatypes)，任何编程语言写的 webservice 接口在发送数据时都要转换成 webservice 标准的 XSD 发送。    </li>
 </ul>
-<pre><code class="html">&lt;#assign info={&quot;mobile&quot;:&quot;13301231212&quot;,&#39;address&#39;:&#39;北京市昌平区王府街&#39;} &gt;
-电话：${info.mobile}  地址：${info.address}</code></pre>
-<p>运行效果 ：</p>
-<p><img src="https://ae01.alicdn.com/kf/H528a2bcc2e0f49098a3c90e50cd2db7bn.jpg" alt></p>
-<h5 id="3-1-2-include-指令"><a href="#3-1-2-include-指令" class="headerlink" title="3.1.2 include 指令"></a>3.1.2 include 指令</h5><p>此指令用于模板文件的嵌套</p>
-<p>创建模板文件head.ftl</p>
-<pre><code class="html">&lt;h1&gt;黑马信息网&lt;/h1&gt;</code></pre>
-<p>我们修改test.ftl，在模板文件中使用include指令引入刚才我们建立的模板 </p>
-<pre><code class="html">&lt;#include &quot;head.ftl&quot;&gt;</code></pre>
-<h5 id="3-1-3-if-指令"><a href="#3-1-3-if-指令" class="headerlink" title="3.1.3 if 指令"></a>3.1.3 if 指令</h5><p>在模板文件上添加</p>
-<pre><code class="html">&lt;#if success=true&gt;
-  你已通过实名认证
-&lt;#else&gt;  
-  你未通过实名认证
-&lt;/#if&gt;</code></pre>
-<p>在代码中对str变量赋值</p>
-<pre><code class="java">map.put(&quot;success&quot;, true);</code></pre>
-<p>在freemarker的判断中，可以使用= 也可以使用== </p>
-<h5 id="3-1-4-List-指令"><a href="#3-1-4-List-指令" class="headerlink" title="3.1.4 List 指令"></a>3.1.4 List 指令</h5><p>需求，实现商品价格表，如下图： </p>
-<p><img src="https://ae01.alicdn.com/kf/H2ec3b2f362d04e788e5baa5c6826e401E.jpg" alt></p>
-<p>代码中对变量goodsList赋值</p>
-<pre><code class="java">    List goodsList=new ArrayList();
-        Map goods1=new HashMap();
-        goods1.put(&quot;name&quot;, &quot;苹果&quot;);
-        goods1.put(&quot;price&quot;, 5.8);
-        Map goods2=new HashMap();
-        goods2.put(&quot;name&quot;, &quot;香蕉&quot;);
-        goods2.put(&quot;price&quot;, 2.5);
-        Map goods3=new HashMap();
-        goods3.put(&quot;name&quot;, &quot;橘子&quot;);
-        goods3.put(&quot;price&quot;, 3.2);
-        goodsList.add(goods1);
-        goodsList.add(goods2);
-        goodsList.add(goods3);
-        map.put(&quot;goodsList&quot;, goodsList);</code></pre>
-<p>在模板文件上添加 </p>
-<pre><code class="html">----商品价格表----&lt;br&gt;
-&lt;#list goodsList as goods&gt;
-  ${goods_index+1} 商品名称： ${goods.name} 价格：${goods.price}&lt;br&gt;
-&lt;/#list&gt;</code></pre>
-<p>如果想在循环中得到索引，使用循环变量+_index就可以得到。 </p>
-<h4 id="3-2-内嵌函数"><a href="#3-2-内嵌函数" class="headerlink" title="3.2 内嵌函数"></a>3.2 内嵌函数</h4><p>内建函数语法格式： 变量+?+函数名称</p>
-<h5 id="3-2-1-获取集合大小"><a href="#3-2-1-获取集合大小" class="headerlink" title="3.2.1 获取集合大小"></a>3.2.1 获取集合大小</h5><p>我们通常要得到某个集合的大小，如下图：</p>
-<p><img src="https://ae01.alicdn.com/kf/H13a6fb0dca3947c4a5dbb0169e934788i.jpg" alt></p>
-<p>我们使用size函数来实现，代码如下：</p>
-<pre><code class="html">共  ${goodsList?size}  条记录</code></pre>
-<h5 id="3-2-2-转换-Json-字符串为对象"><a href="#3-2-2-转换-Json-字符串为对象" class="headerlink" title="3.2.2 转换 Json 字符串为对象"></a>3.2.2 转换 Json 字符串为对象</h5><p>我们通常需要将json字符串转换为对象，那如何处理呢？看代码 </p>
-<pre><code class="html">    &lt;#assign text=&quot;{&#39;bank&#39;:&#39;工商银行&#39;,&#39;account&#39;:&#39;10101920201920212&#39;}&quot; /&gt;
-    &lt;#assign data=text?eval /&gt;
-    开户行：${data.bank}  账号：${data.account}</code></pre>
-<h5 id="3-2-3-日期格式化"><a href="#3-2-3-日期格式化" class="headerlink" title="3.2.3 日期格式化"></a>3.2.3 日期格式化</h5><p>代码中对变量赋值：</p>
-<pre><code class="java">dataModel.put(&quot;today&quot;, new Date());</code></pre>
-<p>在模板文件中加入</p>
-<pre><code class="html">当前日期：${today?date} &lt;br&gt;
-当前时间：${today?time} &lt;br&gt;   
-当前日期+时间：${today?datetime} &lt;br&gt;        
-日期格式化：  ${today?string(&quot;yyyy年MM月&quot;)}</code></pre>
-<p>运行效果如下：</p>
-<p><img src="https://ae01.alicdn.com/kf/H17454a997d4f4c4783cd8ab33c1fc90f9.jpg" alt></p>
-<h5 id="3-2-4-数字转换为字符串"><a href="#3-2-4-数字转换为字符串" class="headerlink" title="3.2.4 数字转换为字符串"></a>3.2.4 数字转换为字符串</h5><p>代码中对变量赋值：</p>
-<pre><code class="java">map.put(&quot;point&quot;, 102920122);</code></pre>
-<p>修改模板：</p>
-<pre><code class="html">累计积分：${point}</code></pre>
-<p>页面显示：</p>
-<p><img src="https://ae01.alicdn.com/kf/H55f065c7bdd84a38b40a77c0f7140bf04.jpg" alt></p>
-<p>我们会发现数字会以每三位一个分隔符显示，有些时候我们不需要这个分隔符，就需要将数字转换为字符串,使用内建函数c </p>
-<pre><code class="html">累计积分：${point?c}</code></pre>
-<p>页面显示效果如下： </p>
-<p><img src="https://ae01.alicdn.com/kf/H3c0e2fcd585240449899cda4cd2ad8e1U.jpg" alt></p>
-<h4 id="3-3-空值处理运算符"><a href="#3-3-空值处理运算符" class="headerlink" title="3.3 空值处理运算符"></a>3.3 空值处理运算符</h4><p>如果你在模板中使用了变量但是在代码中没有对变量赋值，那么运行生成时会抛出异常。但是有些时候，有的变量确实是null，怎么解决这个问题呢？ </p>
-<h5 id="3-3-1-判断某变量是否存在-“-”"><a href="#3-3-1-判断某变量是否存在-“-”" class="headerlink" title="3.3.1 判断某变量是否存在 “??”"></a>3.3.1 判断某变量是否存在 “??”</h5><p>用法为:variable??,如果该变量存在,返回true,否则返回false  </p>
-<pre><code class="html">&lt;#if aaa??&gt;
-  aaa变量存在
-&lt;#else&gt;
-  aaa变量不存在
-&lt;/#if&gt;</code></pre>
-<h5 id="3-3-2-缺失变量默认值-：-“！”"><a href="#3-3-2-缺失变量默认值-：-“！”" class="headerlink" title="3.3.2 缺失变量默认值 ： “！”"></a>3.3.2 缺失变量默认值 ： “！”</h5><p>我们除了可以判断是否为空值，也可以使用!对null值做转换处理</p>
-<p>在模板文件中加入</p>
-<pre><code class="html">  ${aaa!&#39;-&#39;}</code></pre>
-<p>在代码中不对aaa赋值，也不会报错了 ，当aaa为null则返回！后边的内容-</p>
-<h4 id="3-4-运算符"><a href="#3-4-运算符" class="headerlink" title="3.4 运算符"></a>3.4 运算符</h4><h5 id="3-4-1-算数运算符"><a href="#3-4-1-算数运算符" class="headerlink" title="3.4.1 算数运算符"></a>3.4.1 算数运算符</h5><p>FreeMarker表达式中完全支持算术运算,FreeMarker支持的算术运算符包括:+, - , * , / , % </p>
-<h5 id="3-4-2-逻辑运算符"><a href="#3-4-2-逻辑运算符" class="headerlink" title="3.4.2 逻辑运算符"></a>3.4.2 逻辑运算符</h5><p>逻辑运算符有如下几个: </p>
-<p>l  逻辑与：&amp;&amp; </p>
-<p>l  逻辑或：|| </p>
-<p>l  逻辑非：! </p>
-<p>注意：逻辑运算符只能作用于布尔值,否则将产生错误 </p>
-<h5 id="3-4-3-比较运算符"><a href="#3-4-3-比较运算符" class="headerlink" title="3.4.3 比较运算符"></a>3.4.3 比较运算符</h5><p>表达式中支持的比较运算符有如下几个: </p>
-<p>l  =或者==：判断两个值是否相等. </p>
-<p>l  !=：判断两个值是否不等. </p>
-<p>l  &gt;或者gt：判断左边值是否大于右边值 </p>
-<p>l  &gt;=或者gte：判断左边值是否大于等于右边值 </p>
-<p>l  &lt;或者lt：判断左边值是否小于右边值 </p>
-<p>l  &lt;=或者lte：判断左边值是否小于等于右边值 </p>
-<p><strong>注意</strong>:  </p>
-<p>=和!=可以用于字符串,数值和日期来比较是否相等,</p>
-<p>但=和!=两边必须是相同类型的值,否则会产生错误,</p>
-<p>FreeMarker是精确比较,,”x “,”X”是不等的.</p>
-<p>其它的运行符可以作用于数字和日期,但不能作用于字符串,</p>
-<p>使用gt等字母运算符代替&gt;会有更好的效果,因为 FreeMarker会把&gt;解释成FTL标签的结束字符,当然,也可以使用括号来避免这种情况,如:&lt;#if (x&gt;y)&gt; </p>
-<h2 id="四-：整体代码的实现"><a href="#四-：整体代码的实现" class="headerlink" title="四 ：整体代码的实现"></a>四 ：整体代码的实现</h2><h4 id="4-1-FreemarkerTest-相关代码"><a href="#4-1-FreemarkerTest-相关代码" class="headerlink" title="4.1 FreemarkerTest  相关代码"></a>4.1 FreemarkerTest  相关代码</h4><pre><code class="java">package com.pinyougou.freemarker.test;
+<h4 id="3-2-JAX-RS概述"><a href="#3-2-JAX-RS概述" class="headerlink" title="3.2 JAX-RS概述"></a>3.2 JAX-RS概述</h4><p>支持 JAX-RS 服务规范的框架有：    </p>
+<ul>
+<li>CXF——XFire 和 Celtix 的合并（一个由 IONA 赞助的开源 ESB，最初寄存在 ObjectWeb 上）    </li>
+<li>Jersey——Sun 公司的 JAX-RS 参考实现。    </li>
+<li>RESTEasy——JBoss 的 JAX-RS 项目    </li>
+<li>Restlet——也许是最早的 REST 框架了，它 JAX-RS 之前就有了    </li>
+<li>注： REST 是一种软件架构模式，只是一种风格， rest 服务采用 HTTP 做传输协议。    </li>
+</ul>
+<h2 id="四-：Apache-的-CXF-概述"><a href="#四-：Apache-的-CXF-概述" class="headerlink" title="四 ：Apache 的 CXF 概述"></a>四 ：Apache 的 CXF 概述</h2><ul>
+<li>Apache CXF = Celtix + Xfire，开始叫 Apache CeltiXfire，后来更名为 Apache CXF 了，以下 简称为 CXF。 Apache CXF 是一个开源的 web Services 框架， CXF 帮助您构建和开发 web Services ，它 支持多种协议，比如： SOAP1.1,1,2 XML/HTTP、 RESTful 或者 CORBA。    </li>
+<li>RESTful: 一种风格而不是一个协议。它理念是网络上的所有事物都被抽象为资源，每个资源对应一个唯一 的资源标识符。    </li>
+<li>Cxf 是基于 SOA 总线结构，依靠 spring 完成模块的集成，实现 SOA 方式    </li>
+<li>灵活的部署: 可以运行在 Tomcat,Jboss,Jetty(内置),weblogic 上面    </li>
+</ul>
+<h2 id="五-：基于-JAX-WS-规范的入门使用（了解）"><a href="#五-：基于-JAX-WS-规范的入门使用（了解）" class="headerlink" title="五 ：基于 JAX-WS 规范的入门使用（了解）"></a>五 ：基于 JAX-WS 规范的入门使用（了解）</h2><h3 id="5-1-JAX-WS-的三要素"><a href="#5-1-JAX-WS-的三要素" class="headerlink" title="5.1 JAX-WS 的三要素"></a>5.1 JAX-WS 的三要素</h3><ul>
+<li><p><strong>SOAP</strong>: 基于 HTTP 协议，采用 XML 格式，用来传递信息的格式。 </p>
+</li>
+<li><p><strong>WSDL</strong>: 用来描述如何访问具体的服务。 </p>
+</li>
+<li><p><strong>UDDI</strong>: 用户自己可以按 UDDI 标准搭建 UDDI 服务器，用来管理，分发，查询 WebService 。其他用户可以 自己注册发布 WebService 调用。    </p>
+<pre><code>wsdl :文档说明书(自动生成,通过计算机读取=)  
 
-import freemarker.template.Configuration;
-import freemarker.template.Template;
+        http://localhost:8088/ws/weather?wsdl
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.util.*;
+    soap协议 : http + xml
 
-public class FreemarkerTest {
+    uddi :  收集目录</code></pre></li>
+</ul>
+<p><img src="https://ae01.alicdn.com/kf/H23ab50e57f50462982e66c248d42cd227.png" alt></p>
+<h4 id="5-1-1-SOAP"><a href="#5-1-1-SOAP" class="headerlink" title="5.1.1 SOAP"></a>5.1.1 SOAP</h4><p>Simple Object Accrss Protocol，简单对象访问协议是在分散或分布式的环境中交换信息的简单的协 议，是一个基于 XML 的协议，它包括四个部分: </p>
+<ul>
+<li>(1)SOAP 封装(envelop)，封装定义了一个描述消息中的内容是什么，是谁发送的，谁应当接受并处理它， 以及如何处理它们的框架;</li>
+<li>(2)SOAP 编码规则，用于表示应用程序需要使用的数据类型的实例。 </li>
+<li>(2)SOAP RPC 表示远程过程调用和应答的协定。 </li>
+<li>(3)SOAP 绑定(binding)，使用底层协议交换信息。    </li>
+</ul>
+<h4 id="5-1-2-WSDL"><a href="#5-1-2-WSDL" class="headerlink" title="5.1.2 WSDL"></a>5.1.2 WSDL</h4><p>WSDL(Web Service Description Language)，是一个用来描述 Web 服务（Web Service）和说明如 何与 Web 服务通信的 XML 语言。因为是基于 XML 的，所以 WSDL 既是机器可阅读的，又是人可阅读的，这将是一个 很大的好处。    </p>
+<p>说明书中的元素 ：</p>
+<p><img src="https://ae01.alicdn.com/kf/Hbf6eef5fa6234ec2876b68e9811866e3q.jpg" alt></p>
+<p>WSDL 的阅读方法 ：</p>
+<p>每个 wsdl 有且只有一个 Service 节点。 </p>
+<ul>
+<li><p>1、先找 Service 节点 </p>
+</li>
+<li><p>2、 Service 节点中找 port 节点。每个 port 对应一个 PortType。 </p>
+</li>
+<li><p>3、 Port 节点对应一 binding 节点。每个 binding 节点对应一个 PortType    </p>
+</li>
+<li><p>4、 PortType 中有 operation 节点就是服务的方法。</p>
+</li>
+<li><p>5、 operation 中有 Input（参数）和 output（返回值） </p>
+</li>
+<li><p>6、 Input（参数）和 output（返回值）对应 message 节点 </p>
+</li>
+<li><p>7、 Message 对应 element 节点。 Element 节点对应 complexType 节点描述了参数及返回值的数据 类型。    </p>
+</li>
+</ul>
+<p><strong>使用注解规范 wsdl</strong>    </p>
+<p><img src="https://ae01.alicdn.com/kf/Ha44715e0a504492db9fe96d023cae1ed7.jpg" alt></p>
+<h4 id="5-1-3-UDDI-了解项，不重要"><a href="#5-1-3-UDDI-了解项，不重要" class="headerlink" title="5.1.3 UDDI (了解项，不重要)"></a>5.1.3 UDDI (了解项，不重要)</h4><ul>
+<li>UDDI: Universal Description, Discovery and Integration 是一种目录服务，通过它，企业可注册并搜索 Web services。</li>
+<li>企业将自己提供的 Web Service 注册在 UDDI，也可以使用别的企业在 UDDI 注册的 web service 服务，从而达到资源共享。 </li>
+<li>UDDI 旨在将全球的 webservcie 资源进行共享，促进全球经济合作。 </li>
+<li>但是使用 webservice 并不是必须使用 UDDI，因为用户通过 WSDL 知道了 web service 的地址，可以直接 通过 WSDL 调用 webservice。    </li>
+</ul>
+<h3 id="5-2-服务发布（和-RS-一致）"><a href="#5-2-服务发布（和-RS-一致）" class="headerlink" title="5.2 服务发布（和 RS 一致）"></a>5.2 服务发布（和 RS 一致）</h3><ul>
+<li>实体类</li>
+<li>service接口和实现类<ul>
+<li>在接口上配置一个@WebService</li>
+</ul>
+</li>
+<li>配置spring整合</li>
+<li>配置web.xml</li>
+</ul>
+<h3 id="5-3-服务调用"><a href="#5-3-服务调用" class="headerlink" title="5.3 服务调用"></a>5.3 服务调用</h3><p>java代码是通过jdk提供的一个命令  wsimport自动生成的</p>
+<p>使用方式: <strong>wsimport  -s  .(当前路径)  wsdl文档说明书的url</strong></p>
+<ul>
+<li>自动生成代码</li>
+<li>配置spring整合</li>
+<li>测试调用</li>
+</ul>
+<h2 id="六-：jax-rs入门使用（常用）"><a href="#六-：jax-rs入门使用（常用）" class="headerlink" title="六 ：jax-rs入门使用（常用）"></a>六 ：jax-rs入门使用（常用）</h2><h3 id="6-1-服务发布"><a href="#6-1-服务发布" class="headerlink" title="6.1 服务发布"></a>6.1 服务发布</h3><h4 id="6-1-1-搭建环境"><a href="#6-1-1-搭建环境" class="headerlink" title="6.1.1 搭建环境"></a>6.1.1 搭建环境</h4><p>创建工程<code>jaxrs_server</code>并引入坐标</p>
+<pre><code class="xml">   &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.cxf&lt;/groupId&gt;
+            &lt;artifactId&gt;cxf-rt-frontend-jaxrs&lt;/artifactId&gt;
+            &lt;version&gt;3.0.1&lt;/version&gt;
+        &lt;/dependency&gt;
 
-    public static void main(String[] args) throws Exception {
-        //1.创建配置对象，设置版本号
-        Configuration configuration = new Configuration(Configuration.getVersion());
-        //2.设置加载模板的目录
-        configuration.setDirectoryForTemplateLoading(new File(&quot;D:\\Work\\workspaces\\pinyougou\\pyg_91\\pyg_freemarker_demo\\src\\main\\resources\\&quot;));
-        //3.设置加载编码格式：utf-8
-        configuration.setDefaultEncoding(&quot;utf-8&quot;);
-        //4.从模板目录下加载模板文件
-        Template template = configuration.getTemplate(&quot;test.ftl&quot;);
-        //5.准备数据map
-        Map map = new HashMap&lt;String, String&gt;();
-        map.put(&quot;name&quot;,&quot;九纹龙&quot;);
-        map.put(&quot;message&quot;,&quot;你真牛！&quot;);
-        map.put(&quot;isMarketable&quot;,true);
-        List&lt;Map&lt;String, String&gt;&gt; courseList = new ArrayList();
-        Map coursemap = new HashMap&lt;String, String&gt;();
-        coursemap.put(&quot;name&quot;,&quot;基础课程&quot;);
-        coursemap.put(&quot;price&quot;,500);
-        coursemap.put(&quot;days&quot;, 11);
-        courseList.add(coursemap);
-        coursemap = new HashMap&lt;String, String&gt;();
-        coursemap.put(&quot;name&quot;,&quot;web课程&quot;);
-        coursemap.put(&quot;price&quot;,7000);
-        coursemap.put(&quot;days&quot;, 12);
-        courseList.add(coursemap);
-        coursemap = new HashMap&lt;String, String&gt;();
-        coursemap.put(&quot;name&quot;,&quot;框架课程&quot;);
-        coursemap.put(&quot;price&quot;,7000);
-        coursemap.put(&quot;days&quot;, 15);
-        coursemap = new HashMap&lt;String, String&gt;();
-        coursemap.put(&quot;name&quot;,&quot;项目课程&quot;);
-        coursemap.put(&quot;price&quot;,14000);
-        coursemap.put(&quot;days&quot;, 40);
-        courseList.add(coursemap);
-        map.put(&quot;courseList&quot;, courseList);
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.cxf&lt;/groupId&gt;
+            &lt;artifactId&gt;cxf-rt-transports-http-jetty&lt;/artifactId&gt;
+            &lt;version&gt;3.0.1&lt;/version&gt;
+        &lt;/dependency&gt;
 
-        map.put(&quot;today&quot;, new Date());
-//        map.put(&quot;abc&quot;, new Date());
-        //6.将模板和数据整合输出到指定的位置
-        Writer out = new FileWriter(new File(&quot;D:\\Work\\appdata\\htmls\\91\\test.html&quot;));
-        template.process(map, out);
-        //7.关闭资源
-        out.close();
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+            &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
+            &lt;version&gt;1.7.12&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.cxf&lt;/groupId&gt;
+            &lt;artifactId&gt;cxf-rt-rs-client&lt;/artifactId&gt;
+            &lt;version&gt;3.0.1&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.cxf&lt;/groupId&gt;
+            &lt;artifactId&gt;cxf-rt-rs-extension-providers&lt;/artifactId&gt;
+            &lt;version&gt;3.0.1&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.codehaus.jettison&lt;/groupId&gt;
+            &lt;artifactId&gt;jettison&lt;/artifactId&gt;
+            &lt;version&gt;1.3.7&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.12&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;</code></pre>
+<h4 id="6-1-2-配置实体类"><a href="#6-1-2-配置实体类" class="headerlink" title="6.1.2 配置实体类"></a>6.1.2 配置实体类</h4><p>创建实体类<code>cn.itcast.domain.User</code></p>
+<pre><code class="java">package cn.itcast.domain;
+
+import javax.xml.bind.annotation.XmlRootElement;
+// 生成的xml数据的根节点名称
+@XmlRootElement(name = &quot;User&quot;)
+public class User {
+    private Integer id;
+    private String username;
+    private String city;
+
+    public Integer getId() {
+        return id;
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;User [id=&quot; + id + &quot;, username=&quot; + username + &quot;, city=&quot; + city +&quot;]&quot;;
+    }
+
 }</code></pre>
-<h4 id="4-2-前台页面代码实现"><a href="#4-2-前台页面代码实现" class="headerlink" title="4.2 前台页面代码实现"></a>4.2 前台页面代码实现</h4><p>head.ftl  相关代码实现</p>
-<pre><code class="html">&lt;html&gt;
-&lt;#include &quot;head.ftl&quot;&gt;
-&lt;body&gt;
-&lt;#--我只是一个注释，我不会有任何输出  --&gt;
-${name},你好。${message}&lt;br&gt;
-&lt;#assign linkman = &quot;传智播客&quot;&gt;
-公司名：${linkman}&lt;br&gt;
-&lt;#assign company = {&#39;address&#39;:&#39;北京顺义黑马程序员基地&#39;,&#39;telephone&#39;:&#39;010-8008202&#39;}&gt;
-公司地址：${company.address}&lt;br&gt;
-公司电话：${company.telephone}&lt;br&gt;
-&lt;#if isMarketable&gt;
-公司是否上市：上市&lt;br&gt;
-&lt;#else &gt;
-公司是否上市：未上市&lt;br&gt;
-&lt;/#if&gt;
-公司课程：&lt;br&gt;
-课程序号  课程名称  课程价格   课程时间 &lt;br&gt;
-&lt;#list courseList as course&gt;
- ${course_index + 1}   ${course.name}  ${course.price?c}  ${course.days} &lt;br&gt;
-&lt;/#list&gt;
-公司课程总共几段：${courseList?size} &lt;br&gt;
-&lt;#assign jsonStrData = &quot;{&#39;name&#39;:&#39;大老王&#39;,&#39;telephone&#39;:&#39;13838389483&#39;,&#39;address&#39;:&#39;北京昌平区平西府村&#39;}&quot;&gt;
-&lt;#assign jsonObjectData = jsonStrData?eval&gt;
-公司主管信息： &lt;br&gt;
-姓名：${jsonObjectData.name}&lt;br&gt;
-电话：${jsonObjectData.telephone}&lt;br&gt;
-地址：${jsonObjectData.address}&lt;br&gt;
-日期：&lt;br&gt;
-年月日：${today?date}&lt;br&gt;
-时分秒：${today?time}&lt;br&gt;
-年月日时分秒：${today?datetime}&lt;br&gt;
-自定义格式：${today?string(&#39;yyyy年MM月dd日 hh小时mm分钟ss秒&#39;)}&lt;br&gt;
-空值判断：&lt;br&gt;
-&lt;#if abc??&gt;
-    abc存在
-&lt;#else &gt;
-    abc不存在，默认值是${abc!&#39;无&#39;}
-&lt;/#if&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h4 id="4-3-pom-xml-文件相关代码"><a href="#4-3-pom-xml-文件相关代码" class="headerlink" title="4.3 pom.xml 文件相关代码"></a>4.3 pom.xml 文件相关代码</h4><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
-         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
-    &lt;parent&gt;
-        &lt;artifactId&gt;pyg_91&lt;/artifactId&gt;
-        &lt;groupId&gt;cn.itcast&lt;/groupId&gt;
-        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
-    &lt;/parent&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+<h4 id="6-1-3-配置service-接口和实现类"><a href="#6-1-3-配置service-接口和实现类" class="headerlink" title="6.1.3 配置service 接口和实现类"></a>6.1.3 配置service 接口和实现类</h4><p>相关注解 ：</p>
+<pre><code class="java"> @Path：
+   配置到接口上 （请求的父路径）
+   也可以配置到接口方法上   ： 调用此方法的情路路径
+ @Post ,@Put ,@Delete ,@Get
+   配置到方法上， ： 调用此方法的请求方式
+ @Produces：
+   可以响应的数据格式 ： application/json ,application/xml ,
+ @Consumes ：
+    可以接受的数据格式 ：  application/json ,application/xml ,</code></pre>
+<p>创建服务接口<code>cn.itcast.service.IUserService</code>并配置</p>
+<pre><code class="java">package cn.itcast.service;
 
-    &lt;artifactId&gt;pyg_freemarker_demo&lt;/artifactId&gt;
+import cn.itcast.domain.User;
 
-&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.freemarker&lt;/groupId&gt;
-        &lt;artifactId&gt;freemarker&lt;/artifactId&gt;
-        &lt;version&gt;2.3.23&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
+import javax.ws.rs.*;
+import java.util.List;
+
+@Path(&quot;/userService&quot;)
+@Produces(&quot;*/*&quot;)
+public interface IUserService {
+
+    @POST
+    @Path(&quot;/user&quot;)
+    @Consumes({ &quot;application/xml&quot;, &quot;application/json&quot; })
+    public void saveUser(User user);
+
+    @PUT
+    @Path(&quot;/user&quot;)
+    @Consumes({ &quot;application/xml&quot;, &quot;application/json&quot; })
+    public void updateUser(User user);
+
+    @GET
+    @Path(&quot;/user&quot;)
+    @Produces({ &quot;application/xml&quot;, &quot;application/json&quot; })
+    public List&lt;User&gt; findAllUsers();
+
+    @GET
+    @Path(&quot;/user/{id}&quot;)
+    @Consumes(&quot;application/xml&quot;)
+    @Produces({ &quot;application/xml&quot;, &quot;application/json&quot; })
+    public User finUserById(@PathParam(&quot;id&quot;) Integer id);
+
+    @DELETE
+    @Path(&quot;/user/{id}&quot;)
+    @Consumes({&quot;application/xml&quot;, &quot;application/json&quot;})
+    public void deleteUser(@PathParam(&quot;id&quot;) Integer id);
+}</code></pre>
+<p>创建接口实现类<code>cn.itcast.service.UserServiceImpl</code></p>
+<pre><code class="java">package cn.itcast.service;
+
+import cn.itcast.domain.User;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class UserServiceImpl implements IUserService {
+
+   public void saveUser(User user) {
+      System.out.println(&quot;save user:&quot; + user);
+   }
+
+   public void updateUser(User user) {
+      System.out.println(&quot;update user:&quot; + user);
+   }
+
+   public List&lt;User&gt; findAllUsers() {
+      List&lt;User&gt; users = new ArrayList&lt;User&gt;();
+      User user1 = new User();
+      user1.setId(1);
+      user1.setUsername(&quot;小明&quot;);
+      user1.setCity(&quot;北京&quot;);
+
+
+      users.add(user1);
+
+      User user2 = new User();
+      user2.setId(2);
+      user2.setUsername(&quot;小丽&quot;);
+      user2.setCity(&quot;上海&quot;);
+      users.add(user2);
+
+      return users;
+   }
+
+   public User finUserById(Integer id) {
+      if (id == 1) {
+         User user1 = new User();
+         user1.setId(1);
+         user1.setUsername(&quot;小明&quot;);
+         user1.setCity(&quot;北京&quot;);
+         return user1;
+      }
+      return null;
+   }
+
+   public void deleteUser(Integer id) {
+      System.out.println(&quot;delete user id :&quot; + id);
+   }
+}</code></pre>
+<h4 id="6-1-4-发布服务"><a href="#6-1-4-发布服务" class="headerlink" title="6.1.4 发布服务"></a>6.1.4 发布服务</h4><p>编写服务发布类<code>cn.itcast.test.JaxRsServer</code>并发布服务</p>
+<pre><code class="java">public class JaxRsServer {
+   public static void main(String[] args) {
+      //1.创建工厂
+      JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
+      //2.配置实体类
+      factory.setResourceClasses(User.class);
+      //3.配置服务实现类
+      factory.setServiceBean(new UserServiceImpl());
+      //4.配置请求路径
+      factory.setAddress(&quot;http://localhost:12345/&quot;);
+      //5.发布服务
+      factory.create();
+   }
+}</code></pre>
+<h3 id="6-2-服务调用"><a href="#6-2-服务调用" class="headerlink" title="6.2 服务调用"></a>6.2 服务调用</h3><h4 id="6-2-1-搭建环境"><a href="#6-2-1-搭建环境" class="headerlink" title="6.2.1 搭建环境"></a>6.2.1 搭建环境</h4><p>创建jaxrs_client工程并配置坐标（略）</p>
+<p>和服务发布坐标一致</p>
+<h4 id="6-2-2-配置实体类"><a href="#6-2-2-配置实体类" class="headerlink" title="6.2.2 配置实体类"></a>6.2.2 配置实体类</h4><p>和服务发布实体类一致</p>
+<h4 id="6-2-3-调用服务"><a href="#6-2-3-调用服务" class="headerlink" title="6.2.3 调用服务"></a>6.2.3 调用服务</h4><pre><code class="java">public class Client {
+    public static void main(String[] args) {
+        //远程调用rs的webservice规范使用一个工具类即可
+        WebClient client = WebClient.create(&quot;http://localhost:8080/ws/userService/user/1&quot;);
+        //远程调用
+        ItcastUser user = client.get(ItcastUser.class);
+        System.out.println(user);
+    }</code></pre>
+<h3 id="6-3-Spring整合开发"><a href="#6-3-Spring整合开发" class="headerlink" title="6.3 Spring整合开发"></a>6.3 Spring整合开发</h3><h4 id="6-3-1-说明"><a href="#6-3-1-说明" class="headerlink" title="6.3.1 说明"></a>6.3.1 说明</h4><p>spring整合CXF开发基于JAX-RS规范的webservice用于发布服务，调用服务还是借助webClient工具类调用。故这里的整合开发指的是使用spring+cxf开发并发布一个服务</p>
+<h4 id="6-3-2-搭建环境"><a href="#6-3-2-搭建环境" class="headerlink" title="6.3.2 搭建环境"></a>6.3.2 搭建环境</h4><p>创建工程<code>spring_jaxrs_server</code>并引入坐标,打包方式选择War</p>
+<pre><code class="xml">
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;  
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;  
+  &lt;groupId&gt;cn.itcast&lt;/groupId&gt;  
+  &lt;artifactId&gt;spring_jaxrs_server&lt;/artifactId&gt;  
+  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;  
+  &lt;packaging&gt;war&lt;/packaging&gt;
+  &lt;dependencies&gt; 
+    &lt;!-- cxf 进行rs开发 必须导入  --&gt;  
+    &lt;dependency&gt; 
+      &lt;groupId&gt;org.apache.cxf&lt;/groupId&gt;  
+      &lt;artifactId&gt;cxf-rt-frontend-jaxrs&lt;/artifactId&gt;  
+      &lt;version&gt;3.0.1&lt;/version&gt; 
+    &lt;/dependency&gt;  
+    &lt;!-- 日志引入  --&gt;  
+    &lt;dependency&gt; 
+      &lt;groupId&gt;org.slf4j&lt;/groupId&gt;  
+      &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;  
+      &lt;version&gt;1.7.12&lt;/version&gt; 
+    &lt;/dependency&gt;  
+    &lt;!-- 客户端 --&gt;  
+    &lt;dependency&gt; 
+      &lt;groupId&gt;org.apache.cxf&lt;/groupId&gt;  
+      &lt;artifactId&gt;cxf-rt-rs-client&lt;/artifactId&gt;  
+      &lt;version&gt;3.0.1&lt;/version&gt; 
+    &lt;/dependency&gt;  
+    &lt;!-- 扩展json提供者 --&gt;  
+    &lt;dependency&gt; 
+      &lt;groupId&gt;org.apache.cxf&lt;/groupId&gt;  
+      &lt;artifactId&gt;cxf-rt-rs-extension-providers&lt;/artifactId&gt;  
+      &lt;version&gt;3.0.1&lt;/version&gt; 
+    &lt;/dependency&gt;  
+    &lt;!-- 转换json工具包，被extension providers 依赖 --&gt;  
+    &lt;dependency&gt; 
+      &lt;groupId&gt;org.codehaus.jettison&lt;/groupId&gt;  
+      &lt;artifactId&gt;jettison&lt;/artifactId&gt;  
+      &lt;version&gt;1.3.7&lt;/version&gt; 
+    &lt;/dependency&gt;  
+    &lt;!-- spring 核心 --&gt;  
+    &lt;dependency&gt; 
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;  
+      &lt;artifactId&gt;spring-context&lt;/artifactId&gt;  
+      &lt;version&gt;4.2.4.RELEASE&lt;/version&gt; 
+    &lt;/dependency&gt;  
+    &lt;!-- spring web集成 --&gt;  
+    &lt;dependency&gt; 
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;  
+      &lt;artifactId&gt;spring-web&lt;/artifactId&gt;  
+      &lt;version&gt;4.2.4.RELEASE&lt;/version&gt; 
+    &lt;/dependency&gt;  
+    &lt;!-- spring 整合junit  --&gt;  
+    &lt;dependency&gt; 
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;  
+      &lt;artifactId&gt;spring-test&lt;/artifactId&gt;  
+      &lt;version&gt;4.2.4.RELEASE&lt;/version&gt; 
+    &lt;/dependency&gt;  
+    &lt;!-- junit 开发包 --&gt;  
+    &lt;dependency&gt; 
+      &lt;groupId&gt;junit&lt;/groupId&gt;  
+      &lt;artifactId&gt;junit&lt;/artifactId&gt;  
+      &lt;version&gt;4.12&lt;/version&gt; 
+    &lt;/dependency&gt; 
+  &lt;/dependencies&gt; 
 &lt;/project&gt;</code></pre>
+<h4 id="6-3-3-配置实体类和service"><a href="#6-3-3-配置实体类和service" class="headerlink" title="6.3.3 配置实体类和service"></a>6.3.3 配置实体类和service</h4><p>使用上面案例中的User实体类和IUserService接口。</p>
+<h4 id="6-3-4-配置Spring-整合"><a href="#6-3-4-配置Spring-整合" class="headerlink" title="6.3.4 配置Spring 整合"></a>6.3.4 配置Spring 整合</h4><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:cxf=&quot;http://cxf.apache.org/core&quot;
+    xmlns:jaxws=&quot;http://cxf.apache.org/jaxws&quot;
+    xmlns:jaxrs=&quot;http://cxf.apache.org/jaxrs&quot;
+    xsi:schemaLocation=&quot;
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://cxf.apache.org/core
+        http://cxf.apache.org/schemas/core.xsd
+        http://cxf.apache.org/jaxws
+        http://cxf.apache.org/schemas/jaxws.xsd
+        http://cxf.apache.org/jaxrs
+        http://cxf.apache.org/schemas/jaxrs.xsd
+        &quot;&gt;
+    &lt;jaxrs:server serviceClass=&quot;cn.itcast.service.UserServiceImpl&quot;&gt;
+
+    &lt;/jaxrs:server&gt;
+&lt;/beans&gt;</code></pre>
+<h4 id="6-3-5-配置-web-xml"><a href="#6-3-5-配置-web-xml" class="headerlink" title="6.3.5 配置 web.xml"></a>6.3.5 配置 web.xml</h4><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot;
+         xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot;
+         version=&quot;2.5&quot;&gt;
+    &lt;display-name&gt;webservice_05jaxrs_spring&lt;/display-name&gt;
+
+    &lt;context-param&gt;
+        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+        &lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;
+    &lt;/context-param&gt;
+
+    &lt;listener&gt;
+        &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+    &lt;/listener&gt;
+
+    &lt;!-- CXF的核心控制器 --&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;cxfServlet&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.apache.cxf.transport.servlet.CXFServlet&lt;/servlet-class&gt;
+    &lt;/servlet&gt;
+
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;cxfServlet&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/ws/*&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;</code></pre>
 
         </div>
         <!-- .entry-content -->
@@ -598,7 +735,7 @@ ${name},你好。${message}&lt;br&gt;
           
             <div class="post-nepre half previous">
           
-            <a href="/2019/07/25/Spring、Hibernate、Struts2框架整合/" rel="prev">
+            <a href="/2019/07/11/安全框架——shiro的基本使用/" rel="prev">
               <div class="background">
                 <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
               </div>
@@ -606,7 +743,7 @@ ${name},你好。${message}&lt;br&gt;
               Previous Post</span>
               <div class="info">
                 <h3>
-                ssh框架整合</h3>
+                安全框架——shiro的基本使用</h3>
                 <hr>
               </div>
             </a>
@@ -616,7 +753,7 @@ ${name},你好。${message}&lt;br&gt;
           
             <div class="post-nepre half next">
           
-            <a href="/2019/07/25/搜索相关的整体内容实现/" rel="next">
+            <a href="/2019/07/11/HttpClient的基本使用/" rel="next">
               <div class="background">
                 <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
               </div>
@@ -624,7 +761,7 @@ ${name},你好。${message}&lt;br&gt;
               Next Post</span>
               <div class="info">
                 <h3>
-                搜索相关的整体内容实现</h3>
+                HttpClient的基本使用</h3>
                 <hr>
               </div>
             </a>
@@ -648,11 +785,11 @@ ${name},你好。${message}&lt;br&gt;
 
       <section class="author-profile">
         <div class="info" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <a href="nana.cn" class="profile gravatar"><img src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg" itemprop="image" alt="nana" height="70" width="70"></a>
+          <a href="hojun.cn" class="profile gravatar"><img src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg" itemprop="image" alt="nana" height="70" width="70"></a>
           <div class="meta">
             <span class="title">Author</span>
             <h3 itemprop="name">
-            <a href="nana.cn" itemprop="url" rel="author">nana</a>
+            <a href="hojun.cn" itemprop="url" rel="author">nana</a>
             </h3>
           </div>
         </div>

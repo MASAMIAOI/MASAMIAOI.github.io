@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <title itemprop="name">安全框架——shiro的基本使用 | nana</title>
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC" media="all">
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <link rel="stylesheet" id="saukra_css-css" href="/css/style.css" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/lib.min.css" media="all">
+  <link rel="stylesheet" href="/css/font.css" media="all">
+  <link rel="stylesheet" href="/css/insight.css" media="all">
+  <link rel="stylesheet" href="/css/jquery.fancybox.min.css" media="all">
+  <link rel="stylesheet" href="/css/zoom.css" media="all">
+  <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
+" type="text/css" media="all"> -->
+  <script>
+  /*Initial Variables*/
+  var mashiro_option = new Object();
+  var mashiro_global = new Object();
+  mashiro_option.NProgressON = true;
+  /* 
+   * 邮箱信息之类的东西可以填在这里，这些js变量基本都作用于sakura-app.js
+   * 这样的设置仅是为了方便在基于PHP开发的主题中设置js变量，既然移植到了Node上，我想或许可以精简这一逻辑吧
+   */
+  mashiro_option.email_domain = "";
+  mashiro_option.email_name = "";
+  mashiro_option.cookie_version_control = "";
+  mashiro_option.qzone_autocomplete = false;
+  mashiro_option.site_name = "娜娜nana";
+  mashiro_option.author_name = "nana";
+  mashiro_option.site_url = "https://www.masamiaoi.top/";
+  mashiro_option.v_appId = "GyC3NzMvd0hT9Yyd2hYIC0MN-gzGzoHsz";
+  mashiro_option.v_appKey = "mgOpfzbkHYqU92CV4IDlAUHQ";
+  mashiro_option.mathjax = "0";
+  mashiro_option.qq_api_url = "https://api.mashiro.top/qqinfo/"; 
+  mashiro_option.qq_avatar_api_url = "https://api.mashiro.top/qqinfo/";
+
+  // mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/css/lib.min.css";
+  // mashiro_option.float_player_on = true;
+
+  /*End of Initial Variables*/
+  </script>
+  <script type="text/javascript">
+  var bg = "https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg".split(",");
+  var bgindex = Math.floor(Math.random()*bg.length);
+  if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+    alert('朋友，IE浏览器未适配哦~');
+  }
+  </script>
+  <style type="text/css">
+  .hljs-ln{border-collapse:collapse}.hljs-ln td{padding:0}.hljs-ln-n:before{content:attr(data-line-number)}
+  </style>
+  <style type="text/css">.site-top .lower nav{display:block !important;}.author-profile i,.post-like a,.post-share .show-share,.sub-text,.we-info a,span.sitename,.post-more i:hover,#pagination a:hover,.post-content a:hover,.float-content i:hover{color:#FE9600}.feature i,.download,.navigator i:hover,.links ul li:before,.ar-time i,span.ar-circle,.object,.comment .comment-reply-link,.siren-checkbox-radio:checked + .siren-checkbox-radioInput:after{background:#FE9600}::-webkit-scrollbar-thumb{background:#FE9600}.download,.navigator i:hover,.link-title,.links ul li:hover,#pagination a:hover,.comment-respond input[type='submit']:hover{border-color:#FE9600}.entry-content a:hover,.site-info a:hover,.comment h4 a,#comments-navi a.prev,#comments-navi a.next,.comment h4 a:hover,.site-top ul li a:hover,.entry-title a:hover,#archives-temp h3,span.page-numbers.current,.sorry li a:hover,.site-title a:hover,i.iconfont.js-toggle-search.iconsearch:hover,.comment-respond input[type='submit']:hover{color:#FE9600}.comments .comments-main{display:block !important;}.comments .comments-hidden{display:none !important;}background-position:center center;background-attachment:inherit;}
+  </style>
+</head>
+</html>
+<body class="page-template page-template-user page-template-page-analytics page-template-userpage-analytics-php page page-id-1297 chinese-font serif isWebKit">
+  <div class="scrollbar" id="bar">
+  </div>
+  <a href="#" class="cd-top faa-float animated"></a>
+  <section id="main-container">
+    <div class="headertop filter-dot">
+  <div id="banner_wave_1"></div>
+  <div id="banner_wave_2"></div>
+  <figure id="centerbg" class="centerbg">
+    <div class="focusinfo no-select">
+      <div class="header-tou">
+        <a href="https://www.masamiaoi.top/">
+          <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6https://ae01.alicdn.com/kf/H3ec49ae17f1d469eb6c0d9133db61c27Q.jpg">
+        </a>
+      </div>
+      <div class="header-info">
+        <p>勿因未候日光暖，擅自轻言世间寒。</p>
+        <div class="top-social_v2">
+          <li id="bg-pre">
+            <img class="flipx" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/next-b.svg">
+          </li>
+          
+            
+              
+                <li>
+                  <a href="https://github.com/MASAMIAOI" target="_blank" class="social-github" title="github">
+                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/github.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="https://github.com/MASAMIAOI" target="_blank" class="social-github" title="sina">
+                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/sina.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="https://github.com/MASAMIAOI" target="_blank" class="social-github" title="wangyiyun">
+                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/wangyiyun.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="https://github.com/MASAMIAOI" target="_blank" class="social-github" title="zhihu">
+                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/zhihu.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="https://github.com/MASAMIAOI" target="_blank" class="social-github" title="email">
+                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/email.svg">
+                  </a>
+                </li>
+              
+            
+              
+                <li class="wechat">
+                  <a href="/#">
+                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/wechat.png">
+                  </a>
+                  <div class="wechatInner">
+                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/custom/wechat.jpg">
+                  </div>
+                </li>
+              
+            
+          
+          <li id="bg-next">
+            <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/next-b.svg">
+          </li>
+        </div>
+      </div>
+    </div>
+  </figure>
+  <div id="video-container" style="">
+    <video style="object-fit: fill" id="bgvideo" class="video" video-name="" src="" width="auto" preload="auto">
+    </video>
+    <div id="video-btn" class="loadvideo videolive">
+    </div>
+    <div id="video-add">
+    </div>
+    <div class="video-stu">
+    </div>
+  </div>
+  <div class="headertop-down faa-float animated" onclick="headertop_down()">
+    <span>
+      <i class="fa fa-chevron-down" aria-hidden="true">
+      </i>
+    </span>
+  </div>
+</div>
+    <div id="page" class="site wrapper">
+      <header class="site-header no-select gizle sabit" role="banner">
+  <div class="site-top">
+    <div class="site-branding">
+      <span class="site-title">
+        <span class="logolink moe-mashiro">
+          <a href="/">
+            <span class="sakurasono">娜娜</span>
+            <span class="shironeko">nana</span>
+          </a>
+        </span>
+      </span>
+    </div>
+    <div class="searchbox search-form-submit">
+      <i class="iconfont js-toggle-search iconsearch icon-search">
+      </i>
+    </div>
+    <div id="show-nav" class="showNav mobile-fit">
+      <div class="line line1">
+      </div>
+      <div class="line line2">
+      </div>
+      <div class="line line3">
+      </div>
+    </div>
+    <div class="lower-cantiner">
+      <div class="lower">
+        <nav class="mobile-fit-control hide">
+          <ul id="menu-new" class="menu">
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+                    首页
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+                    归档
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/categories/技术/">
+                          <i class="fa fa-code" aria-hidden="true"></i>
+                          技术
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="javascript:;">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+                    清单
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/tags/悦读/">
+                          <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
+                          书单
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      安全框架——shiro的基本使用</h1>
+      <p class="entry-census">
+        <span>
+          <a href="hojun.cn">
+            <img src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="hojun.cn">nana</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2019-7-11<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h2 id="一-：初始-shiro"><a href="#一-：初始-shiro" class="headerlink" title="一 ：初始 shiro"></a>一 ：初始 shiro</h2><p>Apache Shiro是Java的一个安全框架，相比Spring Security，Shiro可能没有那么强大的功能，但是Shiro足够轻量。</p>
+<p>Shiro可以用于JavaSE环境或是JavaEE环境，它能够帮助我们完成：认证、授权、加密、会话管理、与Web集成、缓存等。</p>
+<h4 id="1-shiro-简介"><a href="#1-shiro-简介" class="headerlink" title="1 . shiro 简介"></a>1 . shiro 简介</h4><p>作为轻量级的框架，Shiro的API也非常简单，Shiro的基本功能如下所示： </p>
+<p><img src="https://ae01.alicdn.com/kf/H2f634f90835a4c84bb49d204b3ddb1758.png" alt></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li>Authentication: 身份认证、登录，验证用户是否拥有相应的身份。</li>
+<li>Authorization: 授权、即权限验证，验证某个已认证的用户是否拥有某个权限。</li>
+<li>Session Manager: 会话管理，即用户登录至退出前就是一次会话。</li>
+<li>Cryptography: 加密，如将密码加密存储到数据库中。</li>
+<li>Web Support: Web支持。</li>
+<li>Caching: 缓存。</li>
+<li>Concurrency: Shiro支持多线程的并发验证，即在一个线程中开启另一个线程，能将权限自动传播过去。</li>
+<li>Testing: 提供测试支持。</li>
+<li>Run As: 允许一个用户假装为另一个用户的身份进行访问。</li>
+<li>Remember Me: 记住我，即一次登录后，下次再来会自动登录。</li>
+</ul>
+<h2 id="二-：Shiro的架构"><a href="#二-：Shiro的架构" class="headerlink" title="二 ：Shiro的架构"></a>二 ：Shiro的架构</h2><p><img src="https://ae01.alicdn.com/kf/H0a40562a3eec4ba3adcab69a4cf4a6b1n.png" alt></p>
+<pre><code class="**解释：**"></code></pre>
+<ul>
+<li>Subject: 主体，代表了当前的”用户”，这个用户不一定是一个具体的人，与当前应用程序交互的任何东西都是Subject，如网络爬虫、机器人等；即一个抽象的概念；所有的Subject都绑定到SecurityManager，与Subject的所有交互都会委托给SecurityManager；可以吧Subject认为是一个门面；SubjectManager才是实际的执行者。</li>
+<li>SecurityManager: 安全管理器；即所有与安全有关的操作都会与SecurityManager进行交互，且它管理者所有的Subject；它是Shiro的核心，类似于SpringMVC中的DispatcherServlet.</li>
+<li>Realm: 域，Shiro中Realm获取安全数据（用户、角色、权限），就是说SecurityManager要验证用户身份，那么他需要从Realm获取相应的用户进行比较以确定用户身份是否合法；也需要从Realm中得到用户相应的角色、权限进行验证用户是否能进行操作；可以吧Realm看做DataSource，即安全数据源。</li>
+</ul>
+<p>也就是说，一个简单的Shiro应用：</p>
+<ol>
+<li>应用代码通过Subject来进行认证和授权，而Subject又委托给SecurityManager；</li>
+<li>我们需要给Shiro的SecurityManager注入Realm，从而让SecurityManager能得到合法的用户和权限进行判断。</li>
+</ol>
+<h2 id="三-：从内部看Shiro的架构"><a href="#三-：从内部看Shiro的架构" class="headerlink" title="三 ：从内部看Shiro的架构"></a>三 ：从内部看Shiro的架构</h2><p><img src="https://ae01.alicdn.com/kf/H8ad9975b51e14a329c261ab1d54b31a9I.png" alt></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li>Subject: 主体，可以将主体看做任何与应用交互的”用户”。</li>
+<li>SubjectManager: 相当于SpringMVC中的DispatcherServlet；是Shiro的核心，所有具体的交互都通过SecurityManager进行控制；它管理着所有Subject、且负责进行认证和授权、会话、缓存的管理。</li>
+<li>Authenticator: 认证器，负责主体认证的；可扩展，用户可以自定义实现；其需要认证策略（Authentication Strategy），即什么情况下算用户认证通过了。</li>
+<li>Authrizer: 授权器，或者访问控制器，用来决定主体是否有权限进行相应的操作，即控制着用户能访问应用中的那些功能。</li>
+<li>Realm: 可以有一个或多个Realm，可以认为是安全实体数据源，即用户获取安全实体的；因为不知道你的用户、权限在哪一集以何种格式储存；所以我们一般在应用中都需要实现自己的Realm；</li>
+<li>Session Manager: Shiro抽象了一个自己的Session来管理主体和应用之间交互的数据。</li>
+<li>SessionDAO: DAO即是数据访问对象，用户会话的CRUD，比如我们想把Session保存到数据库，那么可以实现自己的SessionDAO，通过如JDBC写入到数据库；另外SessionDAO中可以使用Cache进行缓存，以提高性能。</li>
+<li>CacheManager: 缓存控制器，来管理如用户、角色、权限等的缓存的，因为这些数据很少去改变，放到缓存中来提高访问的性能。</li>
+<li>Cryptography: 密码模块。</li>
+</ul>
+<h2 id="四-：散列算法"><a href="#四-：散列算法" class="headerlink" title="四 ：散列算法"></a>四 ：散列算法</h2><pre><code>散列算法一般用于生成数据的摘要信息，是一种不可逆的算法，一般适合储存密码之类的数据，常见的散列算法如MD5、SHA等。一般进行散列算法时最好提供一个salt（盐），比如加密密码”admin”，产生的散列值是：”21232f297a57a5a743894a0e4a801fc3”，在一些MD5网站很容易就能将这个散列值解密（但已经提到了散列算法是不可逆的，而解密网址其实是通过大数据的方式，通过对比得到的真实密码），但此时我们加上一段只有系统知道的干扰数据，如用户名和ID（盐），这样散列的对象是：”密码+用户名+ID”，这样生成的散列值就很难破解了。 </code></pre><p><strong>实例</strong> </p>
+<h5 id="1、Md5加盐加密"><a href="#1、Md5加盐加密" class="headerlink" title="1、Md5加盐加密"></a><strong>1、Md5加盐加密</strong></h5><pre><code class="java">@Test
+public void md5HashTest(){
+
+    //1、模拟用户名
+    String username = &quot;tycoding&quot;;
+
+    //2、模拟密码(盐)
+    String salt = &quot;123&quot;;
+
+    //3、得到散列值
+    String md5 = new Md5Hash(username,salt).toString();
+
+    //指定散列次数
+    String md5More = new Md5Hash(username,salt,11).toString();
+
+    //4、打印
+    System.out.println(md5);
+    System.out.println(md5More);</code></pre>
+<p>打印结果： </p>
+<pre><code>261d97bf466c033240efedd7fc1996cd
+f4ac309274f79cb315831a998bce85c5</code></pre><h5 id="2、SHA算法"><a href="#2、SHA算法" class="headerlink" title="2、SHA算法"></a><strong>2、SHA算法</strong></h5><pre><code class="java">@Test
+public void SHAHashTest(){
+
+    //1、模拟用户名
+    String username = &quot;tycoding&quot;;
+
+    //2、模拟密码(盐)
+    String salt = &quot;123&quot;;
+
+    //3、得到散列值(指定散列11次)
+    String sha = new Sha256Hash(username,salt,11).toString();
+
+    //4、打印
+    System.out.println(sha);
+}</code></pre>
+<p>打印结果： </p>
+<pre><code>5eecc48774a310e20de8f0ecdf84b81230c13b64e3d81d4b00cc21a5fe645708</code></pre><p><em>扩展：</em> 除了上面用的<code>SHA256</code>算法，还有<code>SHA1</code> <code>SHA512</code>算法等。 </p>
+<h5 id="3、通用的散列支持"><a href="#3、通用的散列支持" class="headerlink" title="3、通用的散列支持"></a><strong>3、通用的散列支持</strong></h5><pre><code class="java">@Test
+public void simpleHashTest(){
+
+    //1、模拟用户名
+    String username = &quot;tycoding&quot;;
+
+    //2、模拟密码(盐)
+    String salt = &quot;123&quot;;
+
+    //3、得到散列值
+    String simpleHash = new SimpleHash(&quot;SHA-1&quot;,username,salt).toString();
+
+    //4、打印
+    System.out.println(simpleHash);
+}</code></pre>
+<p>通过调用SimpleHash时指定散列算法，其内部使用了Java的MessageDigest实现。 </p>
+<p>打印结果： </p>
+<pre><code>c8a544d0c244db4db9450cbd7bdc9912c78665fe</code></pre><h2 id="五-：shiro-实现身份认证"><a href="#五-：shiro-实现身份认证" class="headerlink" title="五 ：shiro 实现身份认证"></a>五 ：shiro 实现身份认证</h2><p>概述 ：</p>
+<p>身份验证，即在应用中谁能证明他是他本人，一般提供如他们的身份ID、用户名、密码等来证明。</p>
+<p>在Shiro中，用户需要提供principals（身份）和credentials（证明）给Shiro，从而应用能验证用户身份：</p>
+<ul>
+<li>principals: 身份，即主体的标识属性，可以是任何东西，如用户名、邮箱，唯一即可。一个主体可以有多个principals，但只有一个Primary principals，一般是用户名、密码等。</li>
+<li>credentials: 证明、凭证，即只有主体知道的安全值，如密码、数字证书等。</li>
+</ul>
+<h3 id="5-1-入门案例（登录退出）"><a href="#5-1-入门案例（登录退出）" class="headerlink" title="5.1 入门案例（登录退出）"></a>5.1 入门案例（登录退出）</h3><p><strong>shiro.ini</strong> </p>
+<p>使用<code>ini</code>配置文件来模拟数据库中的数据，实际是应该从数据库中读取安全数据。 </p>
+<pre><code class="ini">[users]
+tycoding=123</code></pre>
+<p><strong>AuthenticationTest.java</strong> 测试类 </p>
+<pre><code class="java">public class AuthenticationTest {
+
+    @Test
+    public void loginLogoutTest(){
+        //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
+        Factory factory = new IniSecurityManagerFactory(&quot;classpath:shiro.ini&quot;);
+
+        //2、得到SecurityManager实例，并绑定给SecurityUtils
+        SecurityManager securityManager = (SecurityManager) factory.getInstance();
+        SecurityUtils.setSecurityManager(securityManager);
+
+        //3、得到Subject及创建用户名、密码身份的Token
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(&quot;tycoding&quot;,&quot;123&quot;);
+
+        try{
+            //4、登录，即身份验证
+            subject.login(token);
+        }catch (AuthenticationException e){
+            //5、身份验证失败
+            e.printStackTrace();
+        }
+
+        //判断用户是否已登录
+        //用户登录成功将返回true，否则返回false并抛出异常
+        System.out.println(subject.isAuthenticated());
+
+        //6、退出
+        subject.logout();
+    }
+}</code></pre>
+<p><strong>解释：</strong></p>
+<ol>
+<li>首先需要创建SecurityManager工厂，这里使用<code>ini</code>配置文件来初始化SecurityManager工厂，以后使用Spring时，可通过将SecurityManager注入到Spring容器中，就不再用加载<code>ini</code>配置文件的方式。</li>
+<li>通过工厂类获取到SecurityManager实例并绑定到SecurityUtils，这是一个全局设置，设置一次即可。</li>
+<li>通过SecurityUtils得到Subject，其会自动绑定到当前线程；然后获取身份验证的Token，如用户名、密码等。</li>
+<li>调用subject.login(token)方法登录，其会自动委托给SecurityManager.login()方法进行登录。</li>
+<li>如果登录失败请捕获AuthenticationException或其子类，常见的异常有：DisabledAccountException（禁用的账号）、LockedAccountException（锁定的账号）、UnknownAccountException（错误的账号）、ExcessiveAttemptsException（登录失败次数过多）等。</li>
+<li>最后调用subject.logout()退出，其会自动委托给SecurityManager.logout()退出。</li>
+</ol>
+<h3 id="5-2-身份认证流程"><a href="#5-2-身份认证流程" class="headerlink" title="5.2 身份认证流程"></a>5.2 身份认证流程</h3><p><img src="https://ae01.alicdn.com/kf/H3154a3ebc30240cbba94fdd7b06c89866.png" alt></p>
+<p><strong>解释：</strong></p>
+<ol>
+<li>首先调用Subject.login(token)进行登录，其会自动委托给SecurityManager，调用之前必须通过SecurityUtils.setSecurityManager()设置。</li>
+<li>SecurityManager负责真正的身份验证逻辑；它会自动委托给Authenticator进行身份验证。</li>
+<li>Authenticator才是真正的身份验证者，Shiro API中核心的身份认证入口点，此处可以自定义插入自己的实现。</li>
+<li>Authenticator可能会委托给相应的AuthenticationStrategy进行多Realm身份验证，默认ModularRealmAuthenticator会调用AuthenticationStrategy进行多Realm身份验证。</li>
+<li>Authenticator会把相应的token传给Realm，从Realm获取身份验证信息，若果没有返回、抛出异常表示身份验证失败。此处可以配置多个Realm，将按照相应的顺序及策略进行访问。</li>
+</ol>
+<h3 id="5-3-Realm"><a href="#5-3-Realm" class="headerlink" title="5.3 Realm"></a>5.3 Realm</h3><p><strong>Realm:</strong> 域，Shiro从Realm中获取安全数据（如用户、角色、权限）；SecurityManager要验证用户身份，就需要从Realm中获取相应的用户进行比较以确定用户身份是否合法， </p>
+<p>在<code>org.apache.shiro.realm.Realm</code>接口中有如下方法： </p>
+<pre><code class="java">String getName(); //返回一个唯一的Realm名字
+
+boolean supports(AuthenticationToken token); //判断此Realm是否支持此token
+
+//根据Token获取认证信息
+AuthenticationInfo getAuthenticationInfo(AuthenticationToken token) throws AuthenticationException;</code></pre>
+<h4 id="5-3-1-自定义Realm实现"><a href="#5-3-1-自定义Realm实现" class="headerlink" title="5.3.1 自定义Realm实现"></a>5.3.1 自定义Realm实现</h4><p><strong>MyRealm.java</strong> </p>
+<pre><code class="java">public class MyRealm extends AuthorizingRealm {
+
+    @Override
+    public String getName() {
+        return &quot;myRealm&quot;;
+    }
+
+    //用于授权
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        return null;
+    }
+
+    //用于身份验证
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+
+        System.out.println(&quot;进入自定义realm...&quot;);
+
+        //得到用户名
+        Object principal = token.getPrincipal();
+
+        //得到密码，这个密码应该是从数据库中读取到的，而不是我们主动调用getCredentials()方法得到密码，这里仅为了测试
+
+        //得到密码
+        Object credentials = token.getCredentials();
+//        Object credentials = &quot;12&quot;;
+
+        try{
+            //如果身份验证失败就返回null，并抛出异常
+
+            //如果身份验证成功就返回正确的信息（AuthenticationInfo的实现类）
+            return new SimpleAuthenticationInfo(principal,credentials,getName());
+
+        }catch (AuthenticationException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+}</code></pre>
+<p>为了更清晰的展示自定义Realm参与了身份验证，特意打印了一行<code>sys</code>。</p>
+<p>其中密码应该是从数据库中读取的，这里从我们模拟的<code>ini</code>配置文件中读取安全信息（比如调用了<code>service</code>层获取的密码）。而<code>token.getCredentials()</code>是获取用户输入的密码。</p>
+<p><strong>注意：</strong></p>
+<p>注意最后的返回值类型是<code>SimpleAuthenticationInfo(principal,credentials,realmName)</code>，它是<code>AuthenticationInfo</code>接口的一个实现类。它会返回校验结果：</p>
+<ul>
+<li>校验成功：返回包含安全数据的<code>SimpleAuthenticationInfo</code>实例对象。</li>
+<li>校验失败：返回null。</li>
+</ul>
+<p>在实际中，我们应该从数据库中读取用户安全信息，我们也并不需要手动调用<code>getCredentials()</code>方法，因为在返回<code>SimpleAuthenticationInfo</code>时，Shiro会自动调用<code>getCredentials()</code>方法获取用户输入的密码，并与在数据库中读取到的密码进行比较，并将结果返回。</p>
+<p><strong>shiro-realm.ini</strong> </p>
+<pre><code class="ini">[main]
+#声明一个realm
+myRealm=com.shiro.MyRealm
+#指定securityManager的Realm实现，使用$name来引入之前的realm定义
+securityManager.realms=$myRealm
+
+[users]
+tycoding=123</code></pre>
+<p><strong>注释：</strong></p>
+<p>这里我们使用<code>ini</code>来模拟数据库数据，并在其中指定自动<code>realm</code>实现，在使用Spring后，我们会将自定义realm实现注入到Spring配置文件中。</p>
+<p><strong>多Realm配置</strong> </p>
+<pre><code class="ini">[main]
+#声明一个realm
+myRealm=com.shiro.MyRealm
+myRealm2=com.shiro.MyRealm2
+
+#指定securityManager的Realm实现，使用$name来引入之前的realm定义
+securityManager.realms=$myRealm,$myRealm2
+
+[users]
+tycoding=123</code></pre>
+<h2 id="六-：shiro-实现授权"><a href="#六-：shiro-实现授权" class="headerlink" title="六 ：shiro 实现授权"></a>六 ：shiro 实现授权</h2><p>概念：</p>
+<p>授权，也叫做访问控制，即在应用中控制谁能访问哪些资源（如访问页面、编辑数据、页面操作等）。在授权中需要了解几个关键对象：<strong>主体</strong>（Subject）、<strong>资源</strong>（Resource）、权限（Permission）、角色（Role）。 </p>
+<pre><code>授权的概念
+主体：
+主体，即访问应用的用户，在Shiro中使用Subject代表用户。用户只有授权后才允许访问相应的资源。
+
+资源：
+在应用中用户可以访问的任何东西都称为资源。用户只有授权后才能访问。
+
+权限：
+安全策略中的原子授权单位，通过权限我们可以表示在应用中用户有没有操作某个资源的权利。即权限表示在应用中用户能不能访问某个资源。
+shiro支持粗颗粒度权限（如用户模块的所有权限）和细颗粒度权限（操作某个用户的权限，即实例级别的）。
+
+角色：
+角色代表了操作集合，可以理解为权限的集合，一般情况下我们会赋予用户角色而不是权限，即这样用户可以拥有一组权限。不同的角色拥有一组不同的权限。
+
+隐式角色：
+即直接通过角色来验证用户有没有操作权限。比如：在应用中班长和课代表可以使用打印机，但是某一天老师不允许课代表使用打印机了，我们就需要将应用中课代表操作打印机的权限代码删除。即粒度是以角色为单位进行访问控制的，粒度较粗。
+
+显示角色：
+在程序中通过权限控制谁能访问某个资源，角色聚合一组权限集合；这样假设某个角色不能访问某个资源，只需要从角色代表的权限集合中移除即可；无需修改多处代码；即粒度是以资源、实例为单位的，粒度较细。</code></pre><h3 id="6-1-授权流程"><a href="#6-1-授权流程" class="headerlink" title="6.1 授权流程"></a>6.1 授权流程</h3><p><img src="https://ae01.alicdn.com/kf/H4be5eed07c3c418598913b27496a8b382.png" alt></p>
+<p><strong>解释：</strong></p>
+<ul>
+<li>首先调用<code>Subject.isPermitted*/hasRole*</code>接口，其会自动委托给SecurityManager，而SecurityManager会接着委托给Authorizer；</li>
+<li>Authorizer是真正的授权者，如果调用如<code>isPermitted(&quot;user:view&quot;)</code>，其首先会通过PermissionResolver把真正的字符串转换成相应的Permission实例；</li>
+<li>在进行授权之前，其会调用相应的Realm获取Subject相应的角色、权限用于匹配传入的角色、权限；</li>
+<li>Authorizer会判断Realm的角色、权限是否和传入的匹配，如果有多个Realm，或委托给ModularRealmAuthorizer进行循环判断，如果匹配如<code>isPermitted*/hasRole*</code>会返回true，否则返回false表示授权失败。</li>
+</ul>
+<p>ModularRealmAuthorizer进行多Realm匹配流程：</p>
+<ul>
+<li>首先检查相应的Realm是否实现了Authorizer;</li>
+<li>如果实现了Authorizer，那么接着调用其相应的<code>isPermitted*/hasRole*</code>接口进行匹配；</li>
+<li>如果有一个Realm匹配那么僵返回true，否则返回false;</li>
+</ul>
+<p>如果Realm进行首选的话，应该继承AuthorizingRealm，其流程是：</p>
+<ul>
+<li>如果调用<code>hasRole*</code>，则直接获取AuthorizationInfo.getRoles()与传入的角色比较即可</li>
+<li>如果调用如<code>isPermitted(&quot;user:view&quot;)</code>，首先通过PermissionResolver将权限字符串转换成相应的Permission实例，默认使用WildcardPermissionResolver，即转换为通配符的WildcardPermission；</li>
+<li>通过AuthorizationInfo.getObjectPermissions()得到Permission实例集合；通过AuthorizationInfo.getStringPermissions()得到字符串集合并通过PermissionResolver解析为Permission实例；然后获取用户的角色，并通过RolePermissionResolver解析角色对应的权限集合（默认没有实现，可以自己提供）；</li>
+<li>接着滴啊用Permission.implies(Permission p)逐个与传入的权限比较，如果有匹配的则返回true,否则返回false.</li>
+</ul>
+<h3 id="6-2-授权方式"><a href="#6-2-授权方式" class="headerlink" title="6.2 授权方式"></a>6.2 授权方式</h3><p>Shiro支持三种方式的授权： </p>
+<p><strong>编程式：</strong> 通过写<code>if/else</code>授权代码块完成： </p>
+<pre><code class="java">Subject subject = SecurityUtils.getSubject();
+if(subject.hasRole(&quot;admin&quot;)){
+    //有权限
+} else{
+    //无权限
+}</code></pre>
+<p><strong>注解式：</strong> 通过在指定的Java方法上放置相应的注解完成： </p>
+<pre><code class="java">@RequiresRoles(&quot;admin&quot;)
+public void hello(){
+    //有权限
+}</code></pre>
+<p>没有权限将抛出相应的异常。 </p>
+<p><strong>JSP标签：</strong> 在JSP页面通过相应的标签完成： </p>
+<pre><code class="jsp">&lt;shiro:hasRole name=&quot;admin&quot;&gt;
+    &lt;!-- 有权限 --&gt;
+&lt;/shiro:hasRole&gt;</code></pre>
+<h3 id="6-3-实现授权"><a href="#6-3-实现授权" class="headerlink" title="6.3 实现授权"></a>6.3 实现授权</h3><h4 id="6-3-1-基于角色"><a href="#6-3-1-基于角色" class="headerlink" title="6.3.1 基于角色"></a>6.3.1 基于角色</h4><p><strong>基于角色的访问控制（隐式角色）</strong> </p>
+<h5 id="1、shiro-role-ini"><a href="#1、shiro-role-ini" class="headerlink" title="1、shiro-role.ini"></a>1、<code>shiro-role.ini</code></h5><pre><code class="ini">[users]
+tycoding=123,role1,role2</code></pre>
+<p><strong>补充</strong> 此处ini配置文件的规则：<code>用户名=密码,角色1,角色2,...</code>。如果在需要在应用中判断用户是否拥有相应角色，就需要需要在相应的Realm中返回角色信息，也就是说Shiro不负责维护用户-角色信息，Shiro只是提供了相应的接口方便验证。 </p>
+<h5 id="2、RoleTest-java"><a href="#2、RoleTest-java" class="headerlink" title="2、RoleTest.java"></a>2、<code>RoleTest.java</code></h5><pre><code class="java">@Test
+public void testHasRole() {
+
+    //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
+    Factory factory = new IniSecurityManagerFactory(&quot;classpath:shiro-role.ini&quot;);
+
+    //2、得到SecurityManager实例，并绑定给SecurityUtils
+    SecurityManager securityManager = (SecurityManager) factory.getInstance();
+    SecurityUtils.setSecurityManager(securityManager);
+
+    //3、得到Subject及创建用户名、密码身份的Token
+    Subject subject = SecurityUtils.getSubject();
+    UsernamePasswordToken token = new UsernamePasswordToken(&quot;tycoding&quot;, &quot;123&quot;);
+
+    try {
+        //4、登录，即身份验证
+        subject.login(token);
+
+        //判断用户是否拥有角色：role1
+        System.out.println(subject.hasRole(&quot;role1&quot;));
+
+        //判断用户是否拥有角色：role1、role2
+        boolean[] check1 = subject.hasRoles(Arrays.asList(&quot;role1&quot;, &quot;role2&quot;));
+        for (boolean b: check1) {
+            System.out.println(b);
+        }
+
+        //判断用户是否拥有角色：role1、role2、role3
+        boolean[] check2 = subject.hasRoles(Arrays.asList(&quot;role1&quot;, &quot;role2&quot;, &quot;role3&quot;));
+        for (boolean b: check2) {
+            System.out.println(b);
+        }
+
+    } catch (AuthenticationException e) {
+        //5、身份验证失败
+        e.printStackTrace();
+    }
+
+    //6、退出
+    subject.logout();
+}</code></pre>
+<h5 id="3、打印结果"><a href="#3、打印结果" class="headerlink" title="3、打印结果"></a><strong>3、打印结果</strong></h5><pre><code class="java">true
+true
+
+true
+true
+false</code></pre>
+<h5 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a><strong>4、总结</strong></h5><p>如上就是基于角色的访问控制（即隐式角色），这种方式的缺点如果很多地方都进行了角色的判断，但是某一天不需要了，就要把相关的代码删除掉；这就是粗颗粒度造成的问题。 </p>
+<h4 id="6-3-2-基于资源"><a href="#6-3-2-基于资源" class="headerlink" title="6.3.2 基于资源"></a>6.3.2 基于资源</h4><p><strong>基于资源的访问控制（显示角色）</strong> </p>
+<h5 id="1、shiro-permission-ini"><a href="#1、shiro-permission-ini" class="headerlink" title="1、shiro-permission.ini"></a>1、<code>shiro-permission.ini</code></h5><pre><code class="ini">[users]
+tycoding=123,role1,role2
+
+[roles]
+role1:user:create,user:update
+role2:user:create,user:delete</code></pre>
+<p><strong>补充</strong> 此处ini配置文件的规则：”用户名=密码,角色1,角色2” “角色=权限1,权限2”。即首先根据用户名找到角色，然后再根据角色找到权限；即角色是权限的集合；Shiro同样不进行权限的维护，需要我们通过Realm返回相应的权限信息。只需要维护”用户-角色”之间的关系即可。 </p>
+<h5 id="2、RoleTest-java-1"><a href="#2、RoleTest-java-1" class="headerlink" title="2、RoleTest.java"></a>2、<code>RoleTest.java</code></h5><pre><code class="java">@Test
+public void testPermissionRole() {
+    //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
+    Factory factory = new IniSecurityManagerFactory(&quot;classpath:shiro-permission.ini&quot;);
+
+    //2、得到SecurityManager实例，并绑定给SecurityUtils
+    SecurityManager securityManager = (SecurityManager) factory.getInstance();
+    SecurityUtils.setSecurityManager(securityManager);
+
+    //3、得到Subject及创建用户名、密码身份的Token
+    Subject subject = SecurityUtils.getSubject();
+    UsernamePasswordToken token = new UsernamePasswordToken(&quot;tycoding&quot;, &quot;123&quot;);
+
+    try {
+        //4、登录，即身份验证
+        subject.login(token);
+
+        //判断用户是否拥有权限：user:create
+        System.out.println(subject.isPermitted(&quot;user:create&quot;));
+
+        //潘墩用户是否拥有权限：user:update和user:delete
+        boolean[] check = subject.isPermitted(&quot;user:create&quot;, &quot;user:delete&quot;);
+        for (boolean b: check) {
+            System.out.println(b);
+        }
+
+    } catch (AuthenticationException e) {
+        //5、身份验证失败
+        e.printStackTrace();
+    }
+
+    //6、退出
+    subject.logout();
+}</code></pre>
+<h5 id="3、打印结果："><a href="#3、打印结果：" class="headerlink" title="3、打印结果："></a><strong>3、打印结果：</strong></h5><pre><code class="java">true
+
+true
+true</code></pre>
+<h5 id="4、总结-1"><a href="#4、总结-1" class="headerlink" title="4、总结"></a><strong>4、总结</strong></h5><p>如上，我们事先了<strong>基于资源</strong>的访问控制（显示角色）。这种方式的优势显而易见，主要体现<strong>角色是权限的集合</strong>，这种方式的规则主要是<code>资源标识符:操作</code>，即是资源级别的粒度。如果我们需要更改某个角色的权限，只需要一个资源级别的修改，不会对其他模块代码产生影响，粒度小。需要维护<code>用户--角色，角色--权限</code>之间的关系。 </p>
+<h2 id="七-：shiro-的其他机制"><a href="#七-：shiro-的其他机制" class="headerlink" title="七 ：shiro 的其他机制"></a>七 ：shiro 的其他机制</h2><h3 id="7-1-Shiro实现拦截器"><a href="#7-1-Shiro实现拦截器" class="headerlink" title="7.1 Shiro实现拦截器"></a>7.1 Shiro实现拦截器</h3><p>Shiro使用了与Servlet一样的Filter接口进行扩展；其基础类包括以下： </p>
+<h5 id="1、NameableFilter"><a href="#1、NameableFilter" class="headerlink" title="1、NameableFilter:"></a><strong>1、NameableFilter:</strong></h5><p>NameableFilter给Filter起个名字，如果没有设置默认就是FilterName；</p>
+<h5 id="2、OncePerRequestFilter"><a href="#2、OncePerRequestFilter" class="headerlink" title="2、OncePerRequestFilter"></a><strong>2、OncePerRequestFilter</strong></h5><p>OncePerRequestFilter用于防止多次执行Filter的；也就是说请求只会走一次拦截器链；另外提供enabled属性，表示是否开启该拦截器实例，默认enabled=true表示开启，如果不想让某个拦截器工作，可以设置为false。</p>
+<h5 id="3、ShiroFilter"><a href="#3、ShiroFilter" class="headerlink" title="3、ShiroFilter"></a><strong>3、ShiroFilter</strong></h5><p>ShiroFilter是整个Shiro的入口点，用于拦截需要安全控制的请求进行处理；</p>
+<h5 id="4、AdviceFilter"><a href="#4、AdviceFilter" class="headerlink" title="4、AdviceFilter"></a><strong>4、AdviceFilter</strong></h5><p>AdviceFilter提供了AOP风格的支持，类似于SpringMVC的Interceptor:</p>
+<ul>
+<li>preHandler: 类似于AOP中的前置增强；在拦截器链执行之前执行；如果返回true则继续拦截器链；否则终端后续的拦截器链的执行直接返回；进行预处理（如基于表单的身份验证、授权）。</li>
+<li>postHandle: 类似于AOP中的后置返回增强；在拦截器链执行完成后执行；进行后处理（如记录执行时间之类的）。</li>
+<li>afterCompletion: 类似于AOP中的后置最终增强；即不管有没有异常都会执行；可以进行清理资源（如接触Subject与线程绑定之类的）；</li>
+</ul>
+<h5 id="5、PathMatchingFilter"><a href="#5、PathMatchingFilter" class="headerlink" title="5、PathMatchingFilter"></a><strong>5、PathMatchingFilter</strong></h5><p>PathMatchingFilter提供了基于Ant风格的请求匹配功能及拦截器参数解析的功能，如<code>roles[admin,user]</code>自动根据<code>,</code>分割解析一个请求参数配置并绑定到相应的路径：</p>
+<ul>
+<li>pathsMatch: 该方法用于path与请求路径进行匹配的方法；如果匹配返回true；</li>
+<li>onPreHandle: 在preHandle中，当pathsMatch匹配一个路径后，会调用opPreHandler方法并将路径绑定参数配置传给mappedValue；然后可以在这个方法中进行一些验证（如角色授权），如果验证失败可以返回false中断流程；默认返回true；也就是说子类可以只实现pnPreHandle即可，无需实现preHandle。如果没有path与请求路径匹配，默认是通过的</li>
+</ul>
+<h5 id="6、AccessControlFilter"><a href="#6、AccessControlFilter" class="headerlink" title="6、AccessControlFilter"></a><strong>6、AccessControlFilter</strong></h5><p>AccessControlFilter提供了访问控制的基础功能：</p>
+<ul>
+<li>isAccessAllowed: 表示是否允许访问；mappedValue就是<code>[urls]</code>配置中拦截器参数部分，如果允许放回true，否则返回false；</li>
+<li>onAccessDenied: 表示当访问拒绝时是否已经处理了，如果返回true表示需要继续处理；如果返回false表示该拦截器实例已经处理了，将执行返回即可。</li>
+<li>onPreHandle: 会自动调用这两个方法决定是否继续处理。</li>
+</ul>
+<h3 id="7-2-拦截器链"><a href="#7-2-拦截器链" class="headerlink" title="7.2 拦截器链"></a>7.2 拦截器链</h3><p>Shiro对Servlet容器的FilterChain进行了代理，即ShiroFilter在继续Servlet容器的Filter链的执行之前，通过ProxiedFilterChain对Servlet容器的FilterChain进行了代理；即先走Shiro自己的Filter体系，然后再委托给Servlet容器的FilterChain进行Servlet容器级别的Filter链执行；Shiro的ProxiedFilterChain执行流程：1、先执行Shiro自己的Filter链；2、再执行Servlet容器的Filter链（即原始的Filter）。</p>
+<p>而ProxiedFilterChain是通过FilterChainResolver根据配置文件中的<code>[urls]</code>部分是否与请求的URL是否匹配解析得到的。</p>
+<pre><code class="java">FilterChain getChain(ServletRequest request, ServletResponse response, FilterChain chain);</code></pre>
+<p>即传入原始的Chain，得到一个代理的Chain。</p>
+<p>Shiro内部还提供了一个路径匹配的FilterChainResolver实现：PathMatchingFilterChainResolver，其根据<code>[urls]</code>中配置的URL模式和请求的URL是否匹配解析得到的配置的拦截器链的；而PathMatchingFilterChainResolver内部通过FilterChainManager维护着拦截器链。因此我们可以通过FilterChainManager进行动态增加URL模式与拦截器链的关系。</p>
+<p>DefaultFilterChainManager会默认添加<code>org.apache.shiro.web.filter.mgt.DefaultFilter</code>中声明的拦截器；</p>
+<h3 id="7-3-默认拦截器"><a href="#7-3-默认拦截器" class="headerlink" title="7.3 默认拦截器"></a>7.3 默认拦截器</h3><p><strong>Shiro提供的默认拦截器有以下几种：</strong> </p>
+<table>
+<thead>
+<tr>
+<th>默认拦截器名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>身份验证相关的</td>
+<td></td>
+</tr>
+<tr>
+<td>authc</td>
+<td>基于表单的拦截器，如：<code>/=authc</code> 那么未经身份验证的页面不能访问，将会自动跳转到登录页面</td>
+</tr>
+<tr>
+<td>authcBasic</td>
+<td>Basic HTTP身份验证拦截器，主要属性：<code>applicationName</code>，弹出登录框显示的信息（application）</td>
+</tr>
+<tr>
+<td>logout</td>
+<td>退出拦截器，主要属性：<code>redirectUrl</code>，退出成功后重定向的地址，如：<code>/logout=logout</code></td>
+</tr>
+<tr>
+<td>user</td>
+<td>用户登录拦截器，用户已经身份验证、记住我登录的都可；如：<code>/**=user</code></td>
+</tr>
+<tr>
+<td>anon</td>
+<td>匿名拦截器，即不需要登录就能访问，一般用于静态资源的过滤；如：<code>/static/**=anon</code></td>
+</tr>
+<tr>
+<td>授权相关的</td>
+<td></td>
+</tr>
+<tr>
+<td>roles</td>
+<td>角色授权拦截器，验证用户是否有拥有所有角色；主要属性：<code>loginUrl</code>，登录页面地址（<code>/login.jsp</code>）；<code>unauthorizedUrl</code>，未经授权后重定向的地址；如：<code>/admin/**=roles[admin]</code></td>
+</tr>
+<tr>
+<td>perms</td>
+<td>权限授权拦截器，验证用户是否拥有所有权限；属性和roles一样；如：<code>/user/**=perms[&quot;user:create&quot;]</code></td>
+</tr>
+<tr>
+<td>rest</td>
+<td>rest风格的拦截器，会自动根据请求方法构建全权限字符串（GET=read,POST=create,PUT=update…）构建权限字符串：<code>/users=rest[user]</code>，会自动拼接处<code>user:read,user:create,user:update…</code>权限字符串进行权限匹配</td>
+</tr>
+<tr>
+<td>ssl</td>
+<td>SSL拦截器，自由请求协议是https，才能通过，否则会自动跳转到https端口（443）</td>
+</tr>
+<tr>
+<td>其他</td>
+<td></td>
+</tr>
+<tr>
+<td>noSessionCreation</td>
+<td>不创建会话拦截器</td>
+</tr>
+</tbody></table>
+<h2 id="八-：Shiro实现会话管理"><a href="#八-：Shiro实现会话管理" class="headerlink" title="八 ：Shiro实现会话管理"></a>八 ：Shiro实现会话管理</h2><p>会话：即用户访问应用时保持的连接关系。在多次交互中应用能够识别出当前访问的用户是谁，且可以在多次交互中保存一些数据。如访问一些网站时登录成功后，网站可以记住用户，且在退出之前都可以识别当前用户是谁。 如： </p>
+<pre><code class="java">Subject subject = SecurityUtils.getSubject();
+subject.login(token);
+Session session = subject.getSession();</code></pre>
+<p>登录成功后使用<code>Subject.getSession()</code>即可获取会话；其等价于<code>Subject.getSession(true)</code>，即当前如果没有创建Session对象会自动创建一个；而<code>Subject.getSession(false)</code>，若当前没有创建Session，会返回null（不过默认情况下如果启用会话储存功能的话在创建Subject时会主动创建一个Session）。 其常用方法如下： </p>
+<pre><code class="java">session.getId(); //获取当前会话的唯一标识
+
+session.getHost(); //获取当前Subject的主机地址，该地址是通过HostAuthenticationToken.getHost()提供的
+
+session.getTimeout();
+session.getTimeout(毫秒); //设置当前Session的过期时间；如果不设置默认是会话管理器的全局过期时间
+
+session.getStartTimestamp();
+session.getLastAccessTime(); //获取会话的启动时间和最后访问时间；
+
+session.touch();
+session.stop(); //更新会话最后访问时间及销毁会话
+
+session.setAttribute(&quot;key&quot;, &quot;123&quot;);
+session.getAttribute(&quot;key&quot;);
+session.removeAttribute(&quot;key&quot;); // 设置、获取、删除会话属性，在整个会话范围内都可以对这些属性进行操作</code></pre>
+<h3 id="8-1-会话管理器"><a href="#8-1-会话管理器" class="headerlink" title="8.1 会话管理器"></a>8.1 会话管理器</h3><p>会话管理器管理着所有Subject的会话的创建、维护、删除、失效、验证等工作。是shiro的核心组件，顶层组件SecurityManager直接继承了SessionManager。且提供了SessionSecurityManager实现直接把会话管理委托给相应的SessionManager，DefaultSecurityManager及DefaultWebSecurityManager默认SecurityManager都继承了SessionSecurityManager。 </p>
+<pre><code class="java">Session start(SessionContext context); //启动会话
+Session getSession(SessionKey key) throws SessionException; //根据会话Key获取会话
+
+boolean isServletContainerSessions(); //是否使用Servlet容器的会话
+
+void validateSessions(); //验证所有会话是否过期</code></pre>
+<h3 id="8-2-会话监听器"><a href="#8-2-会话监听器" class="headerlink" title="8.2 会话监听器"></a>8.2 会话监听器</h3><p>会话监听器用于监听会话创建、过期及停止事件 </p>
+<pre><code class="java">public class MySessionListener implements SessionListener {
+    @Override
+    public void onStart(Session session) {
+        System.out.println(&quot;会话创建：&quot; + session.getId());
+    }
+
+    @Override
+    public void onStop(Session session) {
+        System.out.println(&quot;会话过期：&quot; + session.getId());
+    }
+
+    @Override
+    public void onExpiration(Session session) {
+        System.out.println(&quot;会话停止：&quot; + session.getId());
+    }
+}</code></pre>
+<p>ini 配置</p>
+<pre><code class="ini">[main]
+authc.loginUrl=/login
+
+sessionManager=org.apache.shiro.web.session.mgt.DefaultWebSessionManager
+securityManager.sessionManager=$sessionManager
+mySessionListener=com.shiro.listener.MySessionListener
+sessionManager.sessionListeners=$mySessionListener
+#设置全局会话过期时间：1分钟
+sessionManager.globalSessionTimeout=6000
+
+[users]
+tycoding=123,admin
+
+[urls]
+#格式：url=拦截器[参数],拦截器[参数]
+/login=anon</code></pre>
+<h2 id="九-：Shiro实现缓存"><a href="#九-：Shiro实现缓存" class="headerlink" title="九 ：Shiro实现缓存"></a>九 ：Shiro实现缓存</h2><p>Shiro提供了类似于Spring的Cache抽象，即Shiro本身不实现Cache，但是又对Chache进行了抽象，方便更换不同的底层Cache实现。</p>
+<p>Shiro提供了CachingRealm，其实现了CacheManagerAware接口，提供了缓存的一些基础实现；另外AuthenticatingRealm及AuthorizingRealm分别提供了对AuthenticationInfo和AuthorizationInfo信息的缓存。</p>
+<h5 id="测试案例"><a href="#测试案例" class="headerlink" title="测试案例"></a><strong>测试案例</strong></h5><p>ini配置 </p>
+<pre><code class="ini">cacheManager=org.apache.shiro.cache.ehcache.EhCacheManager
+cacheManager.cacheManagerConfigFile=classpath:shiro-ehcache.xml
+securityManager.cacheManager=$cacheManager</code></pre>
+<p>Test </p>
+<pre><code class="java">@Test
+public void testClearCachedAuthenticationInfo() {   
+    login(u1.getUsername(), password);
+    userService.changePassword(u1.getId(), password + &quot;1&quot;);
+    RealmSecurityManager securityManager = (RealmSecurityManager) SecurityUtils.getSecurityManager();
+    UserRealm userRealm = (UserRealm) securityManager.getRealms().iterator().next();
+    userRealm.clearCachedAuthenticationInfo(subject().getPrincipals());
+    login(u1.getUsername(), password + &quot;1&quot;);
+}</code></pre>
+<p><strong>解释：</strong> 上面的测试代码中，模拟出了Shiro缓存作用：1、用户登录成功后，先调用service方法改变原数据库中的密码；2、此时调用<code>clearCachedAuthenticationInfo</code>清空之前缓存的AuthenticationInfo；3、使用新密码进行登录。如果没有清空缓存，下次登录的时候获取到的还是原来未修改的密码。</p>
+<h2 id="十-：shiro-表设计"><a href="#十-：shiro-表设计" class="headerlink" title="十 ：shiro 表设计"></a>十 ：shiro 表设计</h2><ul>
+<li>1.<code>sys_users</code>用户表</li>
+<li>2.<code>sys_roles</code>角色表</li>
+<li>3.<code>sys_permissions</code>权限表（或资源表）</li>
+<li>4.<code>sys_users_roles</code>用户-角色关联表</li>
+<li>5.<code>sys_roles_permissions</code>角色-权限关联表（或角色-资源关联表）</li>
+</ul>
+<p>使用中间表来关系两个表之间的数据关系</p>
+<h2 id="十一-shiro-流程图"><a href="#十一-shiro-流程图" class="headerlink" title="十一 : shiro 流程图"></a>十一 : shiro 流程图</h2><p><img src="https://ae01.alicdn.com/kf/He3adfd38424c4efb8a9d1202eb7f49ded.png" alt></p>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏<div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/custom/donate/nana.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/custom/donate/nana.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2019/07/11/AngularJS入门/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                AngularJs入门使用</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2019/07/11/WebService的基本使用/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                WebService的基本使用</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "GyC3NzMvd0hT9Yyd2hYIC0MN-gzGzoHsz",
+        appKey: "mgOpfzbkHYqU92CV4IDlAUHQ",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <a href="hojun.cn" class="profile gravatar"><img src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg" itemprop="image" alt="nana" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="hojun.cn" itemprop="url" rel="author">nana</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>一个好奇的人</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
+</div>
+
+
+
+    </div>    
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            // PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+    <!-- <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 nana<br>
+      powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer> -->
+<footer id="colophon" class="site-footer" role="contentinfo">
+  <div class="site-info">
+    <div class="footertext">
+      <div class="img-preload">
+        <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/wordpress-rotating-ball-o.svg">
+        <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/disqus-preloader.svg">
+      </div>
+      <p style="color: #666666;">&copy 2018</p>
+    </div>
+    <div class="footer-device">
+    <p style="font-family: 'Ubuntu', sans-serif;">
+        <span style="color: #b9b9b9;">Theme <a href="https://github.com/honjun/hexo-theme-sakura" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Sakura</a> <i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> by <a href="https://2heng.xin/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Mashiro</a>&<a href="https://www.hojun.cn/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Hojun</a>, Powered by Hexo, Hosted by Coding Pages</a>
+        </span>
+      </p>
+    </div>
+  </div><!-- .site-info -->
+</footer>
+
+
+
+<!-- <script src="/js/tocbot.js"></script> -->
+<script type="text/javascript" src="/js/lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/InsightSearch.js"></script>
+<script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
+<script type="text/javascript" src="/js/zoom.min.js"></script>
+<script type="text/javascript" src="/js/sakura-app.js"></script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
+<!-- 不蒜子 网页计数器 -->
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script> -->
+<script type="text/javascript">
+/* <![CDATA[ */
+if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  var Poi = {"pjax":"1","movies":{"url": "https://cdn.jsdelivr.net/gh/honjun/hojun@1.2","name":"Unbroken.mp4","live":"close"},"windowheight":"fixed","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+} else {
+  var Poi = {"pjax":"1","movies":{"url": "https://cdn.jsdelivr.net/gh/honjun/hojun@1.2","name":"Unbroken.mp4","live":"open"},"windowheight":"auto","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+}
+/* ]]> */
+
+</script>
+<script>
+$(document).ready(function() {
+  if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+    if ($(".pattern-center").length > 0) { //有图的情况
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -400,
+          scrollSmoothOffset: -85
+      });
+    } else {
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -85,
+          scrollSmoothOffset: -85
+      });
+    }
+    var offsetTop = $('.toc').offset().top - 95;
+    window.onscroll = function() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollTop >= offsetTop) {
+        $('.toc').addClass('toc-fixed');
+      } else {
+        $('.toc').removeClass('toc-fixed');
+      }
+    }
+  }
+});
+</script>
+
+    <div class="openNav no-select" style="height: 50px;">
+      <div class="iconflat no-select" style="width: 50px; height: 50px;">
+        <div class="icon"></div>
+      </div>
+      <div class="site-branding search-form-submit">
+        <i class="iconfont js-toggle-search iconsearch icon-search"></i>
+      </div>
+    </div>
+  </section>
+  <div id="mo-nav" class="">
+  <div class="m-avatar">
+    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6https://ae01.alicdn.com/kf/H3ec49ae17f1d469eb6c0d9133db61c27Q.jpg">
+  </div>
+  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">娜娜nana</p>
+  <p style="text-align: center; word-spacing: 20px;">
+    
+      
+        <a href="https://github.com/MASAMIAOI" class="fa fa-github" target="_blank" style="color: #333; margin-left:20px"></a>
+      
+        <a href="https://github.com/MASAMIAOI" class="fa fa-weibo" target="_blank" style="color: #dd4b39; margin-left:20px"></a>
+      
+        <a href="https://github.com/MASAMIAOI" class="fa fa-qq" target="_blank" style="color: #25c6fe; margin-left:20px"></a>
+      
+    
+  </p>
+  <ul id="menu-new-1" class="menu">
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+            首页
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/archives">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+            归档
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/categories/技术/">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                  技术
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="javascript:;">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+            清单
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/tags/悦读/">
+                  <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
+                  书单
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+  </ul>
+  <p style="text-align: center; font-size: 13px; color: #b9b9b9;">&copy 2019 hexo-sakura</p>
+</div>
+<button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+<style>
+  .aplayer .aplayer-lrc {
+    height: 35px;
+  }
+  .aplayer .aplayer-lrc p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px !important;
+  }
+  .aplayer .aplayer-lrc p.aplayer-lrc-current{
+    color: #FF1493;
+  }
+  .aplayer.aplayer-narrow .aplayer-body{
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed .aplayer-lrc {
+    display: none;
+  }
+  .aplayer .aplayer-lrc.aplayer-lrc-hide {
+      display:none !important;
+  }
+  .aplayer.aplayer-fixed .lrc-show {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+  }
+</style>
+<div class="aplayer"
+
+    data-id="2660651585"
+
+    data-server="netease"
+
+    data-type="playlist"
+
+    data-fixed="true"
+
+    data-autoplay="false"
+
+    data-loop="all"
+
+    data-order="random"
+
+    data-preload="auto"
+
+    data-volume="0.7"
+
+    data-mutex="true"
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script>
+<script>
+  $(function(){
+    $('body').on('click', '.aplayer', function(){
+      if($('.aplayer-button').hasClass('aplayer-play')) {
+        $('.aplayer-lrc').removeClass('lrc-show');
+      } else {
+        $('.aplayer-lrc').addClass('lrc-show');
+      }
+    })
+  });
+</script>
+</body>
+</html>

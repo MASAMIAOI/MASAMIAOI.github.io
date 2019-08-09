@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Freemarker的基本使用及入门 | nana</title>
+  <title itemprop="name">ssh框架整合 | nana</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -259,7 +259,7 @@
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
-      Freemarker的基本使用及入门</h1>
+      ssh框架整合</h1>
       <p class="entry-census">
         <span>
           <a href="nana.cn">
@@ -285,289 +285,461 @@
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h2 id="一-：-Freemarker-的概述"><a href="#一-：-Freemarker-的概述" class="headerlink" title="一 ： Freemarker 的概述"></a>一 ： Freemarker 的概述</h2><p>l  FreeMarker 是一个用 Java 语言编写的模板引擎，它基于模板来生成文本输出。</p>
-<p>l  Freemarker可以用作表现层的实现技术，还可以用于生成 XML、Html、或 Java 等。</p>
-<p><img src="https://ae01.alicdn.com/kf/Hef4db65a9b1240e7947b3a4802d8c0cbZ.jpg" alt></p>
-<h2 id="二-：Freemarker-的基本使用步骤"><a href="#二-：Freemarker-的基本使用步骤" class="headerlink" title="二 ：Freemarker  的基本使用步骤"></a>二 ：Freemarker  的基本使用步骤</h2><h4 id="2-1-项目基本结构"><a href="#2-1-项目基本结构" class="headerlink" title="2.1 项目基本结构"></a>2.1 项目基本结构</h4><p><img src="https://ae01.alicdn.com/kf/He6cd73796c794cd38c8e0d209d4271c0r.jpg" alt></p>
-<h4 id="2-2-基本使用步骤"><a href="#2-2-基本使用步骤" class="headerlink" title="2.2 基本使用步骤"></a>2.2 基本使用步骤</h4><h5 id="2-2-1-导入相关依赖-Freemarker依赖"><a href="#2-2-1-导入相关依赖-Freemarker依赖" class="headerlink" title="2.2.1 导入相关依赖 Freemarker依赖"></a>2.2.1 导入相关依赖 Freemarker依赖</h5><pre><code class="xml">&lt;dependency&gt;
-        &lt;groupId&gt;org.freemarker&lt;/groupId&gt;
-        &lt;artifactId&gt;freemarker&lt;/artifactId&gt;
-        &lt;version&gt;2.3.23&lt;/version&gt;
-&lt;/dependency&gt;  </code></pre>
-<h5 id="2-2-2-模板结构"><a href="#2-2-2-模板结构" class="headerlink" title="2.2.2 模板结构"></a>2.2.2 模板结构</h5><p>模板文件中四种元素</p>
-<p>l  文本：直接输出的部分</p>
-<p>l  注释：即&lt;#–…–&gt;格式不会输出  </p>
-<p>l  插值（Interpolation）：即${..}部分,将使用数据模型中的部分替代输出</p>
-<p>l  FTL指令：FreeMarker指令，和HTML标记类似，名字前加#予以区分，不会输出。</p>
-<h5 id="2-2-3-创建模板文件"><a href="#2-2-3-创建模板文件" class="headerlink" title="2.2.3 创建模板文件"></a>2.2.3 创建模板文件</h5><pre><code class="html">&lt;html&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot;&gt;
-    &lt;title&gt;Freemarker入门小DEMO &lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;#--我只是一个注释，我不会有任何输出  --&gt;
-${name},你好。${message}
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h5 id="2-2-4-生成文件"><a href="#2-2-4-生成文件" class="headerlink" title="2.2.4 生成文件"></a>2.2.4 生成文件</h5><p>使用步骤：</p>
-<p>第一步：创建一个 Configuration 对象，直接 new 一个对象。构造方法的参数就是freemarker的版本号。</p>
-<p>第二步：设置模板文件所在的路径。</p>
-<p>第三步：设置模板文件使用的字符集。一般就是 utf-8.</p>
-<p>第四步：加载一个模板，创建一个模板对象。</p>
-<p>第五步：创建一个模板使用的数据集，可以是 pojo 也可以是 map。一般是 Map。</p>
-<p>第六步：创建一个 Writer 对象，一般创建一 FileWriter 对象，指定生成的文件名。</p>
-<p>第七步：调用模板对象的 process 方法输出文件。</p>
-<p>第八步：关闭流</p>
-<p>代码：</p>
-<p>创建Test类 main方法如下：</p>
-<pre><code class="java">  //1.创建配置类
-        Configuration configuration=new Configuration(Configuration.getVersion());
-        //2.设置模板所在的目录 
-        configuration.setDirectoryForTemplateLoading(new File(&quot;D:/pinyougou_work/freemarkerDemo/src/main/resources/&quot;));
-        //3.设置字符集
-        configuration.setDefaultEncoding(&quot;utf-8&quot;);
-        //4.加载模板
-        Template template = configuration.getTemplate(&quot;test.ftl&quot;);
-        //5.创建数据模型
-        Map map=new HashMap();
-        map.put(&quot;name&quot;, &quot;张三 &quot;);
-        map.put(&quot;message&quot;, &quot;欢迎来到神奇的品优购世界！&quot;);
-        //6.创建Writer对象
-        Writer out =new FileWriter(new File(&quot;d:\\test.html&quot;));
-        //7.输出
-        template.process(map, out);
-        //8.关闭Writer对象
-        out.close();</code></pre>
-<p>执行后，在D盘根目录即可看到生成的test.html ，打开看看 </p>
-<p><img src="https://ae01.alicdn.com/kf/Ha36be34768c84186abe38d8d08401dbcj.jpg" alt></p>
-<h2 id="三-：相关指令"><a href="#三-：相关指令" class="headerlink" title="三 ：相关指令"></a>三 ：相关指令</h2><h4 id="3-1-FTL指令"><a href="#3-1-FTL指令" class="headerlink" title="3.1 FTL指令"></a>3.1 FTL指令</h4><h5 id="3-1-1-assign-指令"><a href="#3-1-1-assign-指令" class="headerlink" title="3.1.1 assign 指令"></a>3.1.1 assign 指令</h5><p>此指令用于在页面上定义一个变量 </p>
-<ul>
-<li>定义简单类型 ：</li>
-</ul>
-<pre><code class="html">&lt;#assign linkman=&quot;周先生&quot;&gt;
-联系人：${linkman}</code></pre>
-<ul>
-<li>定义对象类型 ：</li>
-</ul>
-<pre><code class="html">&lt;#assign info={&quot;mobile&quot;:&quot;13301231212&quot;,&#39;address&#39;:&#39;北京市昌平区王府街&#39;} &gt;
-电话：${info.mobile}  地址：${info.address}</code></pre>
-<p>运行效果 ：</p>
-<p><img src="https://ae01.alicdn.com/kf/H528a2bcc2e0f49098a3c90e50cd2db7bn.jpg" alt></p>
-<h5 id="3-1-2-include-指令"><a href="#3-1-2-include-指令" class="headerlink" title="3.1.2 include 指令"></a>3.1.2 include 指令</h5><p>此指令用于模板文件的嵌套</p>
-<p>创建模板文件head.ftl</p>
-<pre><code class="html">&lt;h1&gt;黑马信息网&lt;/h1&gt;</code></pre>
-<p>我们修改test.ftl，在模板文件中使用include指令引入刚才我们建立的模板 </p>
-<pre><code class="html">&lt;#include &quot;head.ftl&quot;&gt;</code></pre>
-<h5 id="3-1-3-if-指令"><a href="#3-1-3-if-指令" class="headerlink" title="3.1.3 if 指令"></a>3.1.3 if 指令</h5><p>在模板文件上添加</p>
-<pre><code class="html">&lt;#if success=true&gt;
-  你已通过实名认证
-&lt;#else&gt;  
-  你未通过实名认证
-&lt;/#if&gt;</code></pre>
-<p>在代码中对str变量赋值</p>
-<pre><code class="java">map.put(&quot;success&quot;, true);</code></pre>
-<p>在freemarker的判断中，可以使用= 也可以使用== </p>
-<h5 id="3-1-4-List-指令"><a href="#3-1-4-List-指令" class="headerlink" title="3.1.4 List 指令"></a>3.1.4 List 指令</h5><p>需求，实现商品价格表，如下图： </p>
-<p><img src="https://ae01.alicdn.com/kf/H2ec3b2f362d04e788e5baa5c6826e401E.jpg" alt></p>
-<p>代码中对变量goodsList赋值</p>
-<pre><code class="java">    List goodsList=new ArrayList();
-        Map goods1=new HashMap();
-        goods1.put(&quot;name&quot;, &quot;苹果&quot;);
-        goods1.put(&quot;price&quot;, 5.8);
-        Map goods2=new HashMap();
-        goods2.put(&quot;name&quot;, &quot;香蕉&quot;);
-        goods2.put(&quot;price&quot;, 2.5);
-        Map goods3=new HashMap();
-        goods3.put(&quot;name&quot;, &quot;橘子&quot;);
-        goods3.put(&quot;price&quot;, 3.2);
-        goodsList.add(goods1);
-        goodsList.add(goods2);
-        goodsList.add(goods3);
-        map.put(&quot;goodsList&quot;, goodsList);</code></pre>
-<p>在模板文件上添加 </p>
-<pre><code class="html">----商品价格表----&lt;br&gt;
-&lt;#list goodsList as goods&gt;
-  ${goods_index+1} 商品名称： ${goods.name} 价格：${goods.price}&lt;br&gt;
-&lt;/#list&gt;</code></pre>
-<p>如果想在循环中得到索引，使用循环变量+_index就可以得到。 </p>
-<h4 id="3-2-内嵌函数"><a href="#3-2-内嵌函数" class="headerlink" title="3.2 内嵌函数"></a>3.2 内嵌函数</h4><p>内建函数语法格式： 变量+?+函数名称</p>
-<h5 id="3-2-1-获取集合大小"><a href="#3-2-1-获取集合大小" class="headerlink" title="3.2.1 获取集合大小"></a>3.2.1 获取集合大小</h5><p>我们通常要得到某个集合的大小，如下图：</p>
-<p><img src="https://ae01.alicdn.com/kf/H13a6fb0dca3947c4a5dbb0169e934788i.jpg" alt></p>
-<p>我们使用size函数来实现，代码如下：</p>
-<pre><code class="html">共  ${goodsList?size}  条记录</code></pre>
-<h5 id="3-2-2-转换-Json-字符串为对象"><a href="#3-2-2-转换-Json-字符串为对象" class="headerlink" title="3.2.2 转换 Json 字符串为对象"></a>3.2.2 转换 Json 字符串为对象</h5><p>我们通常需要将json字符串转换为对象，那如何处理呢？看代码 </p>
-<pre><code class="html">    &lt;#assign text=&quot;{&#39;bank&#39;:&#39;工商银行&#39;,&#39;account&#39;:&#39;10101920201920212&#39;}&quot; /&gt;
-    &lt;#assign data=text?eval /&gt;
-    开户行：${data.bank}  账号：${data.account}</code></pre>
-<h5 id="3-2-3-日期格式化"><a href="#3-2-3-日期格式化" class="headerlink" title="3.2.3 日期格式化"></a>3.2.3 日期格式化</h5><p>代码中对变量赋值：</p>
-<pre><code class="java">dataModel.put(&quot;today&quot;, new Date());</code></pre>
-<p>在模板文件中加入</p>
-<pre><code class="html">当前日期：${today?date} &lt;br&gt;
-当前时间：${today?time} &lt;br&gt;   
-当前日期+时间：${today?datetime} &lt;br&gt;        
-日期格式化：  ${today?string(&quot;yyyy年MM月&quot;)}</code></pre>
-<p>运行效果如下：</p>
-<p><img src="https://ae01.alicdn.com/kf/H17454a997d4f4c4783cd8ab33c1fc90f9.jpg" alt></p>
-<h5 id="3-2-4-数字转换为字符串"><a href="#3-2-4-数字转换为字符串" class="headerlink" title="3.2.4 数字转换为字符串"></a>3.2.4 数字转换为字符串</h5><p>代码中对变量赋值：</p>
-<pre><code class="java">map.put(&quot;point&quot;, 102920122);</code></pre>
-<p>修改模板：</p>
-<pre><code class="html">累计积分：${point}</code></pre>
-<p>页面显示：</p>
-<p><img src="https://ae01.alicdn.com/kf/H55f065c7bdd84a38b40a77c0f7140bf04.jpg" alt></p>
-<p>我们会发现数字会以每三位一个分隔符显示，有些时候我们不需要这个分隔符，就需要将数字转换为字符串,使用内建函数c </p>
-<pre><code class="html">累计积分：${point?c}</code></pre>
-<p>页面显示效果如下： </p>
-<p><img src="https://ae01.alicdn.com/kf/H3c0e2fcd585240449899cda4cd2ad8e1U.jpg" alt></p>
-<h4 id="3-3-空值处理运算符"><a href="#3-3-空值处理运算符" class="headerlink" title="3.3 空值处理运算符"></a>3.3 空值处理运算符</h4><p>如果你在模板中使用了变量但是在代码中没有对变量赋值，那么运行生成时会抛出异常。但是有些时候，有的变量确实是null，怎么解决这个问题呢？ </p>
-<h5 id="3-3-1-判断某变量是否存在-“-”"><a href="#3-3-1-判断某变量是否存在-“-”" class="headerlink" title="3.3.1 判断某变量是否存在 “??”"></a>3.3.1 判断某变量是否存在 “??”</h5><p>用法为:variable??,如果该变量存在,返回true,否则返回false  </p>
-<pre><code class="html">&lt;#if aaa??&gt;
-  aaa变量存在
-&lt;#else&gt;
-  aaa变量不存在
-&lt;/#if&gt;</code></pre>
-<h5 id="3-3-2-缺失变量默认值-：-“！”"><a href="#3-3-2-缺失变量默认值-：-“！”" class="headerlink" title="3.3.2 缺失变量默认值 ： “！”"></a>3.3.2 缺失变量默认值 ： “！”</h5><p>我们除了可以判断是否为空值，也可以使用!对null值做转换处理</p>
-<p>在模板文件中加入</p>
-<pre><code class="html">  ${aaa!&#39;-&#39;}</code></pre>
-<p>在代码中不对aaa赋值，也不会报错了 ，当aaa为null则返回！后边的内容-</p>
-<h4 id="3-4-运算符"><a href="#3-4-运算符" class="headerlink" title="3.4 运算符"></a>3.4 运算符</h4><h5 id="3-4-1-算数运算符"><a href="#3-4-1-算数运算符" class="headerlink" title="3.4.1 算数运算符"></a>3.4.1 算数运算符</h5><p>FreeMarker表达式中完全支持算术运算,FreeMarker支持的算术运算符包括:+, - , * , / , % </p>
-<h5 id="3-4-2-逻辑运算符"><a href="#3-4-2-逻辑运算符" class="headerlink" title="3.4.2 逻辑运算符"></a>3.4.2 逻辑运算符</h5><p>逻辑运算符有如下几个: </p>
-<p>l  逻辑与：&amp;&amp; </p>
-<p>l  逻辑或：|| </p>
-<p>l  逻辑非：! </p>
-<p>注意：逻辑运算符只能作用于布尔值,否则将产生错误 </p>
-<h5 id="3-4-3-比较运算符"><a href="#3-4-3-比较运算符" class="headerlink" title="3.4.3 比较运算符"></a>3.4.3 比较运算符</h5><p>表达式中支持的比较运算符有如下几个: </p>
-<p>l  =或者==：判断两个值是否相等. </p>
-<p>l  !=：判断两个值是否不等. </p>
-<p>l  &gt;或者gt：判断左边值是否大于右边值 </p>
-<p>l  &gt;=或者gte：判断左边值是否大于等于右边值 </p>
-<p>l  &lt;或者lt：判断左边值是否小于右边值 </p>
-<p>l  &lt;=或者lte：判断左边值是否小于等于右边值 </p>
-<p><strong>注意</strong>:  </p>
-<p>=和!=可以用于字符串,数值和日期来比较是否相等,</p>
-<p>但=和!=两边必须是相同类型的值,否则会产生错误,</p>
-<p>FreeMarker是精确比较,,”x “,”X”是不等的.</p>
-<p>其它的运行符可以作用于数字和日期,但不能作用于字符串,</p>
-<p>使用gt等字母运算符代替&gt;会有更好的效果,因为 FreeMarker会把&gt;解释成FTL标签的结束字符,当然,也可以使用括号来避免这种情况,如:&lt;#if (x&gt;y)&gt; </p>
-<h2 id="四-：整体代码的实现"><a href="#四-：整体代码的实现" class="headerlink" title="四 ：整体代码的实现"></a>四 ：整体代码的实现</h2><h4 id="4-1-FreemarkerTest-相关代码"><a href="#4-1-FreemarkerTest-相关代码" class="headerlink" title="4.1 FreemarkerTest  相关代码"></a>4.1 FreemarkerTest  相关代码</h4><pre><code class="java">package com.pinyougou.freemarker.test;
+          <p><strong>SSH框架整合、分页查询案例</strong> </p>
+<p>Spring、Hibernate、Struts2框架虽然现在已经不是很流行，但是在一写公司的老项目中仍然在使用，多学一种技术总没有坏处，所以如果大家刚学完了Spring、Struts、Hibernate框架，那么这个项目将教会你如何对这三大框架进行整合。 </p>
+<h1 id="1-关于项目"><a href="#1-关于项目" class="headerlink" title="1 . 关于项目"></a>1 . 关于项目</h1><h2 id="项目环境"><a href="#项目环境" class="headerlink" title="项目环境"></a>项目环境</h2><pre><code>框架：
+    后端：spring + struts2 + hibernate5.x
+    前端：bootstrap + Fontawesome图标集
+环境：IDEA + maven + mysql5.7 + Tomcat8</code></pre><h2 id="项目功能"><a href="#项目功能" class="headerlink" title="项目功能"></a>项目功能</h2><pre><code>1. 用户登录
+2. 客户信息的增、删、改、查
+3. 客户信息的列表展示和分页查询功能</code></pre><h1 id="2-jar依赖"><a href="#2-jar依赖" class="headerlink" title="2 . jar依赖"></a>2 . jar依赖</h1><pre><code class="xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;com&lt;/groupId&gt;
+  &lt;artifactId&gt;customer&lt;/artifactId&gt;
+  &lt;packaging&gt;war&lt;/packaging&gt;
+  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+  &lt;name&gt;customer Maven Webapp&lt;/name&gt;
+  &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+  &lt;build&gt;
+    &lt;finalName&gt;customer&lt;/finalName&gt;
+    &lt;resources&gt;
+      &lt;resource&gt;
+        &lt;directory&gt;${basedir}/src/main/java&lt;/directory&gt;
+        &lt;includes&gt;
+          &lt;include&gt;**/*.properties&lt;/include&gt;
+          &lt;include&gt;**/*.xml&lt;/include&gt;
+        &lt;/includes&gt;
+      &lt;/resource&gt;
+      &lt;resource&gt;
+        &lt;directory&gt;${basedir}/src/main/resources&lt;/directory&gt;
+      &lt;/resource&gt;
+    &lt;/resources&gt;
+  &lt;/build&gt;
 
-import freemarker.template.Configuration;
-import freemarker.template.Template;
+  &lt;properties&gt;
+    &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
+    &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
+  &lt;/properties&gt;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.util.*;
-
-public class FreemarkerTest {
-
-    public static void main(String[] args) throws Exception {
-        //1.创建配置对象，设置版本号
-        Configuration configuration = new Configuration(Configuration.getVersion());
-        //2.设置加载模板的目录
-        configuration.setDirectoryForTemplateLoading(new File(&quot;D:\\Work\\workspaces\\pinyougou\\pyg_91\\pyg_freemarker_demo\\src\\main\\resources\\&quot;));
-        //3.设置加载编码格式：utf-8
-        configuration.setDefaultEncoding(&quot;utf-8&quot;);
-        //4.从模板目录下加载模板文件
-        Template template = configuration.getTemplate(&quot;test.ftl&quot;);
-        //5.准备数据map
-        Map map = new HashMap&lt;String, String&gt;();
-        map.put(&quot;name&quot;,&quot;九纹龙&quot;);
-        map.put(&quot;message&quot;,&quot;你真牛！&quot;);
-        map.put(&quot;isMarketable&quot;,true);
-        List&lt;Map&lt;String, String&gt;&gt; courseList = new ArrayList();
-        Map coursemap = new HashMap&lt;String, String&gt;();
-        coursemap.put(&quot;name&quot;,&quot;基础课程&quot;);
-        coursemap.put(&quot;price&quot;,500);
-        coursemap.put(&quot;days&quot;, 11);
-        courseList.add(coursemap);
-        coursemap = new HashMap&lt;String, String&gt;();
-        coursemap.put(&quot;name&quot;,&quot;web课程&quot;);
-        coursemap.put(&quot;price&quot;,7000);
-        coursemap.put(&quot;days&quot;, 12);
-        courseList.add(coursemap);
-        coursemap = new HashMap&lt;String, String&gt;();
-        coursemap.put(&quot;name&quot;,&quot;框架课程&quot;);
-        coursemap.put(&quot;price&quot;,7000);
-        coursemap.put(&quot;days&quot;, 15);
-        coursemap = new HashMap&lt;String, String&gt;();
-        coursemap.put(&quot;name&quot;,&quot;项目课程&quot;);
-        coursemap.put(&quot;price&quot;,14000);
-        coursemap.put(&quot;days&quot;, 40);
-        courseList.add(coursemap);
-        map.put(&quot;courseList&quot;, courseList);
-
-        map.put(&quot;today&quot;, new Date());
-//        map.put(&quot;abc&quot;, new Date());
-        //6.将模板和数据整合输出到指定的位置
-        Writer out = new FileWriter(new File(&quot;D:\\Work\\appdata\\htmls\\91\\test.html&quot;));
-        template.process(map, out);
-        //7.关闭资源
-        out.close();
-    }
-}</code></pre>
-<h4 id="4-2-前台页面代码实现"><a href="#4-2-前台页面代码实现" class="headerlink" title="4.2 前台页面代码实现"></a>4.2 前台页面代码实现</h4><p>head.ftl  相关代码实现</p>
-<pre><code class="html">&lt;html&gt;
-&lt;#include &quot;head.ftl&quot;&gt;
-&lt;body&gt;
-&lt;#--我只是一个注释，我不会有任何输出  --&gt;
-${name},你好。${message}&lt;br&gt;
-&lt;#assign linkman = &quot;传智播客&quot;&gt;
-公司名：${linkman}&lt;br&gt;
-&lt;#assign company = {&#39;address&#39;:&#39;北京顺义黑马程序员基地&#39;,&#39;telephone&#39;:&#39;010-8008202&#39;}&gt;
-公司地址：${company.address}&lt;br&gt;
-公司电话：${company.telephone}&lt;br&gt;
-&lt;#if isMarketable&gt;
-公司是否上市：上市&lt;br&gt;
-&lt;#else &gt;
-公司是否上市：未上市&lt;br&gt;
-&lt;/#if&gt;
-公司课程：&lt;br&gt;
-课程序号  课程名称  课程价格   课程时间 &lt;br&gt;
-&lt;#list courseList as course&gt;
- ${course_index + 1}   ${course.name}  ${course.price?c}  ${course.days} &lt;br&gt;
-&lt;/#list&gt;
-公司课程总共几段：${courseList?size} &lt;br&gt;
-&lt;#assign jsonStrData = &quot;{&#39;name&#39;:&#39;大老王&#39;,&#39;telephone&#39;:&#39;13838389483&#39;,&#39;address&#39;:&#39;北京昌平区平西府村&#39;}&quot;&gt;
-&lt;#assign jsonObjectData = jsonStrData?eval&gt;
-公司主管信息： &lt;br&gt;
-姓名：${jsonObjectData.name}&lt;br&gt;
-电话：${jsonObjectData.telephone}&lt;br&gt;
-地址：${jsonObjectData.address}&lt;br&gt;
-日期：&lt;br&gt;
-年月日：${today?date}&lt;br&gt;
-时分秒：${today?time}&lt;br&gt;
-年月日时分秒：${today?datetime}&lt;br&gt;
-自定义格式：${today?string(&#39;yyyy年MM月dd日 hh小时mm分钟ss秒&#39;)}&lt;br&gt;
-空值判断：&lt;br&gt;
-&lt;#if abc??&gt;
-    abc存在
-&lt;#else &gt;
-    abc不存在，默认值是${abc!&#39;无&#39;}
-&lt;/#if&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h4 id="4-3-pom-xml-文件相关代码"><a href="#4-3-pom-xml-文件相关代码" class="headerlink" title="4.3 pom.xml 文件相关代码"></a>4.3 pom.xml 文件相关代码</h4><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
-         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
-    &lt;parent&gt;
-        &lt;artifactId&gt;pyg_91&lt;/artifactId&gt;
-        &lt;groupId&gt;cn.itcast&lt;/groupId&gt;
-        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
-    &lt;/parent&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-
-    &lt;artifactId&gt;pyg_freemarker_demo&lt;/artifactId&gt;
-
-&lt;dependencies&gt;
+  &lt;dependencies&gt;
+    &lt;!-- 单元测试 --&gt;
     &lt;dependency&gt;
-        &lt;groupId&gt;org.freemarker&lt;/groupId&gt;
-        &lt;artifactId&gt;freemarker&lt;/artifactId&gt;
-        &lt;version&gt;2.3.23&lt;/version&gt;
+      &lt;groupId&gt;junit&lt;/groupId&gt;
+      &lt;artifactId&gt;junit&lt;/artifactId&gt;
+      &lt;version&gt;4.11&lt;/version&gt;
     &lt;/dependency&gt;
-&lt;/dependencies&gt;
+
+    &lt;!-- 1.日志 --&gt;
+    &lt;!-- 实现slf4j接口并整合 --&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+      &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+      &lt;version&gt;1.1.1&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;!-- 2.数据库 --&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;mysql&lt;/groupId&gt;
+      &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+      &lt;version&gt;5.1.37&lt;/version&gt;
+      &lt;scope&gt;runtime&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;c3p0&lt;/groupId&gt;
+      &lt;artifactId&gt;c3p0&lt;/artifactId&gt;
+      &lt;version&gt;0.9.1.2&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+      &lt;version&gt;4.3.10.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.struts&lt;/groupId&gt;
+      &lt;artifactId&gt;struts2-spring-plugin&lt;/artifactId&gt;
+      &lt;version&gt;2.5.12&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;aspectj&lt;/groupId&gt;
+      &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;
+      &lt;version&gt;1.5.4&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-orm&lt;/artifactId&gt;
+      &lt;version&gt;4.3.10.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.hibernate&lt;/groupId&gt;
+      &lt;artifactId&gt;hibernate-core&lt;/artifactId&gt;
+      &lt;version&gt;5.2.10.Final&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.hibernate&lt;/groupId&gt;
+      &lt;artifactId&gt;hibernate-c3p0&lt;/artifactId&gt;
+      &lt;version&gt;5.2.10.Final&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- 3.Servlet web --&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;jstl&lt;/groupId&gt;
+      &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+      &lt;version&gt;1.2&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+      &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+      &lt;version&gt;2.5.4&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+      &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+      &lt;version&gt;3.1.0&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+      &lt;groupId&gt;net.sf.json-lib&lt;/groupId&gt;
+      &lt;artifactId&gt;json-lib&lt;/artifactId&gt;
+      &lt;version&gt;2.4&lt;/version&gt;
+      &lt;classifier&gt;jdk15&lt;/classifier&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.struts&lt;/groupId&gt;
+      &lt;artifactId&gt;struts2-json-plugin&lt;/artifactId&gt;
+      &lt;version&gt;2.5.12&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+      &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
+      &lt;version&gt;1.2.46&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
 &lt;/project&gt;</code></pre>
+<h1 id="3-创建数据库"><a href="#3-创建数据库" class="headerlink" title="3 . 创建数据库"></a>3 . 创建数据库</h1><p>注：由于使用hibernate，我们已配置表结构由hibernate自动生成，这里就不需要我们创建了 </p>
+<pre><code class="sql">create database ssh_paging character set utf8;
+
+# 插入数据
+# 以下代码需要在启动Tomcat运行项目后才能执行，不然还没有创建表结构，我们怎么插入数据呢。
+insert into Admin values(a,&#39;admin&#39;,&#39;admin&#39;);
+
+insert into Customer values(1,&#39;涂陌&#39;,&#39;123456789&#39;,&#39;你猜&#39;,&#39;不想写备注&#39;);
+insert into Customer values(2,&#39;逗瓜&#39;,&#39;123456789&#39;,&#39;你猜&#39;,&#39;不想写备注&#39;);
+insert into Customer values(3,&#39;愤青&#39;,&#39;123456789&#39;,&#39;你猜&#39;,&#39;不想写备注&#39;);
+insert into Customer values(4,&#39;咸鱼&#39;,&#39;123456789&#39;,&#39;你猜&#39;,&#39;不想写备注&#39;);
+insert into Customer values(5,&#39;小白&#39;,&#39;123456789&#39;,&#39;你猜&#39;,&#39;不想写备注&#39;);
+insert into Customer values(6,&#39;菜鸡&#39;,&#39;123456789&#39;,&#39;你猜&#39;,&#39;不想写备注&#39;);</code></pre>
+<h1 id="4-PageBean的封装"><a href="#4-PageBean的封装" class="headerlink" title="4 . PageBean的封装"></a>4 . PageBean的封装</h1><pre><code class="java">package com.cutton.pojo;
+
+import java.io.Serializable;
+import java.util.List;
+
+/**
+ * @author huys
+ * @date 18-3-10下午12:47
+ */
+public class PageBean&lt;T&gt; implements Serializable {
+
+    //当前页
+    private int pageCode;
+
+    //总页数=总条数/每页显示的条数
+    //private int totalPage;
+
+    //总记录数
+    private int totalCount;
+
+    //每页显示的记录条数
+    private int pageSize;
+
+    //每页显示的数据
+    private List&lt;T&gt; beanList;
+
+    public int getPageCode() {
+        return pageCode;
+    }
+
+    public void setPageCode(int pageCode) {
+        this.pageCode = pageCode;
+    }
+
+    /**
+     * 调用getTotalPage() 获取到总页数
+     * JavaBean属性规定：totalPage是javaBean属性 ${pageBean.totalPage}
+     */
+    public int getTotalPage() {
+        //计算
+        int totalPage = totalCount / pageSize;
+        //说明整除
+        if(totalCount % pageSize == 0){
+            return totalPage;
+        }else{
+            return totalPage + 1;
+        }
+    }
+
+   /* public void setTotalPage(int totalPage) {
+        this.totalPage = totalPage;
+    }*/
+
+    public int getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public List&lt;T&gt; getBeanList() {
+        return beanList;
+    }
+
+    public void setBeanList(List&lt;T&gt; beanList) {
+        this.beanList = beanList;
+    }
+
+}</code></pre>
+<h1 id="5-后端代码编写"><a href="#5-后端代码编写" class="headerlink" title="5 . 后端代码编写"></a>5 . 后端代码编写</h1><h2 id="编辑功能"><a href="#编辑功能" class="headerlink" title="编辑功能"></a>编辑功能</h2><p>处理前台模态框的编辑功能部分 </p>
+<pre><code class="java">/**
+     * 为模态框提供的查询功能
+     * 处理ajax的请求
+     */
+    public String search() {
+        try {
+            HttpServletRequest request = ServletActionContext.getRequest();
+            HttpServletResponse response = ServletActionContext.getResponse();
+            request.setCharacterEncoding(&quot;UTF-8&quot;);
+            response.setContentType(&quot;text/html;charset=UTF-8&quot;);
+            customer = customerService.findById(customer.getC_id());
+
+            //将数据放到Map集合中，再转换成json格式的数据
+            Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();
+            map.put(&quot;c_id&quot;, customer.getC_id());
+            map.put(&quot;c_name&quot;, customer.getC_name());
+            map.put(&quot;c_telephone&quot;, customer.getC_telephone());
+            map.put(&quot;c_address&quot;, customer.getC_address());
+            map.put(&quot;c_remark&quot;, customer.getC_remark());
+
+            //将Map集合数据转换成json格式的数据
+            JSONObject json = JSONObject.fromObject(map);
+            result = json.toString();
+            System.out.println(&quot;这里我要传给前台页面的JSON数据是：&quot;+result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SUCCESS;
+    }</code></pre>
+<p> <strong>说明：</strong></p>
+<p>这里我们就要说一下了，首先我们要明白这个功能：其实就是普通的更新数据的功能，即当我们点击编辑按钮的时候需要先ajax异步请求去后台根据点击的字段id去查询对应的数据库信息，然后将数据以JSON的格式返回给页面，最后页面解析JSON格式数据，回显在编辑框中，实现编辑。</p>
+<p>那么，在这里是怎样进行将这个JSON格式数据返回给页面呢？我们需要看一下struts2.xml中配置：</p>
+<pre><code class="xml">&lt;package name=&quot;struts2&quot; namespace=&quot;/&quot; extends=&quot;struts-default,json-default&quot;&gt;
+&lt;action name=&quot;customer_*&quot; class=&quot;customerAction&quot; method=&quot;{1}&quot;&gt;
+    &lt;result type=&quot;json&quot;&gt;
+          &lt;param name=&quot;root&quot;&gt;result&lt;/param&gt;
+     &lt;/result&gt;
+     &lt;allowed-methods&gt;search&lt;/allowed-methods&gt;
+&lt;/action&gt;
+&lt;/package&gt;</code></pre>
+<ol>
+<li>注意一下这个<code>&lt;allowed-methods&gt;</code>是为我们的通配符服务的，在struts2.3版本以后，如果我们没有写这个而直接使用通配符就会报错找不到映射，所以需要配置这个标签，格式：<code>&lt;allowed-methods&gt;方法名1，方法名2…&lt;/allowed-methods&gt;</code>。详情请参考这篇 <a href="https://blog.csdn.net/qq_29663071/article/details/53009287" target="_blank" rel="noopener">博文</a></li>
+<li>注意<code>&lt;result type=&quot;json&quot;&gt;</code>在struts2中是用来做Ajax请求的，所以根本没有跳转页面，写这个标签，会将你Action中的变量转换成JSON格式数据返回到页面，<br>那么<code>&lt;param name=&quot;root&quot;&gt;result&lt;/param&gt;</code>就会将你要返回的数据result（JSON字符串）返回给页面，在页面使用<code>var d = eval(&quot;(&quot;+data+&quot;)&quot;);</code> 的方式将JSON字符串解析成JSON格式数据，然后我们就能通过ognl表达式解析获取数据，然后给指定的编辑框中赋值数据了。Ajax部分:</li>
+</ol>
+<pre><code class="js">// 先去查询数据
+$.ajax({
+     url: &#39;&lt;%=basePath%&gt;/customer_search.do?c_id=&#39;+c_id,
+     type: &#39;POST&#39;,
+     dataType: &#39;json&#39;,
+     contentType: &#39;application/json;charset=UTF-8&#39;,
+     data: {},
+     success: function(data){
+     var d = eval(&quot;(&quot;+data+&quot;)&quot;);
+     $(&quot;#c_id&quot;).val(d.c_id);
+     $(&quot;#c_name&quot;).val(d.c_name);
+     $(&quot;#c_telephone&quot;).val(d.c_telephone);
+     $(&quot;#c_address&quot;).val(d.c_address);
+     $(&quot;#c_remark&quot;).val(d.c_remark);
+     $(&quot;#editModal&quot;).modal(&#39;show&#39;);
+     },
+     error: function(){
+          alert(&quot;错误&quot;);
+     }
+});</code></pre>
+<h2 id="分页功能"><a href="#分页功能" class="headerlink" title="分页功能"></a>分页功能</h2><p>处理分页逻辑功能部分 </p>
+<pre><code class="java">/**
+  * 分页查询相关
+  */
+  //属性驱动方式，当前页，默认页1
+  private Integer pageCode = 1;
+  public void setPageCode(Integer pageCode) {
+      if(pageCode == null){
+          pageCode = 1;
+      }
+      this.pageCode = pageCode;
+  }
+
+  //默认每页显示的数据条数
+  private Integer pageSize = 4;
+  public void setPageSize(Integer pageSize) {
+      this.pageSize = pageSize;
+  }
+
+  //分页查询的方法
+  public String findByPage(){
+      //调用service层
+      DetachedCriteria criteria = DetachedCriteria.forClass(Cutton.class);
+      //查询
+      PageBean&lt;Cutton&gt; page = cuttonService.findByPage(pageCode,pageSize,criteria);
+      //压栈
+      ValueStack vs = ActionContext.getContext().getValueStack();
+      //顶栈是map&lt;&quot;page&quot;,page对象&gt;
+      vs.set(&quot;page&quot;,page);
+      return &quot;page&quot;;
+  }</code></pre>
+<h2 id="dao"><a href="#dao" class="headerlink" title="dao"></a>dao</h2><p>处理分页逻辑 </p>
+<pre><code class="java">/**
+ * 分页查询的方法
+ * @param pageCode
+ * @param pageSize
+ * @param criteria
+ * @return
+   */
+@Override
+public PageBean&lt;Cutton&gt; findByPage(Integer pageCode, Integer pageSize, DetachedCriteria     criteria) {
+    PageBean&lt;Cutton&gt; page = new PageBean&lt;Cutton&gt;();
+    page.setPageCode(pageCode);
+    page.setPageSize(pageSize);
+
+    //先查询总记录数 select count(*)
+    criteria.setProjection(Projections.rowCount());
+    List&lt;Number&gt; list = (List&lt;Number&gt;) this.getHibernateTemplate().findByCriteria(criteria);
+    if(list != null &amp;&amp; list.size() &gt; 0){
+        int totalCount = list.get(0).intValue();
+        //总记录数
+        page.setTotalCount(totalCount);
+    }
+
+    //要吧select count(*) 先清空 变成select *...
+    criteria.setProjection(null);
+
+    //提供分页查询
+    List&lt;Cutton&gt; beanList = (List&lt;Cutton&gt;) this.getHibernateTemplate().findByCriteria(criteria,(pageCode - 1)*pageSize, pageSize);
+
+    //分页查询的数据，每页显示的数据，使用limit
+    page.setBeanList(beanList);
+    return page;
+}</code></pre>
+<h1 id="6-前台JS的分页逻辑"><a href="#6-前台JS的分页逻辑" class="headerlink" title="6 . 前台JS的分页逻辑"></a>6 . 前台JS的分页逻辑</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><pre><code>百度分页算法（每页显示10个页码）：
+    当点击页码7之后的页码，最前端的页码依次减少
+        [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] [10]
+        点击[7]
+        [1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11]
+算法：
+    若 总页数 &lt;= 10        则begin=1              end=总页数
+    若 总页数 &gt; 10        则begin=当前页-5          end=当前页+4
+        头溢出: 若begin &lt; 1         则begin=1       end=10
+        尾溢出: 若begin &gt; 当前页  则brgin=end-9     end=总页数    
+
+我对词项目每页显示5个页码：
+    若 总页数 &lt;= 5        则begin=1              end=总页数
+    若 总页数 &gt;  5        则begin=当前页-1          end=当前页+3
+        头溢出: 若begin &lt; 1         则begin=1       end=5
+        尾溢出: 若begin &gt; 当前页  则brgin=end-4     end=总页数</code></pre><h2 id="前端代码"><a href="#前端代码" class="headerlink" title="前端代码"></a>前端代码</h2><pre><code class="jsp">&lt;form class=&quot;listForm&quot; name=&quot;listForm&quot; method=&quot;post&quot; action=&quot;&lt;%=basePath%&gt;/cutton_findByPage.action&quot;&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;form-inline&quot;&gt;
+      &lt;label style=&quot;font-size:14px;margin-top:22px;&quot;&gt;
+        &lt;strong&gt;共&lt;b&gt;${page.totalCount}&lt;/b&gt;条记录，共&lt;b&gt;${page.totalPage}&lt;/b&gt;页&lt;/strong&gt;
+        &amp;nbsp;
+        &amp;nbsp;
+        &lt;strong&gt;每页显示&lt;/strong&gt;
+        &lt;select class=&quot;form-control&quot; name=&quot;pageSize&quot;&gt;
+          &lt;option value=&quot;4&quot;
+                  &lt;c:if test=&quot;${page.pageSize == 4}&quot;&gt;selected&lt;/c:if&gt; &gt;4
+        &lt;/option&gt;
+      &lt;option value=&quot;6&quot;
+              &lt;c:if test=&quot;${page.pageSize == 6}&quot;&gt;selected&lt;/c:if&gt; &gt;6
+    &lt;/option&gt;
+  &lt;option value=&quot;8&quot;
+          &lt;c:if test=&quot;${page.pageSize == 8}&quot;&gt;selected&lt;/c:if&gt; &gt;8
+&lt;/option&gt;
+&lt;option value=&quot;10&quot;
+        &lt;c:if test=&quot;${page.pageSize == 10}&quot;&gt;selected&lt;/c:if&gt; &gt;10
+&lt;/option&gt;
+&lt;/select&gt;
+&lt;strong&gt;条&lt;/strong&gt;
+&amp;nbsp;
+&amp;nbsp;
+&lt;strong&gt;到第&lt;/strong&gt;&amp;nbsp;&lt;input type=&quot;text&quot; size=&quot;3&quot; id=&quot;page&quot; name=&quot;pageCode&quot;
+                                class=&quot;form-control input-sm&quot;
+                                style=&quot;width:11%&quot;/&gt;&amp;nbsp;&lt;strong&gt;页&lt;/strong&gt;
+&amp;nbsp;
+&lt;button type=&quot;submit&quot; class=&quot;btn btn-sm btn-info&quot;&gt;GO!&lt;/button&gt;
+&lt;/label&gt;
+&lt;ul class=&quot;pagination&quot; style=&quot;float:right;&quot;&gt;
+  &lt;li&gt;
+    &lt;a href=&quot;&lt;%=basePath%&gt;/cutton_findByPage.action?pageCode=1&quot;&gt;&lt;strong&gt;首页&lt;/strong&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;c:if test=&quot;${page.pageCode &gt; 2}&quot;&gt;
+      &lt;a href=&quot;&lt;%=basePath%&gt;/cutton_findByPage.action?pageCode=${page.pageCode - 1}&quot;&gt;&amp;laquo;&lt;/a&gt;
+    &lt;/c:if&gt;
+  &lt;/li&gt;
+
+  &lt;!-- 写关于分页页码的逻辑 --&gt;
+  &lt;c:choose&gt;
+    &lt;c:when test=&quot;${page.totalPage &lt;= 5}&quot;&gt;
+      &lt;c:set var=&quot;begin&quot; value=&quot;1&quot;/&gt;
+      &lt;c:set var=&quot;end&quot; value=&quot;${page.totalPage}&quot;/&gt;
+    &lt;/c:when&gt;
+    &lt;c:otherwise&gt;
+      &lt;c:set var=&quot;begin&quot; value=&quot;${page.pageCode - 1}&quot;/&gt;
+      &lt;c:set var=&quot;end&quot; value=&quot;${page.pageCode + 3}&quot;/&gt;
+
+      &lt;!-- 头溢出 --&gt;
+      &lt;c:if test=&quot;${begin &lt; 1}&quot;&gt;
+        &lt;c:set var=&quot;begin&quot; value=&quot;1&quot;/&gt;
+        &lt;c:set var=&quot;end&quot; value=&quot;5&quot;/&gt;
+      &lt;/c:if&gt;
+
+      &lt;!-- 尾溢出 --&gt;
+      &lt;c:if test=&quot;${end &gt; page.totalPage}&quot;&gt;
+        &lt;c:set var=&quot;begin&quot; value=&quot;${page.totalPage -4}&quot;/&gt;
+        &lt;c:set var=&quot;end&quot; value=&quot;${page.totalPage}&quot;/&gt;
+      &lt;/c:if&gt;
+    &lt;/c:otherwise&gt;
+  &lt;/c:choose&gt;
+
+  &lt;!-- 显示页码 --&gt;
+  &lt;c:forEach var=&quot;i&quot; begin=&quot;${begin}&quot; end=&quot;${end}&quot;&gt;
+    &lt;!-- 判断是否是当前页,这里用if判断实现是否被点击的页码呈现active样式 --&gt;
+    &lt;c:if test=&quot;${i == page.pageCode}&quot;&gt;
+      &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;javascript:void(0);&quot;&gt;${i}&lt;/a&gt;&lt;/li&gt;
+    &lt;/c:if&gt;
+    &lt;c:if test=&quot;${i != page.pageCode}&quot;&gt;
+      &lt;li&gt;
+        &lt;a href=&quot;&lt;%=basePath%&gt;/cutton_findByPage.action?pageCode=${i}&quot;&gt;${i}&lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/c:if&gt;
+  &lt;/c:forEach&gt;
+  &lt;li&gt;
+    &lt;c:if test=&quot;${page.pageCode &lt; page.totalPage}&quot;&gt;
+      &lt;a href=&quot;&lt;%=basePath%&gt;/cutton_findByPage.action?pageCode=${page.pageCode + 1}&quot;&gt;&amp;raquo;&lt;/a&gt;
+    &lt;/c:if&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href=&quot;&lt;%=basePath%&gt;/cutton_findByPage.action?pageCode=${page.totalPage}&quot;&gt;&lt;strong&gt;末页&lt;/strong&gt;&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/form&gt;</code></pre>
 
         </div>
         <!-- .entry-content -->
@@ -598,7 +770,7 @@ ${name},你好。${message}&lt;br&gt;
           
             <div class="post-nepre half previous">
           
-            <a href="/2019/07/25/Spring、Hibernate、Struts2框架整合/" rel="prev">
+            <a href="/2019/07/25/基础面试题/" rel="prev">
               <div class="background">
                 <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
               </div>
@@ -606,7 +778,7 @@ ${name},你好。${message}&lt;br&gt;
               Previous Post</span>
               <div class="info">
                 <h3>
-                ssh框架整合</h3>
+                java基础面试题</h3>
                 <hr>
               </div>
             </a>
@@ -616,7 +788,7 @@ ${name},你好。${message}&lt;br&gt;
           
             <div class="post-nepre half next">
           
-            <a href="/2019/07/25/搜索相关的整体内容实现/" rel="next">
+            <a href="/2019/07/25/Freemarker的基本使用及入门/" rel="next">
               <div class="background">
                 <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
               </div>
@@ -624,7 +796,7 @@ ${name},你好。${message}&lt;br&gt;
               Next Post</span>
               <div class="info">
                 <h3>
-                搜索相关的整体内容实现</h3>
+                Freemarker的基本使用及入门</h3>
                 <hr>
               </div>
             </a>
