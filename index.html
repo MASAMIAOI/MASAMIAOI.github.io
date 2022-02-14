@@ -1,1031 +1,456 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.9.0">
+    <head>
+  <!-- 元数据 -->
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <link rel="icon" href="">
+  <title>masamiaoi</title>
+  <meta name="author" content="John Doe" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
   
-  <title itemprop="name">nana</title>
+    <meta name="keywords" content="" />
   
-    <link rel="shortcut icon" href="/images/favicon.ico">
+  <meta name="description" content="勿因未候日光暖，擅自轻言世间寒。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="masamiaoi">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="masamiaoi">
+<meta property="og:description" content="勿因未候日光暖，擅自轻言世间寒。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/null">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/null">
+<meta name="twitter:site" content="@null">
   
-  <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC" media="all">
-  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
-  <link rel="stylesheet" id="saukra_css-css" href="/css/style.css" type="text/css" media="all">
-  <link rel="stylesheet" href="/css/lib.min.css" media="all">
-  <link rel="stylesheet" href="/css/font.css" media="all">
-  <link rel="stylesheet" href="/css/insight.css" media="all">
-  <link rel="stylesheet" href="/css/jquery.fancybox.min.css" media="all">
-  <link rel="stylesheet" href="/css/zoom.css" media="all">
-  <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
-<!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
-" type="text/css" media="all"> -->
-  <script>
-  /*Initial Variables*/
-  var mashiro_option = new Object();
-  var mashiro_global = new Object();
-  mashiro_option.NProgressON = true;
-  /* 
-   * 邮箱信息之类的东西可以填在这里，这些js变量基本都作用于sakura-app.js
-   * 这样的设置仅是为了方便在基于PHP开发的主题中设置js变量，既然移植到了Node上，我想或许可以精简这一逻辑吧
-   */
-  mashiro_option.email_domain = "";
-  mashiro_option.email_name = "";
-  mashiro_option.cookie_version_control = "";
-  mashiro_option.qzone_autocomplete = false;
-  mashiro_option.site_name = "娜娜nana";
-  mashiro_option.author_name = "nana";
-  mashiro_option.site_url = "https://www.masamiaoi.top/";
-  mashiro_option.v_appId = "GyC3NzMvd0hT9Yyd2hYIC0MN-gzGzoHsz";
-  mashiro_option.v_appKey = "mgOpfzbkHYqU92CV4IDlAUHQ";
-  mashiro_option.mathjax = "0";
-  mashiro_option.qq_api_url = "https://api.mashiro.top/qqinfo/"; 
-  mashiro_option.qq_avatar_api_url = "https://api.mashiro.top/qqinfo/";
-
-  // mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/css/lib.min.css";
-  // mashiro_option.float_player_on = true;
-
-  /*End of Initial Variables*/
-  </script>
-  <script type="text/javascript">
-  var bg = "https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg".split(",");
-  var bgindex = Math.floor(Math.random()*bg.length);
-  if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
-    alert('朋友，IE浏览器未适配哦~');
-  }
-  </script>
-  <style type="text/css">
-  .hljs-ln{border-collapse:collapse}.hljs-ln td{padding:0}.hljs-ln-n:before{content:attr(data-line-number)}
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://unpkg.com/nprogress@0.2.0/nprogress.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  
+  
+    <link rel="stylesheet" href="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://unpkg.com/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="https://unpkg.com/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner_bak.webp');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bj.webp');
+        }
+      }
+    
   </style>
-  <style type="text/css">.site-top .lower nav{display:block !important;}.author-profile i,.post-like a,.post-share .show-share,.sub-text,.we-info a,span.sitename,.post-more i:hover,#pagination a:hover,.post-content a:hover,.float-content i:hover{color:#FE9600}.feature i,.download,.navigator i:hover,.links ul li:before,.ar-time i,span.ar-circle,.object,.comment .comment-reply-link,.siren-checkbox-radio:checked + .siren-checkbox-radioInput:after{background:#FE9600}::-webkit-scrollbar-thumb{background:#FE9600}.download,.navigator i:hover,.link-title,.links ul li:hover,#pagination a:hover,.comment-respond input[type='submit']:hover{border-color:#FE9600}.entry-content a:hover,.site-info a:hover,.comment h4 a,#comments-navi a.prev,#comments-navi a.next,.comment h4 a:hover,.site-top ul li a:hover,.entry-title a:hover,#archives-temp h3,span.page-numbers.current,.sorry li a:hover,.site-title a:hover,i.iconfont.js-toggle-search.iconsearch:hover,.comment-respond input[type='submit']:hover{color:#FE9600}.comments .comments-main{display:block !important;}.comments .comments-hidden{display:none !important;}background-position:center center;background-attachment:inherit;}
-  </style>
-</head>
-</html>
-<body class="page-template page-template-user page-template-page-analytics page-template-userpage-analytics-php page page-id-1297 chinese-font serif isWebKit">
-  <div class="scrollbar" id="bar">
-  </div>
-  <a href="#" class="cd-top faa-float animated"></a>
-  <section id="main-container">
-    <div class="headertop filter-dot">
-  <div id="banner_wave_1"></div>
-  <div id="banner_wave_2"></div>
-  <figure id="centerbg" class="centerbg">
-    <div class="focusinfo no-select">
-      <div class="header-tou">
-        <a href="https://www.masamiaoi.top/">
-          <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6https://ae01.alicdn.com/kf/H3ec49ae17f1d469eb6c0d9133db61c27Q.jpg">
-        </a>
-      </div>
-      <div class="header-info">
-        <p>勿因未候日光暖，擅自轻言世间寒。</p>
-        <div class="top-social_v2">
-          <li id="bg-pre">
-            <img class="flipx" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/next-b.svg">
-          </li>
-          
-            
-              
-                <li>
-                  <a href="https://github.com/MASAMIAOI" target="_blank" class="social-github" title="github">
-                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/github.png">
-                  </a>
-                </li>
-              
-            
-              
-                <li>
-                  <a href="https://github.com/MASAMIAOI" target="_blank" class="social-github" title="sina">
-                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/sina.png">
-                  </a>
-                </li>
-              
-            
-              
-                <li>
-                  <a href="https://github.com/MASAMIAOI" target="_blank" class="social-github" title="wangyiyun">
-                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/wangyiyun.png">
-                  </a>
-                </li>
-              
-            
-              
-                <li>
-                  <a href="https://github.com/MASAMIAOI" target="_blank" class="social-github" title="zhihu">
-                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/zhihu.png">
-                  </a>
-                </li>
-              
-            
-              
-                <li>
-                  <a href="https://github.com/MASAMIAOI" target="_blank" class="social-github" title="email">
-                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/email.svg">
-                  </a>
-                </li>
-              
-            
-              
-                <li class="wechat">
-                  <a href="/#">
-                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/wechat.png">
-                  </a>
-                  <div class="wechatInner">
-                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/custom/wechat.jpg">
-                  </div>
-                </li>
-              
-            
-          
-          <li id="bg-next">
-            <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/next-b.svg">
-          </li>
-        </div>
-      </div>
-    </div>
-  </figure>
-  <div id="video-container" style="">
-    <video style="object-fit: fill" id="bgvideo" class="video" video-name="" src="" width="auto" preload="auto">
-    </video>
-    <div id="video-btn" class="loadvideo videolive">
-    </div>
-    <div id="video-add">
-    </div>
-    <div class="video-stu">
-    </div>
-  </div>
-  <div class="headertop-down faa-float animated" onclick="headertop_down()">
-    <span>
-      <i class="fa fa-chevron-down" aria-hidden="true">
-      </i>
-    </span>
-  </div>
-</div>
-    <div id="page" class="site wrapper">
-      <header class="site-header no-select gizle sabit" role="banner">
-  <div class="site-top">
-    <div class="site-branding">
-      <span class="site-title">
-        <span class="logolink moe-mashiro">
-          <a href="/">
-            <span class="sakurasono">娜娜</span>
-            <span class="shironeko">nana</span>
-          </a>
-        </span>
-      </span>
-    </div>
-    <div class="searchbox search-form-submit">
-      <i class="iconfont js-toggle-search iconsearch icon-search">
-      </i>
-    </div>
-    <div id="show-nav" class="showNav mobile-fit">
-      <div class="line line1">
-      </div>
-      <div class="line line2">
-      </div>
-      <div class="line line3">
-      </div>
-    </div>
-    <div class="lower-cantiner">
-      <div class="lower">
-        <nav class="mobile-fit-control hide">
-          <ul id="menu-new" class="menu">
-            
-              <li>
-                <a href="/">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
-                    首页
-                  </span>
-                </a>
-                
-              </li>
-            
-              <li>
-                <a href="/archives">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
-                    归档
-                  </span>
-                </a>
-                
-                  <ul class="sub-menu">
-                    
-                      <li>
-                        <a href="/categories/技术/">
-                          <i class="fa fa-code" aria-hidden="true"></i>
-                          技术
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>归档</a></li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">masamiaoi</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
                         </a>
-                      </li>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>masamiaoi</h2> <br />
+                        <span>Tomorrow is another day</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
                     
-                  </ul>
-                
-              </li>
+
+        
+
+            <section class="col-md-8">
+
+        
+
             
-              <li>
-                <a href="javascript:;">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
-                    清单
-                  </span>
-                </a>
+    
+    
+        <article class="kratos-hentry clearfix">
+            <div class="kratos-entry-border-new clearfix">
                 
-                  <ul class="sub-menu">
-                    
-                      <li>
-                        <a href="/tags/悦读/">
-                          <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
-                          书单
+                    <div class="pin-top wrapper">
+                        <div class="pin-top inner"></div>
+                    </div>
+                
+                <div class="kratos-entry-thumb-new">
+                    <a href="/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/es/es_query/">
+                        
+                            <img class="kratos-entry-thumb-new-img">
+                        
+                    </a>
+                </div>
+                <div class="kratos-post-inner-new">
+                    <header class="kratos-entry-header-new">
+                            <a class="label-link" href="/categories/es/">es</a>
+                        <h2 class="kratos-entry-title-new"><a href="/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/es/es_query/">ES->基础查询相关</a>
+                    </header>
+                    <div class="kratos-entry-content-new">
+                        <p>
+                            
+                                ES 查询相关内容基础变量信息123@host=http://127.0.0.1:9200 # ES ip 地址@table=face # 实际表名
+
+
+1、 table 操作相关1.1、 查看表信息
+查看表信息(相关配置项)
+
+12...
+                            
+                        </p>
+                    </div>
+                </div>
+                <footer class="kratos-post-meta-new">
+                    <span class="pull-left">
+                        <a>
+                            <i class="fa fa-calendar"></i>
+                            2022-02-14
                         </a>
-                      </li>
-                    
-                  </ul>
+                        <a>
+                            
+                                <i class="fa fa-tags"></i>
+                                <a class="tag-none-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a>
+                            
+                        </a>
+                        
+                            <!-- 当前仅支持valine/waline自带的统计功能 -->
+                            
+                        
+                        
+                            <!-- 当前仅支持waline自带的统计功能 -->
+                            
+                        
+                    </span>
+                    <span class="pull-right">
+                        <a class="read-more" href="/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/es/es_query/" title="阅读全文">阅读全文<i class="fa fa-chevron-circle-right"></i></a>
+                    </span>
+                </footer>
+            </div>
+        </article>
+    
+
+    
+    
+        <article class="kratos-hentry clearfix">
+            <div class="kratos-entry-border-new clearfix">
                 
-              </li>
+                    <div class="pin-top wrapper">
+                        <div class="pin-top inner"></div>
+                    </div>
+                
+                <div class="kratos-entry-thumb-new">
+                    <a href="/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF/AngularJS/AngularJS_%E5%9F%BA%E7%A1%80/">
+                        
+                            <img class="kratos-entry-thumb-new-img">
+                        
+                    </a>
+                </div>
+                <div class="kratos-post-inner-new">
+                    <header class="kratos-entry-header-new">
+                            <a class="label-link" href="/categories/web/">web</a>
+                        <h2 class="kratos-entry-title-new"><a href="/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF/AngularJS/AngularJS_%E5%9F%BA%E7%A1%80/">AngularJS->基本</a>
+                    </header>
+                    <div class="kratos-entry-content-new">
+                        <p>
+                            
+                                1 . 下载所需要的配置文件以及组件
+2 . 开始使用1 . angularjs - 表达式
+创建一个html文件
+导入所需要的依赖
+代码的操作
+
+12345678910111213141516&lt;!DOCTYPE html&gt...
+                            
+                        </p>
+                    </div>
+                </div>
+                <footer class="kratos-post-meta-new">
+                    <span class="pull-left">
+                        <a>
+                            <i class="fa fa-calendar"></i>
+                            2022-02-14
+                        </a>
+                        <a>
+                            
+                                <i class="fa fa-tags"></i>
+                                <a class="tag-none-link" href="/tags/AngularJS/" rel="tag">AngularJS</a>
+                            
+                        </a>
+                        
+                            <!-- 当前仅支持valine/waline自带的统计功能 -->
+                            
+                        
+                        
+                            <!-- 当前仅支持waline自带的统计功能 -->
+                            
+                        
+                    </span>
+                    <span class="pull-right">
+                        <a class="read-more" href="/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF/AngularJS/AngularJS_%E5%9F%BA%E7%A1%80/" title="阅读全文">阅读全文<i class="fa fa-chevron-circle-right"></i></a>
+                    </span>
+                </footer>
+            </div>
+        </article>
+    
+
+
+
+
+
+    <div class="hidden">
+        <!-- 加载文章阅读对应的统计功能，评论自带的那种 -->
+        
+    </div>
+
+
+
+        
+
+            </section>
+
+        
+
+                
             
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </div>
-</header>
 
-      <div class="blank" style="padding-top: 0px;"></div>
-<div id="content" class="site-content">
-  
-  <div class="notice" style="margin-top:60px">
-    <i class="iconfont icon-notification">
-    </i>
-    <div class="notice-content">A civilization has gone with the wind</div>
-  </div>
-  
-  <div class="top-feature-row">
-  <h1 class="fes-title" style="font-family: 'Ubuntu', sans-serif;">
-  <i class="fa fa-anchor" aria-hidden="true">
-  </i>
-  START:DASH!!</h1>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="/theme-sakura/" target="_blank">
-        <div class="img">
-          <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/startdash/sakura.md.png">
-        </div>
-        <div class="info">
-          <h3>Sakura</h3>
-          <p>本站 hexo 主题</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="https://space.bilibili.com/8827565" target="_blank">
-        <div class="img">
-          <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/startdash/bilibili.jpg">
-        </div>
-        <div class="info">
-          <h3>Bilibili</h3>
-          <p>博主的b站视频</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="/" target="_blank">
-        <div class="img">
-          <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/startdash/wangshiwu.jpg">
-        </div>
-        <div class="info">
-          <h3>nana</h3>
-          <p>技术服务</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
-</div>
-  <div id="primary" class="content-area">
-    <main id="main" class="site-main" role="main">
-      <h1 class="main-title" style="font-family: 'Ubuntu', sans-serif;">
-      <i class="fa fa-envira" aria-hidden="true"></i>
-      Discovery</h1>
-      
-  <!-- 首页默认取最最新文章集 -->
-  
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
     
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="http://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2018/07/11/AngularJS入门/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2018-7-11 15:07</div>
-      <a href="/2018/07/11/AngularJS入门/" class="post-title">
-        <h3>AngularJs入门使用</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/web/">web<em>·</em></a>
-          
-            <a href="/tags/悦读/">悦读<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/技术/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>AngularJs入门使用</p>
-        <div class="post-bottom">
-          <a href="/2018/07/11/AngularJS入门/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
+        <div class="sticky-area">
     
-<article  class="post post-list-thumb" itemscope="" itemtype="http://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2018/05/17/solr相关面试汇总/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2018-5-17 20:05</div>
-      <a href="/2018/05/17/solr相关面试汇总/" class="post-title">
-        <h3>solr相关知识汇总</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/web/">web<em>·</em></a>
-          
-            <a href="/tags/悦读/">悦读<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/技术/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>solr相关知识汇总</p>
-        <div class="post-bottom">
-          <a href="/2018/05/17/solr相关面试汇总/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
     
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="http://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2018/05/13/WebService的基本使用/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2018-5-13 15:05</div>
-      <a href="/2018/05/13/WebService的基本使用/" class="post-title">
-        <h3>WebService的基本使用</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/web/">web<em>·</em></a>
-          
-            <a href="/tags/悦读/">悦读<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/技术/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>WebService的基本使用</p>
-        <div class="post-bottom">
-          <a href="/2018/05/13/WebService的基本使用/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/tx.webp" />
         </div>
-      </div>
     </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="http://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2018/05/11/HttpClient的基本使用/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2018-5-11 15:05</div>
-      <a href="/2018/05/11/HttpClient的基本使用/" class="post-title">
-        <h3>HttpClient的基本使用</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/web/">web<em>·</em></a>
-          
-            <a href="/tags/悦读/">悦读<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/技术/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>HttpClient的基本使用</p>
-        <div class="post-bottom">
-          <a href="/2018/05/11/HttpClient的基本使用/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
+    <div class="textwidget">
+        <p class="text-center">勿因未候日光暖，擅自轻言世间寒。</p>
     </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="http://schema.org/BlogPosting">
+</aside>
+            
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/es/">es</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">1</span></li></ul>
+  </aside>
 
-  <div class="post-thumb">
-    <a href="/2018/03/11/安全框架——SpringSecurity的基本使用/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2018-3-11 15:03</div>
-      <a href="/2018/03/11/安全框架——SpringSecurity的基本使用/" class="post-title">
-        <h3>安全框架——SpringSecurity的基本使用</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AngularJS/" style="font-size: 0.6em;">AngularJS</a> <a href="/tags/Elasticsearch/" style="font-size: 0.6em;">Elasticsearch</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
         
-            <a href="/tags/web/">web<em>·</em></a>
+        
           
-            <a href="/tags/悦读/">悦读<em>·</em></a>
           
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
+            <a class="list-group-item" href="/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/es/es_query/"><i class="fa  fa-book"></i> ES->基础查询相关</a>
+            
           
-            <a href="/categories/技术/">技术</a>
+        
           
-        </span>
-      </div>
-      <div class="float-content">
-        <p>SpringSecurity的基本使用</p>
-        <div class="post-bottom">
-          <a href="/2018/03/11/安全框架——SpringSecurity的基本使用/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
+          
+            <a class="list-group-item" href="/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF/AngularJS/AngularJS_%E5%9F%BA%E7%A1%80/"><i class="fa  fa-book"></i> AngularJS->基本</a>
+            
+          
+        
+      </ul>
+  </div>
+  </aside>
+
+            
     </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="http://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2018/03/07/安全框架——shiro的基本使用/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2018-3-7 15:03</div>
-      <a href="/2018/03/07/安全框架——shiro的基本使用/" class="post-title">
-        <h3>安全框架——shiro的基本使用</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
+</section>
         
-            <a href="/tags/web/">web<em>·</em></a>
-          
-            <a href="/tags/悦读/">悦读<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/技术/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>shiro的基本使用</p>
-        <div class="post-bottom">
-          <a href="/2018/03/07/安全框架——shiro的基本使用/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="http://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2018/02/05/cas单点登陆的基本实现/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2018-2-5 15:02</div>
-      <a href="/2018/02/05/cas单点登陆的基本实现/" class="post-title">
-        <h3>CAS单点登陆的基本实现</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/web/">web<em>·</em></a>
-          
-            <a href="/tags/悦读/">悦读<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/技术/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>CAS单点登陆的基本实现</p>
-        <div class="post-bottom">
-          <a href="/2018/02/05/cas单点登陆的基本实现/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="http://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2018/01/10/Freemarker的基本使用及入门/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2018-1-10 21:01</div>
-      <a href="/2018/01/10/Freemarker的基本使用及入门/" class="post-title">
-        <h3>Freemarker的基本使用及入门</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/web/">web<em>·</em></a>
-          
-            <a href="/tags/悦读/">悦读<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/技术/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>Freemarker的基本使用及入门</p>
-        <div class="post-bottom">
-          <a href="/2018/01/10/Freemarker的基本使用及入门/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="http://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2017/10/25/Spring、Hibernate、Struts2框架整合/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2017-10-25 23:10</div>
-      <a href="/2017/10/25/Spring、Hibernate、Struts2框架整合/" class="post-title">
-        <h3>ssh框架整合</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/web/">web<em>·</em></a>
-          
-            <a href="/tags/悦读/">悦读<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/技术/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>ssh框架整合</p>
-        <div class="post-bottom">
-          <a href="/2017/10/25/Spring、Hibernate、Struts2框架整合/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="http://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2017/10/07/搜索相关的整体内容实现/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://ae01.alicdn.com/kf/Hc9997bb33e10435391f8b22f3e04cdaaF.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2017-10-7 21:10</div>
-      <a href="/2017/10/07/搜索相关的整体内容实现/" class="post-title">
-        <h3>搜索相关的整体内容实现</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/web/">web<em>·</em></a>
-          
-            <a href="/tags/悦读/">悦读<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/技术/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>搜索相关的整体内容实现</p>
-        <div class="post-bottom">
-          <a href="/2017/10/07/搜索相关的整体内容实现/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-
-
-    </main>
-      <!-- 首页默认取最最新文章集 -->
-    <!-- 
-      <nav class="navigator">
-        
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="iconfont icon-right"></i></a>
-      </nav>
-     -->
-  </div>
-  
-    <div id="pagination"><a href="/page/2/" class="">Previous</a></div>
-  
-</div>
-
-    </div>    
-    <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
-            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
         </div>
     </div>
 </div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: '文章',
-            // PAGES: '页面',
-            CATEGORIES: '分类',
-            TAGS: '标签',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-    <!-- <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2019 nana<br>
-      powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/MASAMIAOI"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2022 masamiaoi 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by John Doe.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
     </div>
-  </div>
-</footer> -->
-<footer id="colophon" class="site-footer" role="contentinfo">
-  <div class="site-info">
-    <div class="footertext">
-      <div class="img-preload">
-        <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/wordpress-rotating-ball-o.svg">
-        <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/disqus-preloader.svg">
-      </div>
-      <p style="color: #666666;">&copy 2018</p>
-    </div>
-    <div class="footer-device">
-    <p style="font-family: 'Ubuntu', sans-serif;">
-        <span style="color: #b9b9b9;">Theme <a href="https://github.com/honjun/hexo-theme-sakura" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Sakura</a> <i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> by <a href="https://2heng.xin/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Mashiro</a>&<a href="https://www.hojun.cn/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Hojun</a>, Powered by Hexo, Hosted by Coding Pages</a>
-        </span>
-      </p>
-    </div>
-  </div><!-- .site-info -->
 </footer>
-
-
-
-<!-- <script src="/js/tocbot.js"></script> -->
-<script type="text/javascript" src="/js/lib.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-<script type="text/javascript" src="/js/InsightSearch.js"></script>
-<script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
-<script type="text/javascript" src="/js/zoom.min.js"></script>
-<script type="text/javascript" src="/js/sakura-app.js"></script>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='//unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
-<!-- 不蒜子 网页计数器 -->
-<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script> -->
-<script type="text/javascript">
-/* <![CDATA[ */
-if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-  var Poi = {"pjax":"1","movies":{"url": "https://cdn.jsdelivr.net/gh/honjun/hojun@1.2","name":"Unbroken.mp4","live":"close"},"windowheight":"fixed","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
-} else {
-  var Poi = {"pjax":"1","movies":{"url": "https://cdn.jsdelivr.net/gh/honjun/hojun@1.2","name":"Unbroken.mp4","live":"open"},"windowheight":"auto","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
-}
-/* ]]> */
-
-</script>
-<script>
-$(document).ready(function() {
-  if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
-    if ($(".pattern-center").length > 0) { //有图的情况
-      tocbot.init({
-          // Where to render the table of contents.
-          tocSelector: '.toc', // 放置目录的容器
-          // Where to grab the headings to build the table of contents.
-          contentSelector: '.entry-content', // 正文内容所在
-          // Which headings to grab inside of the contentSelector element.
-          scrollSmooth: true,
-          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
-          headingsOffset: -400,
-          scrollSmoothOffset: -85
-      });
-    } else {
-      tocbot.init({
-          // Where to render the table of contents.
-          tocSelector: '.toc', // 放置目录的容器
-          // Where to grab the headings to build the table of contents.
-          contentSelector: '.entry-content', // 正文内容所在
-          // Which headings to grab inside of the contentSelector element.
-          scrollSmooth: true,
-          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
-          headingsOffset: -85,
-          scrollSmoothOffset: -85
-      });
-    }
-    var offsetTop = $('.toc').offset().top - 95;
-    window.onscroll = function() {
-      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-      if (scrollTop >= offsetTop) {
-        $('.toc').addClass('toc-fixed');
-      } else {
-        $('.toc').removeClass('toc-fixed');
-      }
-    }
-  }
-});
-</script>
-
-    <div class="openNav no-select" style="height: 50px;">
-      <div class="iconflat no-select" style="width: 50px; height: 50px;">
-        <div class="icon"></div>
-      </div>
-      <div class="site-branding search-form-submit">
-        <i class="iconfont js-toggle-search iconsearch icon-search"></i>
-      </div>
-    </div>
-  </section>
-  <div id="mo-nav" class="">
-  <div class="m-avatar">
-    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6https://ae01.alicdn.com/kf/H3ec49ae17f1d469eb6c0d9133db61c27Q.jpg">
-  </div>
-  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">娜娜nana</p>
-  <p style="text-align: center; word-spacing: 20px;">
-    
-      
-        <a href="https://github.com/MASAMIAOI" class="fa fa-github" target="_blank" style="color: #333; margin-left:20px"></a>
-      
-        <a href="https://github.com/MASAMIAOI" class="fa fa-weibo" target="_blank" style="color: #dd4b39; margin-left:20px"></a>
-      
-        <a href="https://github.com/MASAMIAOI" class="fa fa-qq" target="_blank" style="color: #25c6fe; margin-left:20px"></a>
-      
-    
-  </p>
-  <ul id="menu-new-1" class="menu">
-    
-      <li>
-        <a href="/">
-          <span class="faa-parent animated-hover">
-            <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
-            首页
-          </span>
-        </a>
-        
-      </li>
-    
-      <li>
-        <a href="/archives">
-          <span class="faa-parent animated-hover">
-            <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
-            归档
-          </span>
-        </a>
-        
-          <ul class="sub-menu">
-            
-              <li>
-                <a href="/categories/技术/">
-                  <i class="fa fa-code" aria-hidden="true"></i>
-                  技术
-                </a>
-              </li>
-            
-          </ul>
-        
-      </li>
-    
-      <li>
-        <a href="javascript:;">
-          <span class="faa-parent animated-hover">
-            <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
-            清单
-          </span>
-        </a>
-        
-          <ul class="sub-menu">
-            
-              <li>
-                <a href="/tags/悦读/">
-                  <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
-                  书单
-                </a>
-              </li>
-            
-          </ul>
-        
-      </li>
-    
-  </ul>
-  <p style="text-align: center; font-size: 13px; color: #b9b9b9;">&copy 2019 hexo-sakura</p>
 </div>
-<button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
-<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
-<style>
-  .aplayer .aplayer-lrc {
-    height: 35px;
-  }
-  .aplayer .aplayer-lrc p{
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 18px !important;
-  }
-  .aplayer .aplayer-lrc p.aplayer-lrc-current{
-    color: #FF1493;
-  }
-  .aplayer.aplayer-narrow .aplayer-body{
-    left: -66px !important;
-  }
-  .aplayer.aplayer-fixed .aplayer-lrc {
-    display: none;
-  }
-  .aplayer .aplayer-lrc.aplayer-lrc-hide {
-      display:none !important;
-  }
-  .aplayer.aplayer-fixed .lrc-show {
-    display: block;
-    background: rgba(255, 255, 255, 0.8);
-  }
-</style>
-<div class="aplayer"
-
-    data-id="2660651585"
-
-    data-server="netease"
-
-    data-type="playlist"
-
-    data-fixed="true"
-
-    data-autoplay="false"
-
-    data-loop="all"
-
-    data-order="random"
-
-    data-preload="auto"
-
-    data-volume="0.7"
-
-    data-mutex="true"
-
 </div>
-<script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script>
+
+        <script defer src="https://unpkg.com/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
 <script>
-  $(function(){
-    $('body').on('click', '.aplayer', function(){
-      if($('.aplayer-button').hasClass('aplayer-play')) {
-        $('.aplayer-lrc').removeClass('lrc-show');
-      } else {
-        $('.aplayer-lrc').addClass('lrc-show');
-      }
-    })
-  });
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
 </script>
-</body>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="https://unpkg.com/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="3204190542"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://unpkg.com/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
 </html>
