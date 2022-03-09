@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="">
+  <title>jprofiler内存分析工具使用 | masamiaoi</title>
+  <meta name="author" content="John Doe" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="java, jprofiler" />
+  
+  <meta name="description" content="jprofiler 使用一、分析Heap内存镜像 1.1. 按实例数量排序 1.2. 按占用内存排序 1.3. 向下钻取 得到更相信的信息 二、监控实时运行情况2.1. 在服务区上安装代理 输入服务区root密码 等待连接，然后得到服务区上的java服务列表，就表示代理安装成功了 2.2. 监控服务通过第一步得到的java服务列表，然后选择要监控的服务即可， 这种方式只能扫描到jdk时oracle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jprofiler内存分析工具使用">
+<meta property="og:url" content="http://example.com/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/java/jprofiler%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="masamiaoi">
+<meta property="og:description" content="jprofiler 使用一、分析Heap内存镜像 1.1. 按实例数量排序 1.2. 按占用内存排序 1.3. 向下钻取 得到更相信的信息 二、监控实时运行情况2.1. 在服务区上安装代理 输入服务区root密码 等待连接，然后得到服务区上的java服务列表，就表示代理安装成功了 2.2. 监控服务通过第一步得到的java服务列表，然后选择要监控的服务即可， 这种方式只能扫描到jdk时oracle">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/null">
+<meta property="article:published_time" content="2022-02-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-09T10:36:45.590Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="jprofiler">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/null">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://unpkg.com/nprogress@0.2.0/nprogress.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  
+  
+    <link rel="stylesheet" href="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://unpkg.com/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="https://unpkg.com/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner_bak.webp');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bj.webp');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>归档</a></li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">masamiaoi</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>masamiaoi</h2> <br />
+                        <span>Tomorrow is another day</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">jprofiler内存分析工具使用</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2022-02-14</li>
+                <li><i class="fa fa-user"></i> 作者 John Doe</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        633
+                    
+                    字
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1646822205590"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+            <hr />
+            <h1 id="jprofiler-使用"><a href="#jprofiler-使用" class="headerlink" title="jprofiler 使用"></a>jprofiler 使用</h1><h2 id="一、分析Heap内存镜像"><a href="#一、分析Heap内存镜像" class="headerlink" title="一、分析Heap内存镜像"></a>一、分析Heap内存镜像</h2><p><img src="/img/1.png" alt="image"></p>
+<h3 id="1-1-按实例数量排序"><a href="#1-1-按实例数量排序" class="headerlink" title="1.1. 按实例数量排序"></a>1.1. 按实例数量排序</h3><p><img src="/img/2.png" alt="image"></p>
+<h3 id="1-2-按占用内存排序"><a href="#1-2-按占用内存排序" class="headerlink" title="1.2. 按占用内存排序"></a>1.2. 按占用内存排序</h3><p><img src="/img/3.png" alt="image"></p>
+<h3 id="1-3-向下钻取"><a href="#1-3-向下钻取" class="headerlink" title="1.3. 向下钻取"></a>1.3. 向下钻取</h3><p><img src="/img/4.png" alt="image"></p>
+<p>得到更相信的信息<br><img src="/img/5.png" alt="image"></p>
+<h2 id="二、监控实时运行情况"><a href="#二、监控实时运行情况" class="headerlink" title="二、监控实时运行情况"></a>二、监控实时运行情况</h2><h3 id="2-1-在服务区上安装代理"><a href="#2-1-在服务区上安装代理" class="headerlink" title="2.1. 在服务区上安装代理"></a>2.1. 在服务区上安装代理</h3><p><img src="/img/6.png" alt="image"><br><img src="/img/7.png" alt="image"><br><img src="/img/8.png" alt="image"><br><img src="/img/9.png" alt="image"></p>
+<p>输入服务区root密码<br><img src="/img/10.png" alt="image"></p>
+<p>等待连接，然后得到服务区上的java服务列表，就表示代理安装成功了<br><img src="/img/11.png" alt="image"></p>
+<h3 id="2-2-监控服务"><a href="#2-2-监控服务" class="headerlink" title="2.2. 监控服务"></a>2.2. 监控服务</h3><p>通过第一步得到的java服务列表，然后选择要监控的服务即可，</p>
+<p>这种方式只能扫描到jdk时oracle jdk的服务， 如果是openj9的要用下面的方式</p>
+<h3 id="2-3-监控openj9-服务"><a href="#2-3-监控openj9-服务" class="headerlink" title="2.3.  监控openj9 服务"></a>2.3.  监控openj9 服务</h3><p>传 jprofiler_config.xml 文件到root目录， jprofiler_config.xml 在本地的安装路径内查找，默认在 C:\Program Files\jprofiler11\api\samples\common 文件夹里</p>
+<p>在服务的启动参数里添加一行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-agentpath:/root/.jprofiler11/agent/11082_11.0.2/jprofiler11/bin/linux-x64/libjprofilerti.so=port=5555,nowait,config=/root/jprofiler_config.xml</span><br></pre></td></tr></table></figure>
+<p>注意修改port的值，并在防火墙里打开对应端口</p>
+<p><img src="/img/12.png" alt="image"></p>
+<p>出现这个页面，就是连接成功，直接点 OK 就行了<br><img src="/img/13.png" alt="image"></p>
+<h3 id="2-4-分析实时数据"><a href="#2-4-分析实时数据" class="headerlink" title="2.4. 分析实时数据"></a>2.4. 分析实时数据</h3><p>总览<br><img src="/img/14.png" alt="image"></p>
+<p>内存<br><img src="/img/15.png" alt="image"></p>
+<p>线程<br><img src="/img/16.png" alt="image"></p>
+<p>CPU负载<br><img src="/img/17.png" alt="image"></p>
+<p>抓取实时内存镜像<br><img src="/img/18.png" alt="image"></p>
+<p><img src="/img/19.png" alt="image"></p>
+<p>可以通过 toString看到对象的值<br><img src="/img/20.png" alt="image"></p>
+
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5>本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://example.com/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/java/jprofiler%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://example.com/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/java/jprofiler%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90/";
+            const title         = "「jprofiler内存分析工具使用」";
+            const excerpt       = `jprofiler 使用一、分析Heap内存镜像
+1.1. 按实例数量排序
+1.2. 按占用内存排序
+1.3. 向下钻取
+得到更相信的信息
+二、监控实时运行情况2.1. 在服务区上安装代理
+输入服务区root密码
+等待连接，然后得到服...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/java/" rel="tag">java</a>, <a class="tag-none-link" href="/tags/jprofiler/" rel="tag">jprofiler</a>
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2022-03-09</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" java -&gt; 基础面试题" href="/2022/02/14/技术/后端/java/java-basic/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" java -&gt; int 基础类型" href="/2022/02/14/技术/后端/java/bigint类型/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/tx.webp" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">勿因未候日光暖，擅自轻言世间寒。</p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix">
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar"></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#jprofiler-%E4%BD%BF%E7%94%A8"><span class="toc-text">jprofiler 使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%88%86%E6%9E%90Heap%E5%86%85%E5%AD%98%E9%95%9C%E5%83%8F"><span class="toc-text">一、分析Heap内存镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%8C%89%E5%AE%9E%E4%BE%8B%E6%95%B0%E9%87%8F%E6%8E%92%E5%BA%8F"><span class="toc-text">1.1. 按实例数量排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%8C%89%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%8E%92%E5%BA%8F"><span class="toc-text">1.2. 按占用内存排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E5%90%91%E4%B8%8B%E9%92%BB%E5%8F%96"><span class="toc-text">1.3. 向下钻取</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%9B%91%E6%8E%A7%E5%AE%9E%E6%97%B6%E8%BF%90%E8%A1%8C%E6%83%85%E5%86%B5"><span class="toc-text">二、监控实时运行情况</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%8C%BA%E4%B8%8A%E5%AE%89%E8%A3%85%E4%BB%A3%E7%90%86"><span class="toc-text">2.1. 在服务区上安装代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E7%9B%91%E6%8E%A7%E6%9C%8D%E5%8A%A1"><span class="toc-text">2.2. 监控服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E7%9B%91%E6%8E%A7openj9-%E6%9C%8D%E5%8A%A1"><span class="toc-text">2.3.  监控openj9 服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E5%88%86%E6%9E%90%E5%AE%9E%E6%97%B6%E6%95%B0%E6%8D%AE"><span class="toc-text">2.4. 分析实时数据</span></a></li></ol></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/database/">database</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/versionControl/">versionControl</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">1</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AngularJS/" style="font-size: 0.6em;">AngularJS</a> <a href="/tags/ElasticSearch/" style="font-size: 0.8em;">ElasticSearch</a> <a href="/tags/Linux/" style="font-size: 0.73em;">Linux</a> <a href="/tags/arthas/" style="font-size: 0.6em;">arthas</a> <a href="/tags/basis/" style="font-size: 0.67em;">basis</a> <a href="/tags/corn/" style="font-size: 0.6em;">corn</a> <a href="/tags/git/" style="font-size: 0.6em;">git</a> <a href="/tags/java/" style="font-size: 0.6em;">java</a> <a href="/tags/jprofiler/" style="font-size: 0.6em;">jprofiler</a> <a href="/tags/tcpdump/" style="font-size: 0.6em;">tcpdump</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF/AngularJS/AngularJS_%E5%9F%BA%E7%A1%80/"><i class="fa  fa-book"></i> AngularJS->基本</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/ElasticSearch/elasticsearch-theory/"><i class="fa  fa-book"></i> ES->进阶型原理</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/arthas/arthas_%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"><i class="fa  fa-book"></i> arthas -> 基本使用</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/java/bigint%E7%B1%BB%E5%9E%8B/"><i class="fa  fa-book"></i> java -> int 基础类型</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/java/jprofiler%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90/"><i class="fa  fa-book"></i> jprofiler内存分析工具使用</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/MASAMIAOI"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2022 masamiaoi 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by John Doe.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://unpkg.com/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="https://unpkg.com/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="3204190542"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://unpkg.com/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
