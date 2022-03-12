@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="">
-  <title>ES->进阶型原理 | masamiaoi</title>
+  <title>hexo->个人博客搭建 | masamiaoi</title>
   <meta name="author" content="John Doe" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,20 +13,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="ElasticSearch" />
+    <meta name="keywords" content="hexo" />
   
-  <meta name="description" content="进阶型原理 传统关系型数据库的行和列存储，这相当于是把一个表现力丰富的对象挤压到一个非常大的电子表格中：你必须将这个对象扁平化来适应表结构–通常一个字段&gt;对应一列–而且又不得不在每次查询时重新构造对象。 Elasticsearch 是 面向文档 的，意味着它存储整个对象或 文档_。Elasticsearch 不仅存储文档，而且 _索引 每个文档的内容使之可以被检索。在 Elasticsear">
+  <meta name="description" content="个人博客搭建一、下载安装 git ，Node.jsNode.js下载地址：https:&#x2F;&#x2F;nodejs.org&#x2F;en&#x2F; Git：https:&#x2F;&#x2F;git-scm.com&#x2F; 二、安装，配置 Hexo安装: $ npm install -g hexo-cli 配置: (1)新建存放博客文件夹 (2)进入文件夹，并且打开Git Bash (3)运行$hexo init$ npm install _conf">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ES-&gt;进阶型原理">
-<meta property="og:url" content="http://example.com/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/ElasticSearch/elasticsearch-theory/index.html">
+<meta property="og:title" content="hexo-&gt;个人博客搭建">
+<meta property="og:url" content="http://example.com/2022/02/14/%E6%8A%80%E6%9C%AF/other/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="masamiaoi">
-<meta property="og:description" content="进阶型原理 传统关系型数据库的行和列存储，这相当于是把一个表现力丰富的对象挤压到一个非常大的电子表格中：你必须将这个对象扁平化来适应表结构–通常一个字段&gt;对应一列–而且又不得不在每次查询时重新构造对象。 Elasticsearch 是 面向文档 的，意味着它存储整个对象或 文档_。Elasticsearch 不仅存储文档，而且 _索引 每个文档的内容使之可以被检索。在 Elasticsear">
+<meta property="og:description" content="个人博客搭建一、下载安装 git ，Node.jsNode.js下载地址：https:&#x2F;&#x2F;nodejs.org&#x2F;en&#x2F; Git：https:&#x2F;&#x2F;git-scm.com&#x2F; 二、安装，配置 Hexo安装: $ npm install -g hexo-cli 配置: (1)新建存放博客文件夹 (2)进入文件夹，并且打开Git Bash (3)运行$hexo init$ npm install _conf">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/null">
 <meta property="article:published_time" content="2022-02-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-09T06:42:29.813Z">
+<meta property="article:modified_time" content="2022-03-12T16:07:11.593Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="ElasticSearch">
+<meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/null">
 <meta name="twitter:site" content="@null">
@@ -138,7 +138,7 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">ES->进阶型原理</h1>
+                <h1 class="kratos-entry-title text-center">hexo->个人博客搭建</h1>
             
             
             <ul class="kratos-post-meta text-center">
@@ -148,7 +148,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~3.24K
+                        1009
                     
                     字
                 </li>
@@ -157,68 +157,21 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1646808149813"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1647101231593"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <h2 id="进阶型原理"><a href="#进阶型原理" class="headerlink" title="进阶型原理"></a>进阶型原理</h2><hr>
-<p>传统关系型数据库的行和列存储，这相当于是把一个表现力丰富的对象挤压到一个非常大的电子表格中：你必须将这个对象扁平化来适应表结构–通常一个字段&gt;对应一列–而且又不得不在每次查询时重新构造对象。</p>
-<p>Elasticsearch 是 面向文档 的，意味着它存储整个对象或 文档_。Elasticsearch 不仅存储文档，而且 _索引 每个文档的内容使之可以被检索。在 Elasticsearch 中，你 对文档进行索引、检索、排序和过滤–而不是对行列数据。这是一种完全不同的思考数据的方式，也是 Elasticsearch 能支持复杂全文检索的原因。</p>
-<h3 id="集群相关"><a href="#集群相关" class="headerlink" title="集群相关"></a>集群相关</h3><ul>
-<li>节点、主节点、主分片、副本分片</li>
-</ul>
-<p>一个运行中的 Elasticsearch 实例称为一个 节点，而集群是由一个或者多个拥有相同 cluster.name 配置的节点组成， 它们共同承担数据和负载的压力。<strong>当有节点加入集群中或者从集群中移除节点时，集群将会重新平均分布所有的数据。</strong> </p>
-<p>当一个节点被选举成为主节点时， 它将负责管理集群范围内的所有变更，例如增加、删除索引，或者增加、删除节点等。 而主节点并不需要涉及到文档级别的变更和搜索等操作，所以当集群只拥有一个主节点的情况下，即使流量的增加它也不会成为瓶颈。 任何节点都可以成为主节点。集群状态存在于集群中的每个节点，包括客户端节点。但只有主节点被允许更新集群状态，然后向所有集群中的所有节点发布一个新的版本。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">集群状态 是一种数据结构，贮存下列集群级别的信息：</span><br><span class="line">1.集群级别的设置</span><br><span class="line">2.集群中的节点</span><br><span class="line">3.索引以及它们的设置、映射、分析器、预热器（Warmers）和别名</span><br><span class="line">4.与每个索引关联的分片以及它们分配到的节点</span><br></pre></td></tr></table></figure>
-
-<p><strong>每个节点上都有若干分片（即可以有主分片也可以有副分片）。</strong></p>
-<p>作为用户，我们可以将请求发送到集群中的任何节点，包括主节点。 每个节点都知道任意文档所处的位置，并且能够将我们的请求直接转发到存储我们所需文档的节点。 无论我们将请求发送到哪个节点，它都能负责从各个包含我们所需文档的节点收集回数据，并将最终结果返回給客户端。 Elasticsearch 对这一切的管理都是透明的。</p>
-<ul>
-<li>集群健康命令：</li>
-</ul>
-<p>curl -XGET ‘localhost:9200&#x2F;_cluster&#x2F;health?pretty’</p>
-<p>Elasticsearch 是利用分片将数据分发到集群内各处的。分片是数据的容器，文档保存在分片内，分片又被分配到集群内的各个节点里。 当你的集群规模扩大或者缩小时， Elasticsearch 会自动的在各节点中迁移分片，使得数据仍然均匀分布在集群里。</p>
-<p><strong>在索引建立的时候就已经确定了主分片数，但是副本分片数可以随时修改。</strong></p>
-<ul>
-<li>水平扩容</li>
-</ul>
-<p>创建更多的副本分片，提供服务（读操作——搜索和返回数据——可以同时被主分片 或 副本分片所处理），提高系统的吞吐量。</p>
-<p><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_scale_horizontally.html">https://www.elastic.co/guide/cn/elasticsearch/guide/current/_scale_horizontally.html</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PUT /blogs/_settings</span><br><span class="line">&#123;</span><br><span class="line">   &quot;number_of_replicas&quot; : 2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="分布式文档存储"><a href="#分布式文档存储" class="headerlink" title="分布式文档存储"></a>分布式文档存储</h3><p>当我们创建文档时，被存储到哪一个主分片？有一个公式</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shard = hash(routing) % number_of_primary_shards</span><br><span class="line"></span><br><span class="line">注：routing 是一个可变值，默认是文档的 _id ，也可以设置成一个自定义的值。number_of_primary_shards 是主分片的个数。 </span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>新建、更新和删除 请求都是 写 操作， 必须在主分片上面完成之后才能被复制到相关的副本分片。</strong><br><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/distrib-write.html">https://www.elastic.co/guide/cn/elasticsearch/guide/current/distrib-write.html</a></p>
-</li>
-<li><p>**当主分片把更改转发到副本分片时， 它不会转发更新请求。 相反，它转发完整文档的新版本。</p>
-</li>
-</ul>
-<p>** <a target="_blank" rel="noopener" href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_partial_updates_to_a_document.html">https://www.elastic.co/guide/cn/elasticsearch/guide/current/_partial_updates_to_a_document.html</a></p>
-<ul>
-<li><strong>读取请求，协调节点在每次请求的时候将选择不同的副本分片来达到负载均衡；通过轮询所有的副本分片。</strong><br><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/distrib-read.html">https://www.elastic.co/guide/cn/elasticsearch/guide/current/distrib-read.html</a></li>
-</ul>
-<p>注：在分布式系统中，对结果排序的成本随分页的深度成指数上升。这就是 web 搜索引擎对任何查询都不要返回超过 1000 个结果的原因。</p>
-<h3 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h3><p>Elasticsearch 使用一种称为 倒排索引 的结构，它适用于快速的全文搜索。一个倒排索引由文档中所有不重复词的列表构成，对于其中每个词，有一个包含它的文档列表。<br><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/inverted-index.html">https://www.elastic.co/guide/cn/elasticsearch/guide/current/inverted-index.html</a></p>
-<h3 id="分布式检索"><a href="#分布式检索" class="headerlink" title="分布式检索"></a>分布式检索</h3><p>当一个节点接收搜索请求时，这个节点就变成了协调节点。 这个节点的任务是广播查询请求到所有相关分片并将它们的响应整合成全局排序后的结果集合，这个结果集合会返回给客户端。<br><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_query_phase.html">https://www.elastic.co/guide/cn/elasticsearch/guide/current/_query_phase.html</a></p>
-<p>对于楼梯式的翻页，随着页号越大，效率越差。每个分片在本地执行查询请求并且创建一个长度为 from + size 的优先队列，也就是说，每个分片创建的结果集足够大，均可以满足全局的搜索请求。 分片返回一个轻量级的结果列表到协调节点，它仅包含文档 ID 集合以及任何排序需要用到的值，例如 _score 。协调节点将这些分片级的结果合并到自己的有序优先队列里，它代表了全局排序结果集合。至此查询过程结束。</p>
-<h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><p>例子：<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_finding_exact_values.html#_internal_filter_operation">https://www.elastic.co/guide/cn/elasticsearch/guide/current/_finding_exact_values.html#_internal_filter_operation</a></p>
-<p>在内部，Elasticsearch 会在运行非评分查询的时执行多个操作：</p>
-<ul>
-<li><p>查找匹配文档.</p>
-<p>  term 查询在倒排索引中查找 XHDK-A-1293-#fJ3 然后获取包含该 term 的所有文档。本例中，只有文档 1 满足我们要求。</p>
-</li>
-<li><p>创建 bitset.</p>
-<p>  过滤器会创建一个 bitset （一个包含 0 和 1 的数组），它描述了哪个文档会包含该 term 。每一个文档都会有一个二进制数字。匹配上的文档的标志位是 1 。本例中，bitset 的值为 [1,0,0,0] ，因为只有4个文档。在内部，它表示成一个 “roaring bitmap”，可以同时对稀疏或密集的集合进行高效编码。</p>
-<p>  bitset是一个标志位数组，表示有或没有，猜测应该有一个对应的文档id号的数组，数组的下标可以做关联。</p>
-</li>
-<li><p>迭代 bitset(s)</p>
-<p>  一旦为每个查询生成了 bitsets ，Elasticsearch 就会循环迭代 bitsets 从而找到满足所有过滤条件的匹配文档的集合。执行顺序是启发式的，但一般来说先迭代稀疏的 bitset （因为它可以排除掉大量的文档）。</p>
-</li>
-</ul>
-<p><strong>理论上非评分查询先于评分查询执行。非评分查询任务旨在降低那些将对评分查询计算带来更高成本的文档数量，从而达到快速搜索的目的。从概念上记住非评分计算是首先执行的，这将有助于写出高效又快速的搜索请求。</strong></p>
+            <h2 id="个人博客搭建"><a href="#个人博客搭建" class="headerlink" title="个人博客搭建"></a>个人博客搭建</h2><h3 id="一、下载安装-git-，Node-js"><a href="#一、下载安装-git-，Node-js" class="headerlink" title="一、下载安装 git ，Node.js"></a>一、下载安装 git ，Node.js</h3><p>Node.js下载地址：<a target="_blank" rel="noopener" href="https://nodejs.org/en/">https://nodejs.org/en/</a></p>
+<p>Git：<a target="_blank" rel="noopener" href="https://git-scm.com/">https://git-scm.com/</a></p>
+<h3 id="二、安装，配置-Hexo"><a href="#二、安装，配置-Hexo" class="headerlink" title="二、安装，配置 Hexo"></a>二、安装，配置 Hexo</h3><p>安装: $ npm install -g hexo-cli</p>
+<p>配置: (1)新建存放博客文件夹 (2)进入文件夹，并且打开Git Bash (3)运行$hexo init$ npm install</p>
+<p>_config.yml 可以修改我们的博客标题，作者，邮箱，网址 … ..</p>
+<h3 id="三、本地启动Hexo"><a href="#三、本地启动Hexo" class="headerlink" title="三、本地启动Hexo"></a>三、本地启动Hexo</h3><p>$hexo g # 生成<br>$hexo s #启动本地服务器,这一步之后就可以通过<a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a> 查看</p>
+<p>浏览器输入：<a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a></p>
+<h3 id="四、将Hexo部署到GitHub上"><a href="#四、将Hexo部署到GitHub上" class="headerlink" title="四、将Hexo部署到GitHub上"></a>四、将Hexo部署到GitHub上</h3><p>1.注册GitHub账户（默认大家都有了） （无法访问就在微软自带的浏览器安装 Hoxx Vpn 插件）<br>2.新建仓库<br>3.使用Hexo deploy 部署到GitHub<br>3.1 编辑根目录下_config.yml文件</p>
+<h1 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h1><h2 id="Docs-https-hexo-io-docs-deployment-html"><a href="#Docs-https-hexo-io-docs-deployment-html" class="headerlink" title="Docs: https://hexo.io/docs/deployment.html"></a>Docs: <a target="_blank" rel="noopener" href="https://hexo.io/docs/deployment.html">https://hexo.io/docs/deployment.html</a></h2><p>deploy:<br>  type: git<br>  repo: #仓库地址<br>  branch: main<br>3.2 安装扩展<br>npm install hexo-deployer-git –save</p>
+<p>3.3 设置用户信息<br>$ git config –global user.name “注册时候的用户名”          #自己的用户名  username<br>$ git config –global user.email  “邮件地址@youremail.com”  #填写Git的邮箱 email<br>3.4 添加SSh Key到GitHub上<br>ssh-keygen -t rsa -C “邮件地址@youremail.com”   # 生成Key email  </p>
+<h1 id="在-C-x2F-User-x2F-username-x2F-ssh-x2F-文件里面"><a href="#在-C-x2F-User-x2F-username-x2F-ssh-x2F-文件里面" class="headerlink" title="在 C:&#x2F;User&#x2F;username&#x2F;.ssh&#x2F;文件里面"></a>在 C:&#x2F;User&#x2F;username&#x2F;.ssh&#x2F;文件里面</h1><p>ssh -T <a href="mailto:&#103;&#105;&#x74;&#x40;&#103;&#105;&#116;&#104;&#x75;&#98;&#x2e;&#x63;&#x6f;&#109;">&#103;&#105;&#x74;&#x40;&#103;&#105;&#116;&#104;&#x75;&#98;&#x2e;&#x63;&#x6f;&#109;</a> # 测试我们的Key是否添加成功<br>3.5 部署到Github 上 $hexo d</p>
 
         </div>
         
@@ -272,7 +225,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://example.com/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/ElasticSearch/elasticsearch-theory/",
+                text: "http://example.com/2022/02/14/%E6%8A%80%E6%9C%AF/other/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -284,11 +237,11 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://example.com/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/ElasticSearch/elasticsearch-theory/";
-            const title         = "「ES->进阶型原理」";
-            const excerpt       = `进阶型原理
-传统关系型数据库的行和列存储，这相当于是把一个表现力丰富的对象挤压到一个非常大的电子表格中：你必须将这个对象扁平化来适应表结构–通常一个字段&gt;对应一列–而且又不得不在每次查询时重新构造对象。
-Elasticsearc...`;
+            const hostUrl       = "http://example.com/2022/02/14/%E6%8A%80%E6%9C%AF/other/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/";
+            const title         = "「hexo->个人博客搭建」";
+            const excerpt       = `个人博客搭建一、下载安装 git ，Node.jsNode.js下载地址：https://nodejs.org/en/
+Git：https://git-scm.com/
+二、安装，配置 Hexo安装: $ npm install -g...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -307,10 +260,10 @@ Elasticsearc...`;
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/ElasticSearch/" rel="tag">ElasticSearch</a>
+                    <a class="tag-none-link" href="/tags/hexo/" rel="tag">hexo</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-03-09</span>
+                <span>最后编辑：2022-03-13</span>
                 </div>
             </div>
         </footer>
@@ -319,12 +272,12 @@ Elasticsearc...`;
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" arthas -&gt; 基本使用" href="/2022/02/14/技术/后端/arthas/arthas_基本使用/">&lt; 上一篇</a>
+                <a title=" ES-&gt;安装" href="/2022/02/12/技术/后端/ElasticSearch/elasticsearch-setup/">&lt; 上一篇</a>
             </div>
             
             
             <div class="nav-next clearfix">
-                <a title=" AngularJS-&gt;基本" href="/2022/02/14/技术/前端/AngularJS/AngularJS_基础/">下一篇 &gt;</a>
+                <a title=" git -&gt; 常用命令" href="/2022/02/14/技术/后端/versionControl/git/git-commands/">下一篇 &gt;</a>
             </div>
             
         </nav>
@@ -367,7 +320,7 @@ Elasticsearc...`;
         <span class="toc-progress-bar"></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E5%9E%8B%E5%8E%9F%E7%90%86"><span class="toc-text">进阶型原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E7%BE%A4%E7%9B%B8%E5%85%B3"><span class="toc-text">集群相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E6%A1%A3%E5%AD%98%E5%82%A8"><span class="toc-text">分布式文档存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95"><span class="toc-text">倒排索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%A3%80%E7%B4%A2"><span class="toc-text">分布式检索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-text">过滤器</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA"><span class="toc-text">个人博客搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85-git-%EF%BC%8CNode-js"><span class="toc-text">一、下载安装 git ，Node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85%EF%BC%8C%E9%85%8D%E7%BD%AE-Hexo"><span class="toc-text">二、安装，配置 Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%9C%AC%E5%9C%B0%E5%90%AF%E5%8A%A8Hexo"><span class="toc-text">三、本地启动Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%B0%86Hexo%E9%83%A8%E7%BD%B2%E5%88%B0GitHub%E4%B8%8A"><span class="toc-text">四、将Hexo部署到GitHub上</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Deployment"><span class="toc-text">Deployment</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docs-https-hexo-io-docs-deployment-html"><span class="toc-text">Docs: https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;deployment.html</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8-C-x2F-User-x2F-username-x2F-ssh-x2F-%E6%96%87%E4%BB%B6%E9%87%8C%E9%9D%A2"><span class="toc-text">在 C:&#x2F;User&#x2F;username&#x2F;.ssh&#x2F;文件里面</span></a>
     </div>
 </aside>
                 
