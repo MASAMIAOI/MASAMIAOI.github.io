@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="">
-  <title>masamiaoi</title>
+  <title>java -> int 基础类型 | masamiaoi</title>
   <meta name="author" content="masamiaoi" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,17 +13,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="" />
+    <meta name="keywords" content="basis" />
   
-  <meta name="description" content="勿因未候日光暖,擅自轻言世间寒。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="masamiaoi">
-<meta property="og:url" content="http://example.com/search/index.html">
+  <meta name="description" content="mysql中bigint、int、mediumint、smallint 和 tinyint的取值范围 引言社区这边的业务就遇到过这个坑，由于是用的开源框架，很多表id的字段用的mediumint类型，随着业务增长，数据量暴增，结果有一天超过id的上限，结果insert db就报错了，影响部分业务功能。 整型数值 整型的每一种都分有无符号（unsigned）和有符号（signed）两种类型，在默认情">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java -&gt; int 基础类型">
+<meta property="og:url" content="http://example.com/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/java/bigint%E7%B1%BB%E5%9E%8B/index.html">
 <meta property="og:site_name" content="masamiaoi">
-<meta property="og:description" content="勿因未候日光暖,擅自轻言世间寒。">
+<meta property="og:description" content="mysql中bigint、int、mediumint、smallint 和 tinyint的取值范围 引言社区这边的业务就遇到过这个坑，由于是用的开源框架，很多表id的字段用的mediumint类型，随着业务增长，数据量暴增，结果有一天超过id的上限，结果insert db就报错了，影响部分业务功能。 整型数值 整型的每一种都分有无符号（unsigned）和有符号（signed）两种类型，在默认情">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/null">
+<meta property="article:published_time" content="2022-02-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-09T06:34:36.287Z">
 <meta property="article:author" content="masamiaoi">
+<meta property="article:tag" content="basis">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/null">
 <meta name="twitter:site" content="@null">
@@ -133,34 +136,156 @@
 
         
 
-            <div class="kratos-hentry kratos-post-inner clearfix">
-    <div class="kratos-post-content">
-        <h2 class="title-h2 text-center">搜索</h2>
-        <form class="input-group" onsubmit="return inpSearch();">
-            <input class="form-input input-lg" id="search-input" maxlength="80" name="s" placeholder="有什么想找找看的呢o(*￣▽￣*)ブ" required type="search">
-            <button class="btn btn-primary" type="submit">找一找~</button>
-        </form>
-    </div>
-</div>
-
-<div class="alert alert-info" id="kr-search-notice">
-    这里是 masamiaoi 的搜索引擎~
-</div>
-
-<div id="result-posts">
+            <article>
     <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">java -> int 基础类型</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2022-02-14</li>
+                <li><i class="fa fa-user"></i> 作者 masamiaoi</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        807
+                    
+                    字
+                </li>
+                
+            </ul>
+        </header>
         <div class="kratos-post-content">
-            <p>搜索多个关键词时请用空格分割，例如「hexo npm yarn」这样；</p>
-            <p>您也可以使用这些标签碰碰运气哦~</p>
-            <p class="search-demo-tags">
-                <a href="/tags/hexo/" style="font-size: 18px; color: #b2b7be">hexo</a> <a href="/tags/npm/" style="font-size: 18px; color: #b2b7be">npm</a> <a href="/tags/yarn/" style="font-size: 18px; color: #b2b7be">yarn</a> <a href="/tags/git/" style="font-size: 20px; color: #9ba1ac">git</a> <a href="/tags/AngularJS/" style="font-size: 18px; color: #b2b7be">AngularJS</a> <a href="/tags/ElasticSearch/" style="font-size: 24px; color: #6c7588">ElasticSearch</a> <a href="/tags/arthas/" style="font-size: 18px; color: #b2b7be">arthas</a> <a href="/tags/basis/" style="font-size: 20px; color: #9ba1ac">basis</a> <a href="/tags/java/" style="font-size: 18px; color: #b2b7be">java</a> <a href="/tags/jprofiler/" style="font-size: 18px; color: #b2b7be">jprofiler</a> <a href="/tags/Linux/" style="font-size: 22px; color: #838b9a">Linux</a> <a href="/tags/tcpdump/" style="font-size: 18px; color: #b2b7be">tcpdump</a> <a href="/tags/corn/" style="font-size: 18px; color: #b2b7be">corn</a>
-            </p>
-        </div>
-    </div>
-</div>
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1646807676287"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+            <hr />
+            <h2 id="mysql中bigint、int、mediumint、smallint-和-tinyint的取值范围"><a href="#mysql中bigint、int、mediumint、smallint-和-tinyint的取值范围" class="headerlink" title="mysql中bigint、int、mediumint、smallint 和 tinyint的取值范围"></a>mysql中bigint、int、mediumint、smallint 和 tinyint的取值范围</h2><hr>
+<h5 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h5><p>社区这边的业务就遇到过这个坑，由于是用的开源框架，很多表id的字段用的mediumint类型，随着业务增长，数据量暴增，结果有一天超过id的上限，<br>结果insert db就报错了，影响部分业务功能。</p>
+<h5 id="整型数值"><a href="#整型数值" class="headerlink" title="整型数值"></a>整型数值</h5><blockquote>
+<p>整型的每一种都分有无符号（unsigned）和有符号（signed）两种类型，在默认情况下声明的整型变量都是有符号的类型，如果需声明无符号类型的话就需要在类型前加上unsigned。</p>
+</blockquote>
+<ul>
+<li>bigint<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">从 -2^63 (-9223372036854775808) 到 2^63-1 (9223372036854775807) 的整型数据（所有数字），</span><br><span class="line">无符号的范围是0到18446744073709551615，共 8 个字节。</span><br></pre></td></tr></table></figure></li>
+<li>int<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">一个正常大小整数。有符号的范围是-2^31 (-2,147,483,648) 到 2^31 - 1 (2,147,483,647) 的整型数据（所有数字），</span><br><span class="line">无符号的范围是0到4294967295。共 4 个字节。</span><br><span class="line">int 的 SQL-92 同义词为 integer。</span><br></pre></td></tr></table></figure></li>
+<li>mediumint<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">一个中等大小整数，有符号的范围是-8388608到8388607，</span><br><span class="line">无符号的范围是0到16777215，  [0，2^24-1]。 大小为3个字节。</span><br></pre></td></tr></table></figure></li>
+<li>smallint<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">一个小整数。有符号的范围是-2^15 (-32,768) 到 2^15 - 1 (32,767) 的整型数据，</span><br><span class="line">无符号的范围是0到65535。大小为 2 个字节。MySQL提供的功能已经绰绰有余，而且由于MySQL是开放源码软件，因此可以大大降低总体拥有成本。</span><br></pre></td></tr></table></figure></li>
+<li>tinyint<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">有符号的范围是-128 - 127， 无符号的范围是 从 0 到 255 的整型数据。大小为 1 字节。[0，2^8-1]</span><br></pre></td></tr></table></figure></li>
+</ul>
 
-<script>var searchDataFile = "/search.json";</script>
-<script defer src="/js/local-search.min.js"></script>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5>本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://example.com/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/java/bigint%E7%B1%BB%E5%9E%8B/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://example.com/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/java/bigint%E7%B1%BB%E5%9E%8B/";
+            const title         = "「java -> int 基础类型」";
+            const excerpt       = `mysql中bigint、int、mediumint、smallint 和 tinyint的取值范围
+引言社区这边的业务就遇到过这个坑，由于是用的开源框架，很多表id的字段用的mediumint类型，随着业务增长，数据量暴增，结果有一...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/basis/" rel="tag">basis</a>
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2022-03-09</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" java -&gt; 基础面试题" href="/2022/02/14/技术/后端/java/java-basic/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" arthas -&gt; 基本使用" href="/2022/02/14/技术/后端/arthas/arthas_基本使用/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
 
         
 
@@ -173,8 +298,6 @@
 
 <section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
     <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
-    
-        <div class="sticky-area">
     
     
                 <aside id="krw-about" class="widget widget-kratos-about clearfix">
@@ -189,6 +312,20 @@
     </div>
 </aside>
             
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix">
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar"></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#mysql%E4%B8%ADbigint%E3%80%81int%E3%80%81mediumint%E3%80%81smallint-%E5%92%8C-tinyint%E7%9A%84%E5%8F%96%E5%80%BC%E8%8C%83%E5%9B%B4"><span class="toc-text">mysql中bigint、int、mediumint、smallint 和 tinyint的取值范围</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-text">引言</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B4%E5%9E%8B%E6%95%B0%E5%80%BC"><span class="toc-text">整型数值</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+</aside>
+                
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>

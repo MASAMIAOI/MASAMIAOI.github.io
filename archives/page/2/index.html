@@ -18,7 +18,7 @@
   <meta name="description" content="勿因未候日光暖,擅自轻言世间寒。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="masamiaoi">
-<meta property="og:url" content="http://example.com/search/index.html">
+<meta property="og:url" content="http://example.com/archives/page/2/index.html">
 <meta property="og:site_name" content="masamiaoi">
 <meta property="og:description" content="勿因未候日光暖,擅自轻言世间寒。">
 <meta property="og:locale" content="zh_CN">
@@ -133,34 +133,223 @@
 
         
 
-            <div class="kratos-hentry kratos-post-inner clearfix">
-    <div class="kratos-post-content">
-        <h2 class="title-h2 text-center">搜索</h2>
-        <form class="input-group" onsubmit="return inpSearch();">
-            <input class="form-input input-lg" id="search-input" maxlength="80" name="s" placeholder="有什么想找找看的呢o(*￣▽￣*)ブ" required type="search">
-            <button class="btn btn-primary" type="submit">找一找~</button>
-        </form>
-    </div>
-</div>
+            
+<style>
+  .post-meta time{color:#00a7e0}
+  @media (max-width:767px){.posts-collapse{margin:0 20px}
+  .posts-collapse .post-meta,.posts-collapse .post-title{display:block;width:auto;text-align:left}}
+  .posts-collapse{position:relative}
+  .posts-collapse::after{content:" ";position:absolute;top:20px;left:0;margin-left:-2px;width:4px;height:calc(100% - 35px);background:#f5f5f5;z-index:-1}
+  @media (max-width:991px){.posts-collapse{margin:0 20px}}
+  .posts-collapse .collection-title{position:relative}
+  .posts-collapse .collection-title h1,.posts-collapse .collection-title h2{margin-left:20px}.posts-collapse .collection-title small{color:#bbb;margin-left:5px}
+  .posts-collapse .collection-title::before{content:" ";position:absolute;left:0;top:50%;margin-left:-4px;margin-top:-4px;width:8px;height:8px;background:#bbb;border-radius:50%}
+  .posts-collapse .post-header{position:relative;transition-duration:.2s;transition-timing-function:ease-in-out;transition-delay:0s;transition-property:border}
+  .posts-collapse .post-header::before{content:" ";position:absolute;left:0;top:12px;width:6px;height:6px;margin-left:-4px;background:#bbb;border-radius:50%;border:1px solid #fff}
+  .posts-collapse .post-header:hover{border-bottom-color:#666}.posts-collapse .post-header:hover::before{background:#222}
+  .posts-collapse .post-meta{position:absolute;font-size:12px;left:20px;top:5px}
+  .posts-collapse .post-comments-count{display:none}
+  .posts-collapse .post-title{margin-left:70px;font-size:16px;font-weight:400;line-height:inherit}
+  .posts-collapse .post-title::after{margin-left:3px;opacity:.6}.posts-collapse .post-title a{color:#666;border-bottom:none}
+  .kratos-post-content div.arc-tags{margin-bottom:30px}
+  .arc-tags a{-webkit-box-shadow:0 1px 4px rgba(0,0,0,.1);box-shadow:0 1px 4px rgba(0,0,0,.1);border:1px solid #fff;border-radius:15px;margin:4px 8px 0 0;font-weight:500;display:inline-block;padding:0 12px;background:rgba(255,255,255,.5);font-size:16px;}
+  .arc-tags a::before{content:"# ";color:#e8a6a6}
+</style>
 
-<div class="alert alert-info" id="kr-search-notice">
-    这里是 masamiaoi 的搜索引擎~
-</div>
-
-<div id="result-posts">
-    <div class="kratos-hentry kratos-post-inner clearfix">
-        <div class="kratos-post-content">
-            <p>搜索多个关键词时请用空格分割，例如「hexo npm yarn」这样；</p>
-            <p>您也可以使用这些标签碰碰运气哦~</p>
-            <p class="search-demo-tags">
-                <a href="/tags/hexo/" style="font-size: 18px; color: #b2b7be">hexo</a> <a href="/tags/npm/" style="font-size: 18px; color: #b2b7be">npm</a> <a href="/tags/yarn/" style="font-size: 18px; color: #b2b7be">yarn</a> <a href="/tags/git/" style="font-size: 20px; color: #9ba1ac">git</a> <a href="/tags/AngularJS/" style="font-size: 18px; color: #b2b7be">AngularJS</a> <a href="/tags/ElasticSearch/" style="font-size: 24px; color: #6c7588">ElasticSearch</a> <a href="/tags/arthas/" style="font-size: 18px; color: #b2b7be">arthas</a> <a href="/tags/basis/" style="font-size: 20px; color: #9ba1ac">basis</a> <a href="/tags/java/" style="font-size: 18px; color: #b2b7be">java</a> <a href="/tags/jprofiler/" style="font-size: 18px; color: #b2b7be">jprofiler</a> <a href="/tags/Linux/" style="font-size: 22px; color: #838b9a">Linux</a> <a href="/tags/tcpdump/" style="font-size: 18px; color: #b2b7be">tcpdump</a> <a href="/tags/corn/" style="font-size: 18px; color: #b2b7be">corn</a>
-            </p>
+  <article>
+      <div class="kratos-hentry kratos-post-inner clearfix">
+          <div class="kratos-post-content">
+            <h2 class="title-h2 text-center">文章归档</h2>
+            <div id="archives">
+                
+                  <div class="arc-tags">
+                      <a class="tag-none-link" href="/tags/AngularJS/" rel="tag">AngularJS</a> <a class="tag-none-link" href="/tags/ElasticSearch/" rel="tag">ElasticSearch</a> <a class="tag-none-link" href="/tags/Linux/" rel="tag">Linux</a> <a class="tag-none-link" href="/tags/arthas/" rel="tag">arthas</a> <a class="tag-none-link" href="/tags/basis/" rel="tag">basis</a> <a class="tag-none-link" href="/tags/corn/" rel="tag">corn</a> <a class="tag-none-link" href="/tags/git/" rel="tag">git</a> <a class="tag-none-link" href="/tags/hexo/" rel="tag">hexo</a> <a class="tag-none-link" href="/tags/java/" rel="tag">java</a> <a class="tag-none-link" href="/tags/jprofiler/" rel="tag">jprofiler</a> <a class="tag-none-link" href="/tags/npm/" rel="tag">npm</a> <a class="tag-none-link" href="/tags/tcpdump/" rel="tag">tcpdump</a> <a class="tag-none-link" href="/tags/yarn/" rel="tag">yarn</a>
+                  </div>
+                
+                <div class="post-block archive post" style="margin-left: 2em;">
+                  <h3 class="archive-page-counter">当前共有 7 篇文章 (゜-゜)つロ 干杯~</h3>
+                  <div class="posts-collapse">
+                    
+                    
+                      
+                      
+                        <!-- 没遇到Title的会被自动忽略年份，即使并不一致 -->
+                        
+                        <div class="collection-title">
+                          <a href="/archives/2022/"><h2 class="archive-year">2022</h2></a>
+                        </div>
+                      
+                      
+                        <article class="post" itemscope>
+                          <header class="post-header">
+                            <h3 class="post-title">
+                              
+                                  <a class="post-title-link" href="/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/versionControl/git/git-commands/" itemprop="url">
+                                    <span itemprop="name">git -> 常用命令</span>
+                                  </a>
+                              
+                            </h3>
+                            <div class="post-meta">
+                              <time class="post-time" itemprop="dateCreated"
+                                    datetime="2022-02-14T00:00:00+08:00"
+                                    content="2022-02-14" >
+                                02-14
+                              </time>
+                            </div>
+                          </header>
+                        </article>
+                      
+                    
+                      
+                      
+                      
+                        <article class="post" itemscope>
+                          <header class="post-header">
+                            <h3 class="post-title">
+                              
+                                  <a class="post-title-link" href="/2022/02/12/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/ElasticSearch/elasticsearch-setup/" itemprop="url">
+                                    <span itemprop="name">ES->安装</span>
+                                  </a>
+                              
+                            </h3>
+                            <div class="post-meta">
+                              <time class="post-time" itemprop="dateCreated"
+                                    datetime="2022-02-12T00:00:00+08:00"
+                                    content="2022-02-12" >
+                                02-12
+                              </time>
+                            </div>
+                          </header>
+                        </article>
+                      
+                    
+                      
+                      
+                      
+                        <article class="post" itemscope>
+                          <header class="post-header">
+                            <h3 class="post-title">
+                              
+                                  <a class="post-title-link" href="/2022/02/12/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/liunx/java%E6%9C%8D%E5%8A%A1%E5%99%A8load%E9%A3%9A%E9%AB%98%E6%8E%92%E6%9F%A5%E6%80%9D%E8%B7%AF/" itemprop="url">
+                                    <span itemprop="name">java服务器load飚高排查思路</span>
+                                  </a>
+                              
+                            </h3>
+                            <div class="post-meta">
+                              <time class="post-time" itemprop="dateCreated"
+                                    datetime="2022-02-12T00:00:00+08:00"
+                                    content="2022-02-12" >
+                                02-12
+                              </time>
+                            </div>
+                          </header>
+                        </article>
+                      
+                    
+                      
+                      
+                      
+                        <article class="post" itemscope>
+                          <header class="post-header">
+                            <h3 class="post-title">
+                              
+                                  <a class="post-title-link" href="/2022/02/12/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/liunx/linux-commands/" itemprop="url">
+                                    <span itemprop="name">linux -> 基本命令</span>
+                                  </a>
+                              
+                            </h3>
+                            <div class="post-meta">
+                              <time class="post-time" itemprop="dateCreated"
+                                    datetime="2022-02-12T00:00:00+08:00"
+                                    content="2022-02-12" >
+                                02-12
+                              </time>
+                            </div>
+                          </header>
+                        </article>
+                      
+                    
+                      
+                      
+                      
+                        <article class="post" itemscope>
+                          <header class="post-header">
+                            <h3 class="post-title">
+                              
+                                  <a class="post-title-link" href="/2022/02/12/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/liunx/linux-%E6%8A%93%E5%8C%85%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/" itemprop="url">
+                                    <span itemprop="name">抓包相关命令</span>
+                                  </a>
+                              
+                            </h3>
+                            <div class="post-meta">
+                              <time class="post-time" itemprop="dateCreated"
+                                    datetime="2022-02-12T00:00:00+08:00"
+                                    content="2022-02-12" >
+                                02-12
+                              </time>
+                            </div>
+                          </header>
+                        </article>
+                      
+                    
+                      
+                      
+                      
+                        <article class="post" itemscope>
+                          <header class="post-header">
+                            <h3 class="post-title">
+                              
+                                  <a class="post-title-link" href="/2022/02/11/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/ElasticSearch/elasticsearch-application/" itemprop="url">
+                                    <span itemprop="name">ES->基本应用</span>
+                                  </a>
+                              
+                            </h3>
+                            <div class="post-meta">
+                              <time class="post-time" itemprop="dateCreated"
+                                    datetime="2022-02-11T00:00:00+08:00"
+                                    content="2022-02-11" >
+                                02-11
+                              </time>
+                            </div>
+                          </header>
+                        </article>
+                      
+                    
+                      
+                      
+                      
+                        <article class="post" itemscope>
+                          <header class="post-header">
+                            <h3 class="post-title">
+                              
+                                  <a class="post-title-link" href="/2022/02/11/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/ElasticSearch/es_%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E4%BD%BF%E7%94%A8/" itemprop="url">
+                                    <span itemprop="name">ES->基本语法使用</span>
+                                  </a>
+                              
+                            </h3>
+                            <div class="post-meta">
+                              <time class="post-time" itemprop="dateCreated"
+                                    datetime="2022-02-11T00:00:00+08:00"
+                                    content="2022-02-11" >
+                                02-11
+                              </time>
+                            </div>
+                          </header>
+                        </article>
+                      
+                    
+                  </div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+      </div>
+      
+        <div class='text-center pagination'>
+        <a class="extend prev" rel="prev" href="/archives/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
+        </div>
+      
+  </article>
 
-<script>var searchDataFile = "/search.json";</script>
-<script defer src="/js/local-search.min.js"></script>
 
         
 
