@@ -15,16 +15,16 @@
   
     <meta name="keywords" content="basis" />
   
-  <meta name="description" content="##java基础面试题   什么是线程？1线程是操作系统能够进行运算调度的最小单位，它被包含在进程之中，是进程中的实际运作单位。程序员可以通过它进行多处理器编程，你可以使用多线程对运算密集型任务提速。比如，如果一个线程完成一个任务要100毫秒，那么用十个线程完成改任务只需10毫秒。Java在语言层面对多线程提供了卓越的支持，它也是一个很好的卖点。 线程和进程有什么区别？1线程是进程的子集，一个进程">
+  <meta name="description" content="java基础面试题 1、 &#x3D;&#x3D;和equals⽅法之前的区别 &#x3D;&#x3D;：对⽐的是栈中的值，基本数据类型是变量值，引⽤类型是堆中内存对象的地址equals：object中默认也是采⽤&#x3D;&#x3D;⽐较，通常会重写  2、 hashCode()与equals() 关系和区别 如果两个对象相等，则hashcode⼀定也是相同的   两个对象相等,对两个对象分别">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java -&gt; 基础面试题">
 <meta property="og:url" content="http://example.com/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/java/java-basic/index.html">
 <meta property="og:site_name" content="masamiaoi">
-<meta property="og:description" content="##java基础面试题   什么是线程？1线程是操作系统能够进行运算调度的最小单位，它被包含在进程之中，是进程中的实际运作单位。程序员可以通过它进行多处理器编程，你可以使用多线程对运算密集型任务提速。比如，如果一个线程完成一个任务要100毫秒，那么用十个线程完成改任务只需10毫秒。Java在语言层面对多线程提供了卓越的支持，它也是一个很好的卖点。 线程和进程有什么区别？1线程是进程的子集，一个进程">
+<meta property="og:description" content="java基础面试题 1、 &#x3D;&#x3D;和equals⽅法之前的区别 &#x3D;&#x3D;：对⽐的是栈中的值，基本数据类型是变量值，引⽤类型是堆中内存对象的地址equals：object中默认也是采⽤&#x3D;&#x3D;⽐较，通常会重写  2、 hashCode()与equals() 关系和区别 如果两个对象相等，则hashcode⼀定也是相同的   两个对象相等,对两个对象分别">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
 <meta property="article:published_time" content="2022-02-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-09T07:29:01.553Z">
+<meta property="article:modified_time" content="2023-03-15T10:14:36.799Z">
 <meta property="article:author" content="masamiaoi">
 <meta property="article:tag" content="basis">
 <meta name="twitter:card" content="summary">
@@ -150,7 +150,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~12.55K
+                        ~12.35K
                     
                     字
                 </li>
@@ -159,73 +159,393 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1646810941553"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1678875276799"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <p>##java基础面试题</p>
-<hr>
+            <h2 id="java基础面试题"><a href="#java基础面试题" class="headerlink" title="java基础面试题"></a>java基础面试题</h2><hr>
+<h3 id="1、-x3D-x3D-和equals⽅法之前的区别"><a href="#1、-x3D-x3D-和equals⽅法之前的区别" class="headerlink" title="1、 &#x3D;&#x3D;和equals⽅法之前的区别"></a>1、 &#x3D;&#x3D;和equals⽅法之前的区别</h3><blockquote>
+<p>&#x3D;&#x3D;：对⽐的是栈中的值，基本数据类型是变量值，引⽤类型是堆中内存对象的地址<br>equals：object中默认也是采⽤&#x3D;&#x3D;⽐较，通常会重写</p>
+</blockquote>
+<h3 id="2、-hashCode-与equals-关系和区别"><a href="#2、-hashCode-与equals-关系和区别" class="headerlink" title="2、 hashCode()与equals() 关系和区别"></a>2、 hashCode()与equals() 关系和区别</h3><blockquote>
+<p>如果两个对象相等，则hashcode⼀定也是相同的</p>
+</blockquote>
+<blockquote>
+<p>两个对象相等,对两个对象分别调⽤equals⽅法都返回true</p>
+</blockquote>
+<blockquote>
+<p>两个对象有相同的hashcode值，它们也不⼀定是相等的</p>
+</blockquote>
+<blockquote>
+<p>因此，equals⽅法被覆盖过，则hashCode⽅法也必须被覆盖hashCode()的默认⾏为是对堆上的对象产⽣独特值。如果没有重写hashCode()，则该class的两个对象⽆论如何都不会相等（即使这两个对象指向相同的数据）</p>
+</blockquote>
+<h3 id="3、-final关键字的作⽤是什么？"><a href="#3、-final关键字的作⽤是什么？" class="headerlink" title="3、 final关键字的作⽤是什么？"></a>3、 final关键字的作⽤是什么？</h3><blockquote>
+<p>修饰类：表示类不可被继承</p>
+</blockquote>
+<blockquote>
+<p>修饰⽅法：表示⽅法不可被⼦类覆盖，但是可以重载</p>
+</blockquote>
+<blockquote>
+<p>修饰变量：表示变量⼀旦被赋值就不可以更改它的值。</p>
+</blockquote>
+<blockquote>
+<p>修饰成员变量：<br>如果final修饰的是类变量，只能在静态初始化块中指定初始值或者声明该类变量时指定初始值。<br>如果final修饰的是成员变量，可以在⾮静态初始化块、声明该变量或者构造器中执⾏初始值。</p>
+</blockquote>
+<blockquote>
+<p>修饰局部变量：<br>    系统不会为局部变量进⾏初始化，局部变量必须由程序员显示初始化。因此使⽤final修饰局部变量时，即可以在定义时指定默认值（后⾯的代码不能对变量再赋值），也可以不指定默认值，⽽在后⾯的代码中对final变量赋初值（仅⼀次）</p>
+</blockquote>
+<blockquote>
+<p>修饰基本类型数据和引⽤类型数据：<br>    如果是基本数据类型的变量，则其数值⼀旦在初始化之后便不能更改；<br>    如果是引⽤类型的变量，则在对其初始化之后便不能再让其指向另⼀个对象。但是引⽤的值是可变的。</p>
+</blockquote>
+<h3 id="4、-String、StringBuffer、StringBuilder的区别"><a href="#4、-String、StringBuffer、StringBuilder的区别" class="headerlink" title="4、 String、StringBuffer、StringBuilder的区别"></a>4、 String、StringBuffer、StringBuilder的区别</h3><blockquote>
+<p>String是不可变的，如果尝试去修改，会新⽣成⼀个字符串对象，StringBuffer和StringBuilder是可变的</p>
+</blockquote>
+<blockquote>
+<p>StringBuffer是线程安全的，StringBuilder是线程不安全的，所以在单线程环境下StringBuilder效率会更⾼</p>
+</blockquote>
+<h3 id="5、重载和重写的区别"><a href="#5、重载和重写的区别" class="headerlink" title="5、重载和重写的区别"></a>5、重载和重写的区别</h3><blockquote>
+<p>重载：发⽣在同⼀个类中，⽅法名必须相同，参数类型不同、个数不同、顺序不同，⽅法返回值和访问修饰符可以不同，发⽣在编译时。</p>
+</blockquote>
+<blockquote>
+<p>重写：发⽣在⽗⼦类中，⽅法名、参数列表必须相同，返回值范围⼩于等于⽗类，抛出的异常范围⼩于等于⽗类，访问修饰符范围⼤于等于⽗类；如果⽗类⽅法访问修饰符为private则⼦类就不能重写该⽅法。</p>
+</blockquote>
+<h3 id="6、常见访问修饰符"><a href="#6、常见访问修饰符" class="headerlink" title="6、常见访问修饰符"></a>6、常见访问修饰符</h3><blockquote>
+<p>1、private（私有）：private修饰的属性和方法，不能被其他到类访问，也不能被子类继承和访问，只能在当前类访问。</p>
+</blockquote>
+<blockquote>
+<p>2、default （缺省）：没有加修饰符的属性和方法，同一个包的其他类可访问和继承。</p>
+</blockquote>
+<blockquote>
+<p>3、protected（受保护的）：被其修饰的属性和方法，同一个包的其他类可访问和继承，或者不同包的其他子类可访问。</p>
+</blockquote>
+<blockquote>
+<p>4、public（公有的）：不存在访问权限，全部类都可以访问。</p>
+</blockquote>
+<h3 id="7、接⼝和抽象类的区别"><a href="#7、接⼝和抽象类的区别" class="headerlink" title="7、接⼝和抽象类的区别"></a>7、接⼝和抽象类的区别</h3><blockquote>
+<p>象类可以存在普通成员函数，⽽接⼝中只能存在public abstract ⽅法。</p>
+</blockquote>
+<blockquote>
+<p>抽象类中的成员变量可以是各种类型的，⽽接⼝中的成员变量只能是public static final类型的。</p>
+</blockquote>
+<blockquote>
+<p>抽象类只能继承⼀个，接⼝可以实现多个。</p>
+</blockquote>
+<blockquote>
+<p>当你关注⼀个事物的本质的时候，⽤抽象类；当你关注⼀个操作的时候，⽤接⼝</p>
+</blockquote>
+<h3 id="8、List和Set的区别"><a href="#8、List和Set的区别" class="headerlink" title="8、List和Set的区别"></a>8、List和Set的区别</h3><blockquote>
+<p>List: 有序，按对象进⼊的顺序保存对象，可重复，允许多个Null元素对象，可以使⽤Iterator取出所有元素，在逐⼀遍历，还可以使⽤get(int index)获取指定下标的元素</p>
+</blockquote>
+<blockquote>
+<p>Set: ⽆序，不可重复，最多允许有⼀个Null元素对象，取元素时只能⽤Iterator接⼝取得所有元素，在逐⼀遍历各个元素</p>
+</blockquote>
+<h3 id="9、ArrayList和-LinkedList-区别"><a href="#9、ArrayList和-LinkedList-区别" class="headerlink" title="9、ArrayList和 LinkedList 区别"></a>9、ArrayList和 LinkedList 区别</h3><blockquote>
+<p>底层结构不同。 </p>
+</blockquote>
+<ul>
+<li>ArrayList<br>  基于数组实现, 线程不安全。 插入的话会默认插到最后一位。 而且还要插入的时候考虑索引和数组大小。（例如自动扩容）<br>  默认容量为 10 （DEFAULT_CAPACITY）<br>  在用户向ArrayList追加对象时，Java总是要先计算容量（Capacity）是否适当，若容量不足则把原数组拷贝到以指定容量为长度创建的 新数组内，并对原数组变量重新赋值，指向新数组。<br>  在这同时，size进行自增1。在删除对象时，先使用拷贝方法把指定index后面的对象前移1位（如果 有的话），然后把空出来的位置置null，交给Junk收集器销毁，size自减1。</li>
+<li>LinkedList<br>  基于链表实现</li>
+</ul>
+<blockquote>
+<p>使用场景不同<br>    如果应用程序对数据有较多的随机访问，ArrayList对象要优于LinkedList对象；<br>    如果应用程序有更多的插入或者删除操作，较少的数据读取，LinkedList对象要优于ArrayList对象；<br>    不过ArrayList的插入，删除操作也不一定比LinkedList慢，如果在List靠近末尾的地方插入，那么ArrayList只需要移动较少的数据，而LinkedList则需要一直查找到列表尾部，反而耗费较多时间，这时ArrayList就比LinkedList要快。</p>
+</blockquote>
+<h3 id="10、HashMap-和-HashTable-有什么区别？其底层实现是什么？"><a href="#10、HashMap-和-HashTable-有什么区别？其底层实现是什么？" class="headerlink" title="10、HashMap 和 HashTable 有什么区别？其底层实现是什么？"></a>10、HashMap 和 HashTable 有什么区别？其底层实现是什么？</h3><blockquote>
+<p>安全性不同</p>
+</blockquote>
+<ul>
+<li>HashMap<br>  无 synsynchronized 修饰。 现场不安全</li>
+<li>HashTable<br>  线程安全的</li>
+</ul>
+<blockquote>
+<p>插入值的允许度不同</p>
+</blockquote>
+<ul>
+<li>HashMap<br>  允许 key、 value 为空</li>
+<li>HashTable<br>  不允许 key、 value 为空</li>
+</ul>
+<blockquote>
+<p>底层实现</p>
+</blockquote>
+<ul>
+<li>数组+链表实现，jdk8开始链表⾼度到8、数组⻓度超过64，链表转变为红⿊树，元素以内部类Node节点存在</li>
+</ul>
 <ol>
-<li>什么是线程？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">线程是操作系统能够进行运算调度的最小单位，它被包含在进程之中，是进程中的实际运作单位。程序员可以通过它进行多处理器编程，你可以使用多线程对运算密集型任务提速。比如，如果一个线程完成一个任务要100毫秒，那么用十个线程完成改任务只需10毫秒。Java在语言层面对多线程提供了卓越的支持，它也是一个很好的卖点。</span><br></pre></td></tr></table></figure></li>
-<li>线程和进程有什么区别？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">线程是进程的子集，一个进程可以有很多线程，每条线程并行执行不同的任务。不同的进程使用不同的内存空间，而所有的线程共享一片相同的内存空间。别把它和栈内存搞混，每个线程都拥有单独的栈内存用来存储本地数据。</span><br></pre></td></tr></table></figure></li>
-<li>如何在Java中实现线程？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在语言层面有两种方式。java.lang.Thread 类的实例就是一个线程但是它需要调用java.lang.Runnable接口来执行，由于线程类本身就是调用的Runnable接口所以你可以继承java.lang.Thread 类或者直接调用Runnable接口来重写run()方法实现线程。</span><br></pre></td></tr></table></figure></li>
-<li>用Runnable还是Thread？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这个问题是上题的后续，大家都知道我们可以通过继承Thread类或者调用Runnable接口来实现线程，问题是，那个方法更好呢？什么情况下使用它？这个问题很容易回答，如果你知道Java不支持类的多重继承，但允许你调用多个接口。所以如果你要继承其他类，当然是调用Runnable接口好了。</span><br></pre></td></tr></table></figure></li>
-<li>Thread 类中的start() 和 run() 方法有什么区别？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这个问题经常被问到，但还是能从此区分出面试者对Java线程模型的理解程度。start()方法被用来启动新创建的线程，而且start()内部调用了run()方法，这和直接调用run()方法的效果不一样。当你调用run()方法的时候，只会是在原来的线程中调用，没有新的线程启动，start()方法才会启动新线程。</span><br></pre></td></tr></table></figure></li>
-<li>Java中Runnable和Callable有什么不同？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Runnable和Callable都代表那些要在不同的线程中执行的任务。Runnable从JDK1.0开始就有了，Callable是在JDK1.5增加的。它们的主要区别是Callable的 call() 方法可以返回值和抛出异常，而Runnable的run()方法没有这些功能。Callable可以返回装载有计算结果的Future对象。我的博客有更详细的说明。（http://java67.blogspot.com/2013/01/difference-between-callable-and-runnable-java.html) </span><br></pre></td></tr></table></figure></li>
-<li>Java中CyclicBarrier 和 CountDownLatch有什么不同？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CyclicBarrier 和 CountDownLatch 都可以用来让一组线程等待其它线程。与 CyclicBarrier 不同的是，CountdownLatch 不能重新使用。点此查看更多信息和示例代码。（http://javarevisited.blogspot.com/2012/07/cyclicbarrier-example-java-5-concurrency-tutorial.html) </span><br></pre></td></tr></table></figure></li>
-<li>Java内存模型是什么？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Java内存模型规定和指引Java程序在不同的内存架构、CPU和操作系统间有确定性地行为。它在多线程的情况下尤其重要。Java内存模型对一个线程所做的变动能被其它线程可见提供了保证，它们之间是先行发生关系。这个关系定义了一些规则让程序员在并发编程时思路更清晰。比如，先行发生关系确保了：</span><br><span class="line"></span><br><span class="line">- 线程内的代码能够按先后顺序执行，这被称为程序次序规则。</span><br><span class="line"></span><br><span class="line">- 对于同一个锁，一个解锁操作一定要发生在时间上后发生的另一个锁定操作之前，也叫做管程锁定规则。</span><br><span class="line"></span><br><span class="line">- 前一个对volatile的写操作在后一个volatile的读操作之前，也叫volatile变量规则。</span><br><span class="line"></span><br><span class="line">- 一个线程内的任何操作必需在这个线程的start()调用之后，也叫作线程启动规则。</span><br><span class="line"></span><br><span class="line">- 一个线程的所有操作都会在线程终止之前，线程终止规则。</span><br><span class="line"></span><br><span class="line">- 一个对象的终结操作必需在这个对象构造完成之后，也叫对象终结规则。</span><br><span class="line"></span><br><span class="line">- 可传递性</span><br><span class="line"></span><br><span class="line">我强烈建议大家阅读《Java并发编程实践》第十六章来加深对Java内存模型的理解。</span><br></pre></td></tr></table></figure></li>
-<li>Java中的volatile 变量是什么？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">volatile是一个特殊的修饰符，只有成员变量才能使用它。在Java并发程序缺少同步类的情况下，多线程对成员变量的操作对其它线程是透明的。volatile变量可以保证下一个读取操作会在前一个写操作之后发生，就是上一题的volatile变量规则。查看更多volatile的相关内容。（http://javarevisited.blogspot.com/2011/06/volatile-keyword-java-example-tutorial.html) </span><br></pre></td></tr></table></figure></li>
-<li>什么是线程安全？Vector是一个线程安全类吗？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果你的代码所在的进程中有多个线程在同时运行，而这些线程可能会同时运行这段代码。如果每次运行结果和单线程运行的结果是一样的，而且其他的变量的值也和预期的是一样的，就是线程安全的。一个线程安全的计数器类的同一个实例对象在被多个线程使用的情况下也不会出现计算失误。很显然你可以将集合类分成两组，线程安全和非线程安全的。Vector 是用同步方法来实现线程安全的, 而和它相似的ArrayList不是线程安全的。</span><br></pre></td></tr></table></figure></li>
-<li>Java中什么是竞态条件？ 举个例子说明。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">竞态条件会导致程序在并发情况下出现一些bugs。多线程对一些资源的竞争的时候就会产生竞态条件，如果首先要执行的程序竞争失败排到后面执行了，那么整个程序就会出现一些不确定的bugs。这种bugs很难发现而且会重复出现，因为线程间的随机竞争。一个例子就是无序处理，详见答案。（http://javarevisited.blogspot.com/2012/02/what-is-race-condition-in.html) </span><br></pre></td></tr></table></figure></li>
-<li>Java中如何停止一个线程？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Java提供了很丰富的API但没有为停止线程提供API。JDK 1.0本来有一些像stop(), suspend() 和 resume()的控制方法但是由于潜在的死锁威胁因此在后续的JDK版本中他们被弃用了，之后Java API的设计者就没有提供一个兼容且线程安全的方法来停止一个线程。当run() 或者 call() 方法执行完的时候线程会自动结束,如果要手动结束一个线程，你可以用volatile 布尔变量来退出run()方法的循环或者是取消任务来中断线程。点击这里查看示例代码。（http://javarevisited.blogspot.com/2011/10/how-to-stop-thread-java-example.html) </span><br></pre></td></tr></table></figure></li>
-<li>一个线程运行时发生异常会怎样？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是我在一次面试中遇到的一个很刁钻的Java面试题, 简单的说，如果异常没有被捕获该线程将会停止执行。Thread.UncaughtExceptionHandler是用于处理未捕获异常造成线程突然中断情况的一个内嵌接口。当一个未捕获异常将造成线程中断的时候JVM会使用Thread.getUncaughtExceptionHandler()来查询线程的UncaughtExceptionHandler并将线程和异常作为参数传递给handler的uncaughtException()方法进行处理。</span><br></pre></td></tr></table></figure></li>
-<li>如何在两个线程间共享数据？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">你可以通过共享对象来实现这个目的，或者是使用像阻塞队列这样并发的数据结构。这篇教程《Java线程间通信》（http://javarevisited.blogspot.sg/2013/12/inter-thread-communication-in-java-wait-notify-example.html) (涉及到在两个线程间共享对象)用wait和notify方法实现了生产者消费者模型。</span><br></pre></td></tr></table></figure></li>
-<li>Java中notify 和 notifyAll有什么区别？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这又是一个刁钻的问题，因为多线程可以等待单监控锁，Java API 的设计人员提供了一些方法当等待条件改变的时候通知它们，但是这些方法没有完全实现。notify()方法不能唤醒某个具体的线程，所以只有一个线程在等待的时候它才有用武之地。而notifyAll()唤醒所有线程并允许他们争夺锁确保了至少有一个线程能继续运行。</span><br></pre></td></tr></table></figure></li>
-<li>为什么wait, notify 和 notifyAll这些方法不在thread类里面？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是个设计相关的问题，它考察的是面试者对现有系统和一些普遍存在但看起来不合理的事物的看法。回答这些问题的时候，你要说明为什么把这些方法放在Object类里是有意义的，还有不把它放在Thread类里的原因。一个很明显的原因是JAVA提供的锁是对象级的而不是线程级的，每个对象都有锁，通过线程获得。如果线程需要等待某些锁那么调用对象中的wait()方法就有意义了。如果wait()方法定义在Thread类中，线程正在等待的是哪个锁就不明显了。简单的说，由于wait，notify和notifyAll都是锁级别的操作，所以把他们定义在Object类中因为锁属于对象。</span><br></pre></td></tr></table></figure></li>
-<li>什么是ThreadLocal变量？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ThreadLocal是Java里一种特殊的变量。每个线程都有一个ThreadLocal就是每个线程都拥有了自己独立的一个变量，竞争条件被彻底消除了。它是为创建代价高昂的对象获取线程安全的好方法，比如你可以用ThreadLocal让SimpleDateFormat变成线程安全的，因为那个类创建代价高昂且每次调用都需要创建不同的实例所以不值得在局部范围使用它，如果为每个线程提供一个自己独有的变量拷贝，将大大提高效率。首先，通过复用减少了代价高昂的对象的创建个数。其次，你在没有使用高代价的同步或者不变性的情况下获得了线程安全。线程局部变量的另一个不错的例子是ThreadLocalRandom类，它在多线程环境中减少了创建代价高昂的Random对象的个数。</span><br></pre></td></tr></table></figure></li>
-<li>什么是FutureTask？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在Java并发程序中FutureTask表示一个可以取消的异步运算。它有启动和取消运算、查询运算是否完成和取回运算结果等方法。只有当运算完成的时候结果才能取回，如果运算尚未完成get方法将会阻塞。一个FutureTask对象可以对调用了Callable和Runnable的对象进行包装，由于FutureTask也是调用了Runnable接口所以它可以提交给Executor来执行。</span><br></pre></td></tr></table></figure></li>
-<li>Java中interrupted 和 isInterruptedd方法的区别？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">interrupted() 和 isInterrupted()的主要区别是前者会将中断状态清除而后者不会。Java多线程的中断机制是用内部标识来实现的，调用Thread.interrupt()来中断一个线程就会设置中断标识为true。当中断线程调用静态方法Thread.interrupted()来检查中断状态时，中断状态会被清零。而非静态方法isInterrupted()用来查询其它线程的中断状态且不会改变中断状态标识。简单的说就是任何抛出InterruptedException异常的方法都会将中断状态清零。无论如何，一个线程的中断状态有有可能被其它线程调用中断来改变。</span><br></pre></td></tr></table></figure></li>
-<li>为什么wait和notify方法要在同步块中调用？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">主要是因为Java API强制要求这样做，如果你不这么做，你的代码会抛出IllegalMonitorStateException异常。还有一个原因是为了避免wait和notify之间产生竞态条件。</span><br></pre></td></tr></table></figure></li>
-<li>为什么你应该在循环中检查等待条件?<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">处于等待状态的线程可能会收到错误警报和伪唤醒，如果不在循环中检查等待条件，程序就会在没有满足结束条件的情况下退出。因此，当一个等待线程醒来时，不能认为它原来的等待状态仍然是有效的，在notify()方法调用之后和等待线程醒来之前这段时间它可能会改变。这就是在循环中使用wait()方法效果更好的原因，你可以在Eclipse中创建模板调用wait和notify试一试。如果你想了解更多关于这个问题的内容，我推荐你阅读《Effective Java》这本书中的线程和同步章节。</span><br></pre></td></tr></table></figure></li>
-<li>Java中的同步集合与并发集合有什么区别？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">同步集合与并发集合都为多线程和并发提供了合适的线程安全的集合，不过并发集合的可扩展性更高。在Java1.5之前程序员们只有同步集合来用且在多线程并发的时候会导致争用，阻碍了系统的扩展性。Java5介绍了并发集合像ConcurrentHashMap，不仅提供线程安全还用锁分离和内部分区等现代技术提高了可扩展性。</span><br></pre></td></tr></table></figure></li>
-<li>Java中堆和栈有什么不同？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">为什么把这个问题归类在多线程和并发面试题里？因为栈是一块和线程紧密相关的内存区域。每个线程都有自己的栈内存，用于存储本地变量，方法参数和栈调用，一个线程中存储的变量对其它线程是不可见的。而堆是所有线程共享的一片公用内存区域。对象都在堆里创建，为了提升效率线程会从堆中弄一个缓存到自己的栈，如果多个线程使用该变量就可能引发问题，这时volatile 变量就可以发挥作用了，它要求线程从主存中读取变量的值。</span><br></pre></td></tr></table></figure></li>
-<li>什么是线程池？ 为什么要使用它？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">创建线程要花费昂贵的资源和时间，如果任务来了才创建线程那么响应时间会变长，而且一个进程能创建的线程数有限。为了避免这些问题，在程序启动的时候就创建若干线程来响应处理，它们被称为线程池，里面的线程叫工作线程。从JDK1.5开始，Java API提供了Executor框架让你可以创建不同的线程池。比如单线程池，每次处理一个任务；数目固定的线程池或者是缓存线程池（一个适合很多生存期短的任务的程序的可扩展线程池) 。</span><br></pre></td></tr></table></figure></li>
-<li>如何写代码来解决生产者消费者问题？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在现实中你解决的许多线程问题都属于生产者消费者模型，就是一个线程生产任务供其它线程进行消费，你必须知道怎么进行线程间通信来解决这个问题。比较低级的办法是用wait和notify来解决这个问题，比较赞的办法是用Semaphore 或者 BlockingQueue来实现生产者消费者模型。</span><br></pre></td></tr></table></figure></li>
-<li>如何避免死锁？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Java多线程中的死锁</span><br><span class="line"></span><br><span class="line">死锁是指两个或两个以上的进程在执行过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。这是一个严重的问题，因为死锁会让你的程序挂起无法完成任务，死锁的发生必须满足以下四个条件：</span><br><span class="line"></span><br><span class="line">- 互斥条件：一个资源每次只能被一个进程使用。</span><br><span class="line"></span><br><span class="line">- 请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。</span><br><span class="line"></span><br><span class="line">- 不剥夺条件：进程已获得的资源，在末使用完之前，不能强行剥夺。</span><br><span class="line"></span><br><span class="line">- 循环等待条件：若干进程之间形成一种头尾相接的循环等待资源关系。</span><br><span class="line"></span><br><span class="line">避免死锁最简单的方法就是阻止循环等待条件，将系统中所有的资源设置标志位、排序，规定所有的进程申请资源必须以一定的顺序（升序或降序) 做操作来避免死锁。</span><br></pre></td></tr></table></figure></li>
-<li>Java中活锁和死锁有什么区别？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是上题的扩展，活锁和死锁类似，不同之处在于处于活锁的线程或进程的状态是不断改变的，活锁可以认为是一种特殊的饥饿。一个现实的活锁例子是两个人在狭小的走廊碰到，两个人都试着避让对方好让彼此通过，但是因为避让的方向都一样导致最后谁都不能通过走廊。简单的说就是，活锁和死锁的主要区别是前者进程的状态可以改变但是却不能继续执行。</span><br></pre></td></tr></table></figure></li>
-<li>怎么检测一个线程是否拥有锁？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我一直不知道我们竟然可以检测一个线程是否拥有锁，直到我参加了一次电话面试。在java.lang.Thread中有一个方法叫holdsLock()，它返回true如果当且仅当当前线程拥有某个具体对象的锁。</span><br></pre></td></tr></table></figure></li>
-<li>你如何在Java中获取线程堆栈？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对于不同的操作系统，有多种方法来获得Java进程的线程堆栈。当你获取线程堆栈时，JVM会把所有线程的状态存到日志文件或者输出到控制台。在Windows你可以使用Ctrl + Break组合键来获取线程堆栈，Linux下用kill -3命令。你也可以用jstack这个工具来获取，它对线程id进行操作，你可以用jps这个工具找到id。</span><br></pre></td></tr></table></figure></li>
-<li>JVM中哪个参数是用来控制线程的栈堆栈小的<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这个问题很简单， -Xss参数用来控制线程的堆栈大小。你可以查看JVM配置列表来了解这个参数的更多信息。</span><br></pre></td></tr></table></figure></li>
-<li>Java中synchronized 和 ReentrantLock 有什么不同？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Java在过去很长一段时间只能通过synchronized关键字来实现互斥，它有一些缺点。比如你不能扩展锁之外的方法或者块边界，尝试获取锁时不能中途取消等。Java 5 通过Lock接口提供了更复杂的控制来解决这些问题。 ReentrantLock 类实现了 Lock，它拥有与 synchronized 相同的并发性和内存语义且它还具有可扩展性。</span><br></pre></td></tr></table></figure></li>
-<li>有三个线程T1，T2，T3，怎么确保它们按顺序执行？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在多线程中有多种方法让线程按特定顺序执行，你可以用线程类的join()方法在一个线程中启动另一个线程，另外一个线程完成该线程继续执行。为了确保三个线程的顺序你应该先启动最后一个(T3调用T2，T2调用T1)，这样T1就会先完成而T3最后完成。</span><br></pre></td></tr></table></figure></li>
-<li>Thread类中的yield方法有什么作用？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Yield方法可以暂停当前正在执行的线程对象，让其它有相同优先级的线程执行。它是一个静态方法而且只保证当前线程放弃CPU占用而不能保证使其它线程一定能占用CPU，执行yield()的线程有可能在进入到暂停状态后马上又被执行。</span><br></pre></td></tr></table></figure></li>
-<li>Java中ConcurrentHashMap的并发度是什么？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ConcurrentHashMap把实际map划分成若干部分来实现它的可扩展性和线程安全。这种划分是使用并发度获得的，它是ConcurrentHashMap类构造函数的一个可选参数，默认值为16，这样在多线程情况下就能避免争用。欲了解更多并发度和内部大小调整请阅读我的文章How ConcurrentHashMap works in Java。</span><br></pre></td></tr></table></figure></li>
-<li>Java中Semaphore是什么？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Java中的Semaphore是一种新的同步类，它是一个计数信号。从概念上讲，从概念上讲，信号量维护了一个许可集合。如有必要，在许可可用前会阻塞每一个 acquire()，然后再获取该许可。每个 release()添加一个许可，从而可能释放一个正在阻塞的获取者。但是，不使用实际的许可对象，Semaphore只对可用许可的号码进行计数，并采取相应的行动。信号量常常用于多线程的代码中，比如数据库连接池。</span><br></pre></td></tr></table></figure></li>
-<li>如果你提交任务时，线程池队列已满。会时发会生什么？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这个问题问得很狡猾，许多程序员会认为该任务会阻塞直到线程池队列有空位。事实上如果一个任务不能被调度执行那么ThreadPoolExecutor’s submit()方法将会抛出一个RejectedExecutionException异常。</span><br></pre></td></tr></table></figure></li>
-<li>Java线程池中submit() 和 execute()方法有什么区别？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">两个方法都可以向线程池提交任务，execute()方法的返回类型是void，它定义在Executor接口中, 而submit()方法可以返回持有计算结果的Future对象，它定义在ExecutorService接口中，它扩展了Executor接口，其它线程池类像ThreadPoolExecutor和ScheduledThreadPoolExecutor都有这些方法。</span><br></pre></td></tr></table></figure></li>
-<li>什么是阻塞式方法？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">阻塞式方法是指程序会一直等待该方法完成期间不做其他事情，ServerSocket的accept()方法就是一直等待客户端连接。这里的阻塞是指调用结果返回之前，当前线程会被挂起，直到得到结果之后才会返回。此外，还有异步和非阻塞式方法在任务完成前就返回。</span><br></pre></td></tr></table></figure></li>
-<li>Swing是线程安全的吗？ 为什么？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">你可以很肯定的给出回答，Swing不是线程安全的，但是你应该解释这么回答的原因即便面试官没有问你为什么。当我们说swing不是线程安全的常常提到它的组件，这些组件不能在多线程中进行修改，所有对GUI组件的更新都要在AWT线程中完成，而Swing提供了同步和异步两种回调方法来进行更新。</span><br></pre></td></tr></table></figure></li>
-<li>Java中invokeAndWait 和 invokeLater有什么区别？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这两个方法是Swing API 提供给Java开发者用来从当前线程而不是事件派发线程更新GUI组件用的。InvokeAndWait()同步更新GUI组件，比如一个进度条，一旦进度更新了，进度条也要做出相应改变。如果进度被多个线程跟踪，那么就调用invokeAndWait()方法请求事件派发线程对组件进行相应更新。而invokeLater()方法是异步调用更新组件的。</span><br></pre></td></tr></table></figure></li>
-<li>Swing API中那些方法是线程安全的？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这个问题又提到了swing和线程安全，虽然组件不是线程安全的但是有一些方法是可以被多线程安全调用的，比如repaint(), revalidate()。 JTextComponent的setText()方法和JTextArea的insert() 和 append() 方法也是线程安全的。</span><br></pre></td></tr></table></figure></li>
-<li>如何在Java中创建Immutable对象？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这个问题看起来和多线程没什么关系， 但不变性有助于简化已经很复杂的并发程序。Immutable对象可以在没有同步的情况下共享，降低了对该对象进行并发访问时的同步化开销。可是Java没有@Immutable这个注解符，要创建不可变类，要实现下面几个步骤：通过构造方法初始化所有成员、对变量不要提供setter方法、将所有的成员声明为私有的，这样就不允许直接访问这些成员、在getter方法中，不要直接返回对象本身，而是克隆对象，并返回对象的拷贝。我的文章how to make an object Immutable in Java有详细的教程，看完你可以充满自信。</span><br></pre></td></tr></table></figure></li>
-<li>Java中的ReadWriteLock是什么？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一般而言，读写锁是用来提升并发程序性能的锁分离技术的成果。Java中的ReadWriteLock是Java 5 中新增的一个接口，一个ReadWriteLock维护一对关联的锁，一个用于只读操作一个用于写。在没有写线程的情况下一个读锁可能会同时被多个读线程持有。写锁是独占的，你可以使用JDK中的ReentrantReadWriteLock来实现这个规则，它最多支持65535个写锁和65535个读锁。</span><br></pre></td></tr></table></figure></li>
-<li>多线程中的忙循环是什么?<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">忙循环就是程序员用循环让一个线程等待，不像传统方法wait(), sleep() 或 yield() 它们都放弃了CPU控制，而忙循环不会放弃CPU，它就是在运行一个空循环。这么做的目的是为了保留CPU缓存，在多核系统中，一个等待线程醒来的时候可能会在另一个内核运行，这样会重建缓存。为了避免重建缓存和减少等待重建的时间就可以使用它了。</span><br></pre></td></tr></table></figure></li>
-<li>volatile 变量和 atomic 变量有什么不同？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是个有趣的问题。首先，volatile 变量和 atomic 变量看起来很像，但功能却不一样。Volatile变量可以确保先行关系，即写操作会发生在后续的读操作之前, 但它并不能保证原子性。例如用volatile修饰count变量那么 count++ 操作就不是原子性的。而AtomicInteger类提供的atomic方法可以让这种操作具有原子性如getAndIncrement()方法会原子性的进行增量操作把当前值加一，其它数据类型和引用变量也可以进行相似操作。</span><br></pre></td></tr></table></figure></li>
-<li>如果同步块内的线程抛出异常会发生什么？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这个问题坑了很多Java程序员，若你能想到锁是否释放这条线索来回答还有点希望答对。无论你的同步块是正常还是异常退出的，里面的线程都会释放锁，所以对比锁接口我更喜欢同步块，因为它不用我花费精力去释放锁，该功能可以在finally block里释放锁实现。</span><br></pre></td></tr></table></figure></li>
-<li>单例模式的双检锁是什么？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这个问题在Java面试中经常被问到，但是面试官对回答此问题的满意度仅为50%。一半的人写不出双检锁还有一半的人说不出它的隐患和Java1.5是如何对它修正的。它其实是一个用来创建线程安全的单例的老方法，当单例实例第一次被创建时它试图用单个锁进行性能优化，但是由于太过于复杂在JDK1.4中它是失败的，我个人也不喜欢它。无论如何，即便你也不喜欢它但是还是要了解一下，因为它经常被问到。你可以查看how double checked locking on Singleton works这篇文章获得更多信息。</span><br></pre></td></tr></table></figure></li>
-<li>如何在Java中创建线程安全的Singleton？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是上面那个问题的后续，如果你不喜欢双检锁而面试官问了创建Singleton类的替代方法，你可以利用JVM的类加载和静态变量初始化特征来创建Singleton实例，或者是利用枚举类型来创建Singleton，我很喜欢用这种方法。</span><br></pre></td></tr></table></figure></li>
-<li>写出3条你遵循的多线程最佳实践<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">这种问题我最喜欢了，我相信你在写并发代码来提升性能的时候也会遵循某些最佳实践。以下三条最佳实践我觉得大多数Java程序员都应该遵循：</span><br><span class="line"></span><br><span class="line">- 给你的线程起个有意义的名字。</span><br><span class="line">这样可以方便找bug或追踪。OrderProcessor, QuoteProcessor or TradeProcessor 这种名字比 Thread-1. Thread-2 and Thread-3 好多了，给线程起一个和它要完成的任务相关的名字，所有的主要框架甚至JDK都遵循这个最佳实践。</span><br><span class="line"></span><br><span class="line">- 避免锁定和缩小同步的范围</span><br><span class="line">锁花费的代价高昂且上下文切换更耗费时间空间，试试最低限度的使用同步和锁，缩小临界区。因此相对于同步方法我更喜欢同步块，它给我拥有对锁的绝对控制权。</span><br><span class="line"></span><br><span class="line">- 多用同步类少用wait 和 notify</span><br><span class="line">首先，CountDownLatch, Semaphore, CyclicBarrier 和 Exchanger 这些同步类简化了编码操作，而用wait和notify很难实现对复杂控制流的控制。其次，这些类是由最好的企业编写和维护在后续的JDK中它们还会不断优化和完善，使用这些更高等级的同步工具你的程序可以不费吹灰之力获得优化。</span><br><span class="line"></span><br><span class="line">- 多用并发集合少用同步集合</span><br><span class="line">这是另外一个容易遵循且受益巨大的最佳实践，并发集合比同步集合的可扩展性更好，所以在并发编程时使用并发集合效果更好。如果下一次你需要用到map，你应该首先想到用ConcurrentHashMap。我的文章Java并发集合有更详细的说明。</span><br></pre></td></tr></table></figure></li>
-<li>如何强制启动一个线程？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这个问题就像是如何强制进行Java垃圾回收，目前还没有觉得方法，虽然你可以使用System.gc()来进行垃圾回收，但是不保证能成功。在Java里面没有办法强制启动一个线程，它是被线程调度器控制着且Java没有公布相关的API。</span><br></pre></td></tr></table></figure></li>
-<li>Java中的fork join框架是什么？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fork join框架是JDK7中出现的一款高效的工具，Java开发人员可以通过它充分利用现代服务器上的多处理器。它是专门为了那些可以递归划分成许多子模块设计的，目的是将所有可用的处理能力用来提升程序的性能。fork join框架一个巨大的优势是它使用了工作窃取算法，可以完成更多任务的工作线程可以从其它线程中窃取任务来执行。</span><br></pre></td></tr></table></figure></li>
-<li>Java多线程中调用wait() 和 sleep()方法有什么不同？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Java程序中wait 和 sleep都会造成某种形式的暂停，它们可以满足不同的需要。wait()方法用于线程间通信，如果等待条件为真且其它线程被唤醒时它会释放锁，而sleep()方法仅仅释放CPU资源或者让当前线程停止执行一段时间，但不会释放锁。</span><br></pre></td></tr></table></figure></li>
-<li>ArrayList、Vector、LinkedList 的区别及其优缺点？HashMap、HashTable 的区别及优缺点？</li>
+<li>计算key的hash值，⼆次hash然后对数组⻓度取模，对应到数组下标，</li>
+<li>如果没有产⽣hash冲突(下标位置没有元素)，则直接创建Node存⼊数组，</li>
+<li>如果产⽣hash冲突，先进⾏equal⽐较，相同则取代该元素，不同，则判断链表⾼度插⼊链表，链表⾼度达到8，并且数组⻓度到64则转变为红⿊树，⻓度低于6则将红⿊树转回链表</li>
+<li>key为null，存在下标0的位置</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ArrayList 和 Vector 是采用数组方式存储数据的,是根据索引来访问元素的，都可以根据需要自动扩展内部数据长度，以便增加和插入元素，都允许直接序号索引元素，但是插入数据要涉及到数组元素移动等内存操作，所以索引数据快插入数据慢，他们最大的区别就是 synchronized 同步的使用。</span><br><span class="line"></span><br><span class="line">LinkedList 使用双向链表实现存储，按序号索引数据需要进行向前或向后遍历，但是插入数据时只需要记录本项的前后项即可，所以插入数度较快！如果只是查找特定位置的元素或只在集合的末端增加、移除元素，那么使用 Vector或 ArrayList 都可以。如果是对其它指定位置的插入、删除操作，最好选择 LinkedList</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">HashMap、HashTable 的区别及其优缺点：</span><br><span class="line"></span><br><span class="line">HashTable 中的方法是同步的 HashMap 的方法在缺省情况下是非同步的 因此在多线程环境下需要做额外的同步机制。</span><br><span class="line">HashTable 不允许有 null 值 key 和 value 都不允许，而 HashMap 允许有 null 值 key和 value 都允许 因此 HashMap 使用 containKey（) 来判断是否存在某个键。</span><br><span class="line">HashTable 使用 Enumeration ，而 HashMap 使用 iterator。</span><br><span class="line">Hashtable 是 Dictionary 的子类，HashMap 是 Map 接口的一个实现类。</span><br></pre></td></tr></table></figure>
+<h3 id="11、谈-ConcurrentHashMap-的扩容机制"><a href="#11、谈-ConcurrentHashMap-的扩容机制" class="headerlink" title="11、谈 ConcurrentHashMap 的扩容机制"></a>11、谈 ConcurrentHashMap 的扩容机制</h3><ul>
+<li>1.7</li>
+</ul>
+<ol>
+<li>1.7版本的ConcurrentHashMap是基于Segment分段实现的</li>
+<li>每个Segment相对于⼀个⼩型的HashMap</li>
+<li>每个Segment内部会进⾏扩容，和HashMap的扩容逻辑类似</li>
+<li>先⽣成新的数组，然后转移元素到新数组中</li>
+<li>扩容的判断也是每个Segment内部单独判断的，判断是否超过阈值</li>
+</ol>
+<ul>
+<li>1.8</li>
+</ul>
+<ol>
+<li>1.8版本的ConcurrentHashMap不再基于Segment实现</li>
+<li>当某个线程进⾏put时，如果发现ConcurrentHashMap正在进⾏扩容那么该线程⼀起进⾏扩容</li>
+<li>如果某个线程put时，发现没有正在进⾏扩容，则将key-value添加到ConcurrentHashMap中，然后判断是否超过阈值，超过了则进⾏扩容</li>
+<li>ConcurrentHashMap是⽀持多个线程同时扩容的</li>
+<li>扩容之前也先⽣成⼀个新的数组</li>
+<li>在转移元素时，先将原数组分组，将每组分给不同的线程来进⾏元素的转移，每个线程负责⼀组或多组的元素转移⼯作</li>
+</ol>
+<h3 id="12、Jdk1-7到Jdk1-8-HashMap-发⽣了什么变化"><a href="#12、Jdk1-7到Jdk1-8-HashMap-发⽣了什么变化" class="headerlink" title="12、Jdk1.7到Jdk1.8 HashMap 发⽣了什么变化"></a>12、Jdk1.7到Jdk1.8 HashMap 发⽣了什么变化</h3><ol>
+<li>1.7中底层是数组+链表，1.8中底层是数组+链表+红⿊树，加红⿊树的⽬的是提⾼HashMap插⼊和查询整体效率</li>
+<li>1.7中链表插⼊使⽤的是头插法，1.8中链表插⼊使⽤的是尾插法，因为1.8中插⼊key和value时需要判断链表元素个数，所以需要遍历链表统计链表元素个数，所以正好就直接使⽤尾插法</li>
+<li>1.7中哈希算法⽐较复杂，存在各种右移与异或运算，1.8中进⾏了简化，因为复杂的哈希算法的⽬的就是提⾼散列性，来提供HashMap的整体效率，⽽1.8中新增了红⿊树，所以可以适当的简化哈希算法，节省CPU资源</li>
+</ol>
+<h3 id="13、泛型中-extends-和-super-的区别"><a href="#13、泛型中-extends-和-super-的区别" class="headerlink" title="13、泛型中 extends 和 super 的区别"></a>13、泛型中 extends 和 super 的区别</h3><blockquote>
+<p>子类 和 父类的区别</p>
+</blockquote>
+<ol>
+<li><? extends T>表示包括T在内的任何T的⼦类</li>
+<li><? super T>表示包括T在内的任何T的⽗类</li>
+</ol>
+<h3 id="14、深拷⻉和浅拷⻉"><a href="#14、深拷⻉和浅拷⻉" class="headerlink" title="14、深拷⻉和浅拷⻉"></a>14、深拷⻉和浅拷⻉</h3><blockquote>
+<p>深拷⻉和浅拷⻉就是指对象的拷⻉，⼀个对象中存在两种类型的属性，⼀种是基本数据类型，⼀种是实例对象的引⽤。</p>
+</blockquote>
+<blockquote>
+<p>浅拷贝不会存在新的内存地址，指向的实际是同一个内存地址。 深拷贝会对引用地址也进行赋值。实际在内存中的应用地址是不同的。</p>
+</blockquote>
+<ol>
+<li>浅拷⻉: 只会拷⻉基本数据类型的值，以及实例对象的引⽤地址，并不会复制⼀份引⽤地址所指向的对象，也就是浅拷⻉出来的对象，内部的类属性指向的是同⼀个对象</li>
+<li>深拷⻉: 既会拷⻉基本数据类型的值，也会针对实例对象的引⽤地址所指向的对象进⾏复制，深拷⻉出来的对象，内部的属性指向的不是同⼀个对象</li>
+</ol>
+<h3 id="15、CopyOnWriteArrayList-的相关解释说明"><a href="#15、CopyOnWriteArrayList-的相关解释说明" class="headerlink" title="15、CopyOnWriteArrayList 的相关解释说明"></a>15、CopyOnWriteArrayList 的相关解释说明</h3><ol>
+<li>⾸先CopyOnWriteArrayList内部也是⽤过数组来实现的，在向CopyOnWriteArrayList添加元素时，会复制⼀个新的数组，写操作在新数组上进⾏，读操作在原数组上进⾏</li>
+<li>并且，写操作会加锁，防⽌出现并发写⼊丢失数据的问题</li>
+<li>写操作结束之后会把原数组</li>
+<li>CopyOnWriteArrayList允许在写操作时来读取数据，⼤⼤提⾼了读的性能，因此适合读多写少的应⽤场景，但是CopyOnWriteArrayList会⽐较占内存，同时可能读到的数据不是实时最新的数据，所以不适合实时性要求很⾼的场景</li>
+</ol>
+<h3 id="16、java-中的异常体系"><a href="#16、java-中的异常体系" class="headerlink" title="16、java 中的异常体系"></a>16、java 中的异常体系</h3><ul>
+<li>java中的所有异常都来⾃顶级⽗类Throwable。</li>
+<li>Throwable下有两个⼦类Exception和Error。</li>
+<li>Error是程序⽆法处理的错误，⼀旦出现这个错误，则程序将被迫停⽌运⾏。</li>
+<li>Exception不会导致程序停⽌，⼜分为两个部分RunTimeException运⾏时异常和CheckedException检查异常。</li>
+<li>RunTimeException常常发⽣在程序运⾏过程中，会导致程序当前线程执⾏失败。</li>
+<li>CheckedException常常发⽣在程序编译过程中，会导致程序编译不通过。</li>
+</ul>
+<h3 id="17、-java-中的类加载器"><a href="#17、-java-中的类加载器" class="headerlink" title="17、 java 中的类加载器"></a>17、 java 中的类加载器</h3><blockquote>
+<p>jDK⾃带有三个类加载器：bootstrap ClassLoader、ExtClassLoader、AppClassLoader。</p>
+</blockquote>
+<ul>
+<li>BootStrapClassLoader是ExtClassLoader的⽗类加载器，默认负责加载%JAVA_HOME%lib下的jar包和class⽂件。</li>
+<li>ExtClassLoader是AppClassLoader的⽗类加载器，负责加载%JAVA_HOME%&#x2F;lib&#x2F;ext⽂件夹下的jar包和class类。</li>
+<li>AppClassLoader是⾃定义类加载器的⽗类，负责加载classpath下的类⽂件。</li>
+</ul>
+<h3 id="18、-说说类加载器双亲委派模型"><a href="#18、-说说类加载器双亲委派模型" class="headerlink" title="18、 说说类加载器双亲委派模型"></a>18、 说说类加载器双亲委派模型</h3><p>JVM中存在三个默认的类加载器：</p>
+<ol>
+<li>BootstrapClassLoader</li>
+<li>ExtClassLoader</li>
+<li>AppClassLoader</li>
+</ol>
+<ul>
+<li>AppClassLoader的⽗加载器是ExtClassLoader，ExtClassLoader的⽗加载器是BootstrapClassLoader。</li>
+</ul>
+<p>JVM在加载⼀个类时，会调⽤AppClassLoader的loadClass⽅法来加载这个类，不过在这个⽅法中，会先使⽤ExtClassLoader的loadClass⽅法来加载类，<br>同样ExtClassLoader的loadClass⽅法中会先使⽤BootstrapClassLoader来加载类，如果BootstrapClassLoader加载到了就直接成功，<br>如果BootstrapClassLoader没有加载到，那么ExtClassLoader就会⾃⼰尝试加载该类，如果没有加载到，那么则会由AppClassLoader来加载这个类。</p>
+<p>所以，双亲委派指得是，JVM在加载类时，会委派给Ext和Bootstrap进⾏加载，如果没加载到才由⾃⼰进⾏加载。</p>
+<h3 id="19、-GC如何判断对象可以被回收"><a href="#19、-GC如何判断对象可以被回收" class="headerlink" title="19、 GC如何判断对象可以被回收"></a>19、 GC如何判断对象可以被回收</h3><ul>
+<li>引⽤计数法：每个对象有⼀个引⽤计数属性，新增⼀个引⽤时计数加1，引⽤释放时计数减1，计数为0时可以回收<br>  注意互相引用时, 引用计数法无法回收、 （例如 A 引用 B, B 引用 A。则他们互相引用计数为 1，无法被该机制回收）</li>
+<li>可达性分析法：从 GC Roots 开始向下搜索，搜索所⾛过的路径称为引⽤链。当⼀个对象到 GCRoots 没有任何引⽤链相连时，则证明此对象是不可⽤的，那么虚拟机就判断是可回收对象。</li>
+</ul>
+<blockquote>
+<p>GC Roots的对象有：</p>
+</blockquote>
+<ul>
+<li>虚拟机栈(栈帧中的本地变量表）中引⽤的对象</li>
+<li>⽅法区中类静态属性引⽤的对象</li>
+<li>⽅法区中常量引⽤的对象</li>
+<li>本地⽅法栈中JNI(即⼀般说的Native⽅法)引⽤的对象</li>
+</ul>
+<p>可达性算法中的不可达对象并不是⽴即死亡的，对象拥有⼀次⾃我拯救的机会。对象被系统宣告死亡⾄少要经历两次标记过程：第⼀次是经过可达性分析发现没有与GC Roots相连接的引⽤链，第⼆次是在由虚拟机⾃动建⽴的Finalizer队列中判断是否需要执⾏finalize()⽅法。</p>
+<p>当对象变成(GC Roots)不可达时，GC会判断该对象是否覆盖了finalize⽅法，若未覆盖，则直接将其回收。否则，若对象未执⾏过finalize⽅法，将其放⼊F-Queue队列，由⼀低优先级线程执⾏该队列中对象的finalize⽅法。执⾏finalize⽅法完毕后，GC会再次判断该对象是否可达，若不可达，则进⾏回收，否则，对象“复活”每个对象只能触发⼀次finalize()⽅法</p>
+<p>由于finalize()⽅法运⾏代价⾼昂，不确定性⼤，⽆法保证各个对象的调⽤顺序，不推荐⼤家使⽤，建议遗忘它。</p>
+<h3 id="20、-线程共享区"><a href="#20、-线程共享区" class="headerlink" title="20、 线程共享区"></a>20、 线程共享区</h3><blockquote>
+<p>堆区和⽅法区是所有线程共享的，栈、本地⽅法栈、程序计数器是每个线程独有的</p>
+</blockquote>
+<h3 id="21、-jvm-相关参数-和-排查方向"><a href="#21、-jvm-相关参数-和-排查方向" class="headerlink" title="21、 jvm 相关参数 和 排查方向"></a>21、 jvm 相关参数 和 排查方向</h3><blockquote>
+<p>env 中 XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath&#x3D;&#x2F;usr&#x2F;local&#x2F;base 添加配置项监控 oom<br>jprofiler 工具在线监控。<br>wireshark 查看 dump 文件</p>
+</blockquote>
+<h3 id="22、-⼀个对象从加载到JVM，再到被GC清除，都经历了什么过程？"><a href="#22、-⼀个对象从加载到JVM，再到被GC清除，都经历了什么过程？" class="headerlink" title="22、 ⼀个对象从加载到JVM，再到被GC清除，都经历了什么过程？"></a>22、 ⼀个对象从加载到JVM，再到被GC清除，都经历了什么过程？</h3><ol>
+<li>⽤户创建⼀个对象，JVM⾸先需要到⽅法区去找对象的类型信息。然后再创建对象。</li>
+<li>JVM要实例化⼀个对象，⾸先要在堆当中先创建⼀个对象。-&gt; 半初始化状态</li>
+<li>对象⾸先会分配在堆内存中新⽣代的Eden。然后经过⼀次Minor GC，对象如果存活，就会进⼊S区。在后续的每次GC中，如果对象⼀直存活，就会在S区来回拷⻉，每移动⼀次，年龄加1。-&gt; 多⼤年龄才会移⼊⽼年代？ 年龄最⼤15， 超过⼀定年龄后，对象转⼊⽼年代。</li>
+<li>当⽅法执⾏结束后，栈中的指针会先移除掉。</li>
+<li>堆中的对象，经过Full GC，就会被标记为垃圾，然后被GC线程清理掉。</li>
+</ol>
+<h3 id="23、-怎么确定一个对象是否是垃圾"><a href="#23、-怎么确定一个对象是否是垃圾" class="headerlink" title="23、 怎么确定一个对象是否是垃圾"></a>23、 怎么确定一个对象是否是垃圾</h3><ul>
+<li>引⽤计数法<br>  通过引用进行计数，当没有计数时认为无引用</li>
+<li>根可达算法<br>  从引用对象向下寻找。找不到对象则认为是垃圾</li>
+</ul>
+<h3 id="24、JVM有哪些垃圾回收算法？"><a href="#24、JVM有哪些垃圾回收算法？" class="headerlink" title="24、JVM有哪些垃圾回收算法？"></a>24、JVM有哪些垃圾回收算法？</h3><ol>
+<li><p>MarkSweep 标记清除算法：这个算法分为两个阶段，标记阶段：把垃圾内存标记出来，清除阶段：直接将垃圾内存回收。这种算法是⽐较简单的，但是有个很严重的问题，就是会产⽣⼤量的内存碎⽚。</p>
+</li>
+<li><p>Copying 拷⻉算法：为了解决标记清除算法的内存碎⽚问题，就产⽣了拷⻉算法。拷⻉算法将内存分为⼤⼩相等的两半，每次只使⽤其中⼀半。垃圾回收时，将当前这⼀块的存活对象全部拷⻉到另⼀半，然后当前这⼀半内存就可以直接清除。这种算法没有内存碎⽚，但是他的问题就在于浪费空间。⽽且，他的效率跟存货对象的个数有关。</p>
+</li>
+<li><p>MarkCompack 标记压缩算法：为了解决拷⻉算法的缺陷，就提出了标记压缩算法。这种算法在标记阶段跟标记清除算法是⼀样的，但是在完成标记之后，不是直接清理垃圾内存，⽽是将存活对象往⼀端移动，然后将端边界以外的所有内存直接清除。</p>
+</li>
+</ol>
+<h3 id="25、-jvm-的垃圾回收器"><a href="#25、-jvm-的垃圾回收器" class="headerlink" title="25、 jvm 的垃圾回收器"></a>25、 jvm 的垃圾回收器</h3><ul>
+<li>新⽣代收集器：<br>  Serial<br>  ParNew<br>  Parallel Scavenge</li>
+<li>⽼年代收集器：<br>  CMS<br>  Serial Old<br>  Parallel Old</li>
+<li>整堆收集器：<br>  G1</li>
+</ul>
+<h3 id="26、-垃圾回收阶段"><a href="#26、-垃圾回收阶段" class="headerlink" title="26、 垃圾回收阶段"></a>26、 垃圾回收阶段</h3><ol>
+<li>初始标记 标记出GCRoot直接引⽤的对象。STW</li>
+<li>标记Region，通过RSet标记出上⼀个阶段标记的Region引⽤到的Old区Region。</li>
+<li>并发标记阶段：跟CMS的步骤是差不多的。只是遍历的范围不再是整个Old区，⽽只需要遍历第⼆步标记出来的Region。</li>
+<li>重新标记： 跟CMS中的重新标记过程是差不多的。</li>
+<li>垃圾清理：与CMS不同的是，G1可以采⽤拷⻉算法，直接将整个Region中的对象拷⻉到另</li>
+</ol>
+<p>⼀个Region。⽽这个阶段，G1只选择垃圾较多的Region来清理，并不是完全清理。</p>
+<h3 id="27、什么是三⾊标记？"><a href="#27、什么是三⾊标记？" class="headerlink" title="27、什么是三⾊标记？"></a>27、什么是三⾊标记？</h3><blockquote>
+<p>三⾊标记：是⼀种逻辑上的抽象。将每个内存对象分成三种颜⾊：</p>
+</blockquote>
+<ol>
+<li>⿊⾊：表示⾃⼰和成员变量都已经标记完毕。</li>
+<li>灰⾊：⾃⼰标记完了，但是成员变量还没有完全标记完。</li>
+<li>⽩⾊：⾃⼰未标记完。</li>
+</ol>
+<h3 id="28、JVM参数有哪些？"><a href="#28、JVM参数有哪些？" class="headerlink" title="28、JVM参数有哪些？"></a>28、JVM参数有哪些？</h3><ul>
+<li><p>JVM参数⼤致可以分为三类：</p>
+<ol>
+<li>标注指令： -开头，这些是所有的HotSpot都⽀持的参数。可以⽤java -help 打印出来。</li>
+<li>⾮标准指令： -X开头，这些指令通常是跟特定的HotSpot版本对应的。可以⽤java -X 打印出来。</li>
+<li>不稳定参数： -XX 开头，这⼀类参数是跟特定HotSpot版本对应的，并且变化⾮常⼤。详细的⽂档</li>
+</ol>
+</li>
+<li><p>资料⾮常少。在JDK1.8版本下，有⼏个常⽤的不稳定指令：<br>  java -XX:+PrintCommandLineFlags ： 查看当前命令的不稳定指令。<br>  java -XX:+PrintFlagsInitial ： 查看所有不稳定指令的默认值。<br>  java -XX:+PrintFlagsFinal： 查看所有不稳定指令最终⽣效的实际值。</p>
+</li>
+</ul>
+<h3 id="29、-线程的⽣命周期？线程有⼏种状态"><a href="#29、-线程的⽣命周期？线程有⼏种状态" class="headerlink" title="29、 线程的⽣命周期？线程有⼏种状态"></a>29、 线程的⽣命周期？线程有⼏种状态</h3><ul>
+<li><p>线程通常有五种状态，创建，就绪，运⾏、阻塞和死亡状态：</p>
+<ol>
+<li>新建状态（New）：新创建了⼀个线程对象。</li>
+<li>就绪状态（Runnable）：线程对象创建后，其他线程调⽤了该对象的start⽅法。该状态的线程位于可运⾏线程池中，变得可运⾏，等待获取CPU的使⽤权。</li>
+<li>运⾏状态（Running）：就绪状态的线程获取了CPU，执⾏程序代码。</li>
+<li>阻塞状态（Blocked）：阻塞状态是线程因为某种原因放弃CPU使⽤权，暂时停⽌运⾏。直到线程进⼊就绪状态，才有机会转到运⾏状态。</li>
+<li>死亡状态（Dead）：线程执⾏完了或者因异常退出了run⽅法，该线程结束⽣命周期。</li>
+</ol>
+</li>
+<li><p>阻塞的情况⼜分为三种：</p>
+<ol>
+<li>等待阻塞：运⾏的线程执⾏wait⽅法，该线程会释放占⽤的所有资源，JVM会把该线程放⼊“等待池”中。进⼊这个状态后，是不能⾃动唤醒的，必须依靠其他线程调⽤notify或notifyAll⽅法才能被唤醒，wait是object类的⽅法</li>
+<li>同步阻塞：运⾏的线程在获取对象的同步锁时，若该同步锁被别的线程占⽤，则JVM会把该线程放⼊“锁池”中。</li>
+<li>其他阻塞：运⾏的线程执⾏sleep或join⽅法，或者发出了I&#x2F;O请求时，JVM会把该线程置为阻塞状 态。当sleep状态超时、join等待线程终⽌或者超时、或者I&#x2F;O处理完毕时，线程重新转⼊就绪状态。sleep是Thread类的⽅法</li>
+</ol>
+</li>
+</ul>
+<h3 id="30、并发、并⾏、串⾏之间的区别"><a href="#30、并发、并⾏、串⾏之间的区别" class="headerlink" title="30、并发、并⾏、串⾏之间的区别"></a>30、并发、并⾏、串⾏之间的区别</h3><ul>
+<li>串⾏在时间上不可能发⽣重叠，前⼀个任务没搞定，下⼀个任务就只能等着</li>
+<li>并⾏在时间上是重叠的，两个任务在同⼀时刻互不⼲扰的同时执⾏。</li>
+<li>并发允许两个任务彼此⼲扰。统⼀时间点、只有⼀个任务运⾏，交替执⾏</li>
+</ul>
+<h3 id="31、sleep-、wait-、join-、yield-之间的的区别"><a href="#31、sleep-、wait-、join-、yield-之间的的区别" class="headerlink" title="31、sleep()、wait()、join()、yield()之间的的区别"></a>31、sleep()、wait()、join()、yield()之间的的区别</h3><blockquote>
+<p>锁池：所有需要竞争同步锁的线程都会放在锁池当中，⽐如当前对象的锁已经被其中⼀个线程得到，则其他线程需要在这个锁池进⾏等待，当前⾯的线程释放同步锁后锁池中的线程去竞争同步锁，当某个线程得到后会进⼊就绪队列进⾏等待cpu资源分配。</p>
+</blockquote>
+<blockquote>
+<p>等待池：当我们调⽤wait（）⽅法后，线程会放到等待池当中，等待池的线程是不会去竞争同步锁。只有调⽤了notify（）或notifyAll()后等待池的线程才会开始去竞争锁，notify（）是随机从等待池选出⼀个线程放到锁池，⽽notifyAll()是将等待池的所有线程放到锁池当中</p>
+</blockquote>
+<ol>
+<li>sleep 是 Thread 类的静态本地⽅法，wait 则是 Object 类的本地⽅法。</li>
+<li>sleep⽅法不会释放lock，但是wait会释放，⽽且会加⼊到等待队列中。</li>
+<li>sleep⽅法不依赖于同步器synchronized，但是wait需要依赖synchronized关键字。</li>
+<li>sleep不需要被唤醒（休眠之后推出阻塞），但是wait需要（不指定时间需要被别⼈中断）。</li>
+<li>sleep ⼀般⽤于当前线程休眠，或者轮循暂停操作，wait 则多⽤于多线程之间的通信。</li>
+<li>sleep 会让出 CPU 执⾏时间且强制上下⽂切换，⽽ wait 则不⼀定，wait 后可能还是有机会重新竞争到锁继续执⾏的。</li>
+<li>yield（）执⾏后线程直接进⼊就绪状态，⻢上释放了cpu的执⾏权，但是依然保留了cpu的执⾏资格，所以有可能cpu下次进⾏线程调度还会让这个线程获取到执⾏权继续执⾏</li>
+<li>join（）执⾏后线程进⼊阻塞状态，例如在线程B中调⽤线程A的join（），那线程B会进⼊到阻塞队列，直到线程A结束或中断线程</li>
+</ol>
+<h3 id="31、-对线程安全的理解"><a href="#31、-对线程安全的理解" class="headerlink" title="31、 对线程安全的理解"></a>31、 对线程安全的理解</h3><p>不是线程安全、应该是内存安全，堆是共享内存，可以被所有线程访问，当多个线程访问⼀个对象时，如果不⽤进⾏额外的同步控制或其他的协调操作，调⽤这个对象的⾏为都可以获得正确的结果，我们就说这个对象是线程安全的。</p>
+<p>堆是进程和线程共有的空间，分全局堆和局部堆。全局堆就是所有没有分配的空间，局部堆就是⽤户分配的空间。堆在操作系统对进程初始化的时候分配，运⾏过程中也可以向系统要额外的堆，但是⽤完了要还给操作系统，要不然就是内存泄漏。在Java中，堆是Java虚拟机所管理的内存中最⼤的⼀块，是所有线程共享的⼀块内存区域，在虚拟机启动时创建。堆所存在的内存区域的唯⼀⽬的就是存放对象实例，⼏乎所有的对象实例以及数组都在这⾥分配内存。</p>
+<p>栈是每个线程独有的，保存其运⾏状态和局部⾃动变量的。栈在线程开始的时候初始化，每个线程的栈互相独⽴，因此，栈是线程安全的。操作系统在切换线程的时候会⾃动切换栈。栈空间不需要在⾼级语⾔⾥⾯显式的分配和释放。</p>
+<p>在每个进程的内存空间中都会有⼀块特殊的公共区域，通常称为堆（内存）。进程内的所有线程都可以访问到该区域，这就是造成问题的潜在原因。</p>
+<h3 id="32、Thread和Runable的区别"><a href="#32、Thread和Runable的区别" class="headerlink" title="32、Thread和Runable的区别"></a>32、Thread和Runable的区别</h3><p>Thread和Runnable的实质是继承关系，没有可⽐性。⽆论使⽤Runnable还是Thread，都会newThread，然后执⾏run⽅法。<br>⽤法上，如果有复杂的线程操作需求，那就选择继承Thread，如果只是简单的执⾏⼀个任务，那就实现runnable。</p>
+<h3 id="33、-并发的三⼤特性"><a href="#33、-并发的三⼤特性" class="headerlink" title="33、 并发的三⼤特性"></a>33、 并发的三⼤特性</h3><ul>
+<li><p>原子性<br>  关键字：synchronized</p>
+<blockquote>
+<p>原⼦性是指在⼀个操作中cpu不可以在中途暂停然后再调度，即不被中断操作，要不全部执⾏完成，要不都不执⾏。</p>
+</blockquote>
+<blockquote>
+<p>就好⽐转账，从账户A向账户B转1000元，那么必然包括2个操作：从账户A减去1000元，往账户B加上1000元。2个操作必须全部完成。</p>
+</blockquote>
+</li>
+<li><p>可见性<br>  关键字：volatile、synchronized、final</p>
+<blockquote>
+<p>当多个线程访问同⼀个变量时，⼀个线程修改了这个变量的值，其他线程能够⽴即看得到修改的值。</p>
+</blockquote>
+<blockquote>
+<p>若两个线程在不同的cpu，那么线程1改变了i的值还没刷新到主存，线程2⼜使⽤了i，那么这个i值肯定还是之前的，线程1对变量的修改线程没看到这就是可⻅性问题。</p>
+</blockquote>
+</li>
+<li><p>有序性<br>  关键字：volatile、synchronized</p>
+<blockquote>
+<p>虚拟机在进⾏代码编译时，对于那些改变顺序之后不会对最终结果造成影响的代码，虚拟机不⼀定会按照我们写的代码的顺序来执⾏，有可能将他们重排序。实际上，对于有些代码进⾏重排序之后，虽然对变量的值没有造成影响，但有可能会出现线程安全问题。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="34、ThreadLocal的底层原理"><a href="#34、ThreadLocal的底层原理" class="headerlink" title="34、ThreadLocal的底层原理"></a>34、ThreadLocal的底层原理</h3><ol>
+<li>ThreadLocal是Java中所提供的线程本地存储机制，可以利⽤该机制将数据缓存在某个线程内部，该线程可以在任意时刻、任意⽅法中获取缓存的数据</li>
+<li>ThreadLocal底层是通过ThreadLocalMap来实现的，每个Thread对象（注意不是ThreadLocal对象）中都存在⼀个ThreadLocalMap，Map的key为ThreadLocal对象，Map的value为需要缓存的值</li>
+<li>如果在线程池中使⽤ThreadLocal会造成内存泄漏，因为当ThreadLocal对象使⽤完之后，应该要把设置的key，value，也就是Entry对象进⾏回收，但线程池中的线程不会回收，⽽线程对象是通过强引⽤指向ThreadLocalMap，ThreadLocalMap也是通过强引⽤指向Entry对象，线程不被回收，Entry对象也就不会被回收，从⽽出现内存泄漏，解决办法是，在使⽤了ThreadLocal对象之后，⼿动调⽤ThreadLocal的remove⽅法，⼿动清楚Entry对象</li>
+<li>ThreadLocal经典的应⽤场景就是连接管理（⼀个线程持有⼀个连接，该连接对象可以在不同的⽅法之间进⾏传递，线程之间不共享同⼀个连接）</li>
+</ol>
+<h3 id="35、Java死锁如何避免？"><a href="#35、Java死锁如何避免？" class="headerlink" title="35、Java死锁如何避免？"></a>35、Java死锁如何避免？</h3><ul>
+<li>造成死锁的⼏个原因：<ol>
+<li>⼀个资源每次只能被⼀个线程使⽤</li>
+<li>⼀个线程在阻塞等待某个资源时，不释放已占有资源</li>
+<li>⼀个线程已经获得的资源，在未使⽤完之前，不能被强⾏剥夺</li>
+<li>若⼲线程形成头尾相接的循环等待资源关系</li>
+</ol>
+</li>
+</ul>
+<p>这是造成死锁必须要达到的4个条件，如果要避免死锁，只需要不满⾜其中某⼀个条件即可。⽽其中前3个条件是作为锁要符合的条件，所以要避免死锁就需要打破第4个条件，不出现循环等待锁的关系。</p>
+<p>在开发过程中：</p>
+<ol>
+<li>要注意加锁顺序，保证每个线程按同样的顺序进⾏加锁</li>
+<li>要注意加锁时限，可以针对所设置⼀个超时时间</li>
+<li>要注意死锁检查，这是⼀种预防机制，确保在第⼀时间发现死锁并进⾏解决</li>
+</ol>
+<h3 id="36、如何理解volatile关键字"><a href="#36、如何理解volatile关键字" class="headerlink" title="36、如何理解volatile关键字"></a>36、如何理解volatile关键字</h3><blockquote>
+<p>保证被volatile修饰的共享变量对所有线程总是可⻅的，也就是当⼀个线程修改了⼀个被volatile修饰共享变量的值，新值总是可以被其他线程⽴即得知。</p>
+</blockquote>
+<blockquote>
+<p>但是不能保证线程安全</p>
+</blockquote>
+<h3 id="37、线程池使用以及相关参数"><a href="#37、线程池使用以及相关参数" class="headerlink" title="37、线程池使用以及相关参数"></a>37、线程池使用以及相关参数</h3><ul>
+<li><p>使用原因</p>
+<ol>
+<li>降低资源消耗；提⾼线程利⽤率，降低创建和销毁线程的消耗。</li>
+<li>提⾼响应速度；任务来了，直接有线程可⽤可执⾏，⽽不是先创建线程，再执⾏。</li>
+<li>提⾼线程的可管理性；线程是稀缺资源，使⽤线程池可以统⼀分配调优监控。</li>
+</ol>
+</li>
+<li><p>相关参数</p>
+<ul>
+<li>corePoolSize<br>  代表核⼼线程数，也就是正常情况下创建⼯作的线程数，这些线程创建后并不会消除，⽽是⼀种常驻线程</li>
+<li>maxinumPoolSize<br>  代表的是最⼤线程数，它与核⼼线程数相对应，表示最⼤允许被创建的线程数，⽐如当前任务较多，将核⼼线程数都⽤完了，还⽆法满⾜需求时，此时就会创建新的线程，但是线程池内线程总数不会超过最⼤线程数</li>
+<li>keepAliveTime、 unit<br>  表示超出核⼼线程数之外的线程的空闲存活时间，也就是核⼼线程不会消除，但是超出核⼼线程数的部分线程如果空闲⼀定的时间则会被消除,我们可以通过setKeepAliveTime 来设置空闲时间</li>
+<li>workQueue<br>  ⽤来存放待执⾏的任务，假设我们现在核⼼线程都已被使⽤，还有任务进来则全部放⼊队列，直到整个队列被放满但任务还再持续进⼊则会开始创建新的线程</li>
+<li>ThreadFactory<br>  实际上是⼀个线程⼯⼚，⽤来⽣产线程执⾏任务。我们可以选择使⽤默认的创建⼯⼚，产⽣的线程都在同⼀个组内，拥有相同的优先级，且都不是守护线程。当然我们也可以选择⾃定义线程⼯⼚，⼀般我们会根据业务来制定不同的线程⼯⼚</li>
+<li>Handler<br>  任务拒绝策略，有两种情况，第⼀种是当我们调⽤ shutdown 等⽅法关闭线程池后，这时候即使线程池内部还有没执⾏完的任务正在执⾏，但是由于线程池已经关闭，我们再继续想线程池提交任务就会遭到拒绝。另⼀种情况就是当达到最⼤线程数，线程池已经没有能⼒继续处理新提交的任务时，这是也就拒绝</li>
+</ul>
+</li>
+</ul>
+<h3 id="38、线程池的底层⼯作原理"><a href="#38、线程池的底层⼯作原理" class="headerlink" title="38、线程池的底层⼯作原理"></a>38、线程池的底层⼯作原理</h3><ol>
+<li>如果此时线程池中的线程数量⼩于corePoolSize，即使线程池中的线程都处于空闲状态，也要创建新的线程来处理被添加的任务。</li>
+<li>如果此时线程池中的线程数量等于corePoolSize，但是缓冲队列workQueue未满，那么任务被放⼊缓冲队列。</li>
+<li>如果此时线程池中的线程数量⼤于等于corePoolSize，缓冲队列workQueue满，并且线程池中的数量⼩于maximumPoolSize，建新的线程来处理被添加的任务。</li>
+<li>如果此时线程池中的线程数量⼤于corePoolSize，缓冲队列workQueue满，并且线程池中的数量等于maximumPoolSize，那么通过 handler所指定的策略来处理此任务。</li>
+<li>当线程池中的线程数量⼤于 corePoolSize时，如果某线程空闲时间超过keepAliveTime，线程将被终⽌。这样，线程池可以动态的调整池中的线程数</li>
+</ol>
 
-<ol start="55">
-<li>Java中Class.forName和ClassLoader.loadClass的区别</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(&quot;xx.xx&quot;)等同于Class.forName(&quot;xx.xx&quot;,true,CALLClass.class.getClassLoader())，第二个参数(bool)表示装载类的时候是否初始化该类，即调用类的静态块的语句及初始化静态成员变量。</span><br><span class="line"></span><br><span class="line">ClassLoader loader = Thread.currentThread.getContextClassLoader(); //也可以用(ClassLoader.getSystemClassLoader())</span><br><span class="line"></span><br><span class="line">Class cls = loader.loadClass(&quot;xx.xx&quot;); //这句话没有执行初始化</span><br><span class="line">forName可以控制是否初始化类，而loadClass加载时是没有初始化的。</span><br></pre></td></tr></table></figure>
         </div>
         
             <div class="kratos-copyright text-center clearfix">
@@ -292,10 +612,9 @@
             const twitterBase   = "https://twitter.com/intent/tweet?";
             const hostUrl       = "http://example.com/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/java/java-basic/";
             const title         = "「java -> 基础面试题」";
-            const excerpt       = `##java基础面试题
-
-
-什么是线程？1线程是操作系统能够进行运算调度的最小单位，它被包含在进程之中，是进程中的实际运作单位。程序员可以通过它进行多处理器编程，你可以使用多线程对运算密集型任务提速。比如，如果一个线程完成一个任务要1...`;
+            const excerpt       = `java基础面试题
+1、 &#x3D;&#x3D;和equals⽅法之前的区别
+&#x3D;&#x3D;：对⽐的是栈中的值，基本数据类型是变量值，引⽤类型是堆中内存对象的地址equals：object中默认也是采⽤&#x3D;&#x3...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -317,7 +636,7 @@
                     <a class="tag-none-link" href="/tags/basis/" rel="tag">basis</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2022-03-09</span>
+                <span>最后编辑：2023-03-15</span>
                 </div>
             </div>
         </footer>
@@ -366,10 +685,22 @@
             
                     <div class="sticky-area">
                 
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix">
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar"></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#java%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-text">java基础面试题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81-x3D-x3D-%E5%92%8Cequals%E2%BD%85%E6%B3%95%E4%B9%8B%E5%89%8D%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">1、 &#x3D;&#x3D;和equals⽅法之前的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81-hashCode-%E4%B8%8Eequals-%E5%85%B3%E7%B3%BB%E5%92%8C%E5%8C%BA%E5%88%AB"><span class="toc-text">2、 hashCode()与equals() 关系和区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81-final%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%9C%E2%BD%A4%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">3、 final关键字的作⽤是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81-String%E3%80%81StringBuffer%E3%80%81StringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">4、 String、StringBuffer、StringBuilder的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81%E9%87%8D%E8%BD%BD%E5%92%8C%E9%87%8D%E5%86%99%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">5、重载和重写的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E3%80%81%E5%B8%B8%E8%A7%81%E8%AE%BF%E9%97%AE%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="toc-text">6、常见访问修饰符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E3%80%81%E6%8E%A5%E2%BC%9D%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">7、接⼝和抽象类的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8%E3%80%81List%E5%92%8CSet%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">8、List和Set的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9%E3%80%81ArrayList%E5%92%8C-LinkedList-%E5%8C%BA%E5%88%AB"><span class="toc-text">9、ArrayList和 LinkedList 区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10%E3%80%81HashMap-%E5%92%8C-HashTable-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F%E5%85%B6%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">10、HashMap 和 HashTable 有什么区别？其底层实现是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11%E3%80%81%E8%B0%88-ConcurrentHashMap-%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6"><span class="toc-text">11、谈 ConcurrentHashMap 的扩容机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12%E3%80%81Jdk1-7%E5%88%B0Jdk1-8-HashMap-%E5%8F%91%E2%BD%A3%E4%BA%86%E4%BB%80%E4%B9%88%E5%8F%98%E5%8C%96"><span class="toc-text">12、Jdk1.7到Jdk1.8 HashMap 发⽣了什么变化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13%E3%80%81%E6%B3%9B%E5%9E%8B%E4%B8%AD-extends-%E5%92%8C-super-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">13、泛型中 extends 和 super 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14%E3%80%81%E6%B7%B1%E6%8B%B7%E2%BB%89%E5%92%8C%E6%B5%85%E6%8B%B7%E2%BB%89"><span class="toc-text">14、深拷⻉和浅拷⻉</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15%E3%80%81CopyOnWriteArrayList-%E7%9A%84%E7%9B%B8%E5%85%B3%E8%A7%A3%E9%87%8A%E8%AF%B4%E6%98%8E"><span class="toc-text">15、CopyOnWriteArrayList 的相关解释说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16%E3%80%81java-%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB"><span class="toc-text">16、java 中的异常体系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17%E3%80%81-java-%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="toc-text">17、 java 中的类加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18%E3%80%81-%E8%AF%B4%E8%AF%B4%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B"><span class="toc-text">18、 说说类加载器双亲委派模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19%E3%80%81-GC%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E5%AF%B9%E8%B1%A1%E5%8F%AF%E4%BB%A5%E8%A2%AB%E5%9B%9E%E6%94%B6"><span class="toc-text">19、 GC如何判断对象可以被回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20%E3%80%81-%E7%BA%BF%E7%A8%8B%E5%85%B1%E4%BA%AB%E5%8C%BA"><span class="toc-text">20、 线程共享区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21%E3%80%81-jvm-%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0-%E5%92%8C-%E6%8E%92%E6%9F%A5%E6%96%B9%E5%90%91"><span class="toc-text">21、 jvm 相关参数 和 排查方向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22%E3%80%81-%E2%BC%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E4%BB%8E%E5%8A%A0%E8%BD%BD%E5%88%B0JVM%EF%BC%8C%E5%86%8D%E5%88%B0%E8%A2%ABGC%E6%B8%85%E9%99%A4%EF%BC%8C%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88%E8%BF%87%E7%A8%8B%EF%BC%9F"><span class="toc-text">22、 ⼀个对象从加载到JVM，再到被GC清除，都经历了什么过程？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23%E3%80%81-%E6%80%8E%E4%B9%88%E7%A1%AE%E5%AE%9A%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E6%98%AF%E5%9E%83%E5%9C%BE"><span class="toc-text">23、 怎么确定一个对象是否是垃圾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24%E3%80%81JVM%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95%EF%BC%9F"><span class="toc-text">24、JVM有哪些垃圾回收算法？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#25%E3%80%81-jvm-%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="toc-text">25、 jvm 的垃圾回收器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#26%E3%80%81-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E9%98%B6%E6%AE%B5"><span class="toc-text">26、 垃圾回收阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#27%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%89%E2%BE%8A%E6%A0%87%E8%AE%B0%EF%BC%9F"><span class="toc-text">27、什么是三⾊标记？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#28%E3%80%81JVM%E5%8F%82%E6%95%B0%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">28、JVM参数有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#29%E3%80%81-%E7%BA%BF%E7%A8%8B%E7%9A%84%E2%BD%A3%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%9F%E7%BA%BF%E7%A8%8B%E6%9C%89%E2%BC%8F%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="toc-text">29、 线程的⽣命周期？线程有⼏种状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#30%E3%80%81%E5%B9%B6%E5%8F%91%E3%80%81%E5%B9%B6%E2%BE%8F%E3%80%81%E4%B8%B2%E2%BE%8F%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">30、并发、并⾏、串⾏之间的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#31%E3%80%81sleep-%E3%80%81wait-%E3%80%81join-%E3%80%81yield-%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">31、sleep()、wait()、join()、yield()之间的的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#31%E3%80%81-%E5%AF%B9%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">31、 对线程安全的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32%E3%80%81Thread%E5%92%8CRunable%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">32、Thread和Runable的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#33%E3%80%81-%E5%B9%B6%E5%8F%91%E7%9A%84%E4%B8%89%E2%BC%A4%E7%89%B9%E6%80%A7"><span class="toc-text">33、 并发的三⼤特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#34%E3%80%81ThreadLocal%E7%9A%84%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86"><span class="toc-text">34、ThreadLocal的底层原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35%E3%80%81Java%E6%AD%BB%E9%94%81%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%EF%BC%9F"><span class="toc-text">35、Java死锁如何避免？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#36%E3%80%81%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3volatile%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-text">36、如何理解volatile关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#37%E3%80%81%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0"><span class="toc-text">37、线程池使用以及相关参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#38%E3%80%81%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%BA%95%E5%B1%82%E2%BC%AF%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">38、线程池的底层⼯作原理</span></a></li></ol></li></ol>
+    </div>
+</aside>
+                
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/database/">database</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/versionControl/">versionControl</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/database/">database</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/liunx/">liunx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/versionControl/">versionControl</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">2</span></li></ul>
   </aside>
 
 
@@ -378,7 +709,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/AngularJS/" style="font-size: 0.6em;">AngularJS</a> <a href="/tags/Docker/" style="font-size: 0.6em;">Docker</a> <a href="/tags/ElasticSearch/" style="font-size: 0.8em;">ElasticSearch</a> <a href="/tags/Linux/" style="font-size: 0.73em;">Linux</a> <a href="/tags/arthas/" style="font-size: 0.6em;">arthas</a> <a href="/tags/basis/" style="font-size: 0.67em;">basis</a> <a href="/tags/corn/" style="font-size: 0.6em;">corn</a> <a href="/tags/git/" style="font-size: 0.67em;">git</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/java/" style="font-size: 0.6em;">java</a> <a href="/tags/jprofiler/" style="font-size: 0.6em;">jprofiler</a> <a href="/tags/npm/" style="font-size: 0.6em;">npm</a> <a href="/tags/tcpdump/" style="font-size: 0.6em;">tcpdump</a> <a href="/tags/yarn/" style="font-size: 0.6em;">yarn</a>
+        <a href="/tags/AngularJS/" style="font-size: 0.6em;">AngularJS</a> <a href="/tags/Docker/" style="font-size: 0.6em;">Docker</a> <a href="/tags/ElasticSearch/" style="font-size: 0.8em;">ElasticSearch</a> <a href="/tags/Linux/" style="font-size: 0.73em;">Linux</a> <a href="/tags/arthas/" style="font-size: 0.6em;">arthas</a> <a href="/tags/basis/" style="font-size: 0.67em;">basis</a> <a href="/tags/corn/" style="font-size: 0.6em;">corn</a> <a href="/tags/git/" style="font-size: 0.67em;">git</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/java/" style="font-size: 0.6em;">java</a> <a href="/tags/jprofiler/" style="font-size: 0.6em;">jprofiler</a> <a href="/tags/liunx/" style="font-size: 0.6em;">liunx</a> <a href="/tags/npm/" style="font-size: 0.6em;">npm</a> <a href="/tags/tcpdump/" style="font-size: 0.6em;">tcpdump</a> <a href="/tags/yarn/" style="font-size: 0.6em;">yarn</a>
       </div>
   </aside>
 
@@ -389,9 +720,6 @@
   <div class="tab-content">
       <ul class="list-group">
         
-        
-          
-          
         
           
           
@@ -423,6 +751,8 @@
             
           
         
+          
+            
           
             
           

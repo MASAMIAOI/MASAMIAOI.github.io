@@ -15,16 +15,16 @@
   
     <meta name="keywords" content="Docker" />
   
-  <meta name="description" content="喵呼呼o(&#x3D;•ェ•&#x3D;)m  成功啦o(￣▽￣)ブ  有危险Σ(っ °Д °;)っ  有消息(・∀・(・∀・(・∀・*)  当心哦≧ ﹏ ≦">
+  <meta name="description" content="docker 的基本使用命令 参考：https:&#x2F;&#x2F;www.kuangstudy.com&#x2F;bbs&#x2F;1552836707509223426  喵呼呼o(&#x3D;•ェ•&#x3D;)m  成功啦o(￣▽￣)ブ  有危险Σ(っ °Д °;)っ  有消息(・∀・(・∀・(・∀・*)  当心哦≧ ﹏ ≦">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker-&gt;安装和基本命令">
 <meta property="og:url" content="http://example.com/2022/02/11/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/docker/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="masamiaoi">
-<meta property="og:description" content="喵呼呼o(&#x3D;•ェ•&#x3D;)m  成功啦o(￣▽￣)ブ  有危险Σ(っ °Д °;)っ  有消息(・∀・(・∀・(・∀・*)  当心哦≧ ﹏ ≦">
+<meta property="og:description" content="docker 的基本使用命令 参考：https:&#x2F;&#x2F;www.kuangstudy.com&#x2F;bbs&#x2F;1552836707509223426  喵呼呼o(&#x3D;•ェ•&#x3D;)m  成功啦o(￣▽￣)ブ  有危险Σ(っ °Д °;)っ  有消息(・∀・(・∀・(・∀・*)  当心哦≧ ﹏ ≦">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
 <meta property="article:published_time" content="2022-02-10T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-25T20:29:58.826Z">
+<meta property="article:modified_time" content="2023-02-26T11:25:53.723Z">
 <meta property="article:author" content="masamiaoi">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
@@ -150,7 +150,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        83
+                        153
                     
                     字
                 </li>
@@ -159,11 +159,14 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1677356998826"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1677410753723"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
-            <div class="alert alert-primary"><p>喵呼呼o(&#x3D;•ェ•&#x3D;)m</p>
+            <h2 id="docker-的基本使用命令"><a href="#docker-的基本使用命令" class="headerlink" title="docker 的基本使用命令"></a>docker 的基本使用命令</h2><blockquote>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.kuangstudy.com/bbs/1552836707509223426">https://www.kuangstudy.com/bbs/1552836707509223426</a></p>
+</blockquote>
+<div class="alert alert-primary"><p>喵呼呼o(&#x3D;•ェ•&#x3D;)m</p>
 </div>
 <div class="alert alert-success"><p>成功啦o(<em>￣▽￣</em>)ブ</p>
 </div>
@@ -242,19 +245,14 @@
             const twitterBase   = "https://twitter.com/intent/tweet?";
             const hostUrl       = "http://example.com/2022/02/11/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/docker/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/";
             const title         = "「Docker->安装和基本命令」";
-            const excerpt       = `喵呼呼o(&#x3D;•ェ•&#x3D;)m
+            const excerpt       = `docker 的基本使用命令
+参考：https://www.kuangstudy.com/bbs/1552836707509223426
+
+喵呼呼o(&#x3D;•ェ•&#x3D;)m
 
 成功啦o(￣▽￣)ブ
 
-有危险Σ(っ °Д °;)っ
-
-有消息(・∀・(・∀・(・∀・*)
-
-当心哦≧ ﹏ ≦
-
-
-
-`;
+有危险Σ(っ °Д °...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -286,7 +284,7 @@
             
             
             <div class="nav-next clearfix">
-                <a title=" ES-&gt;基本语法使用" href="/2022/02/11/技术/后端/ElasticSearch/es_基本语法使用/">下一篇 &gt;</a>
+                <a title=" 内存溢出env配置项" href="/2022/02/11/技术/后端/java/内存溢出排查/">下一篇 &gt;</a>
             </div>
             
         </nav>
@@ -321,10 +319,22 @@
             
                     <div class="sticky-area">
                 
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix">
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar"></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#docker-%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">docker 的基本使用命令</span></a></li></ol>
+    </div>
+</aside>
+                
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/database/">database</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/versionControl/">versionControl</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/database/">database</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/liunx/">liunx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/versionControl/">versionControl</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">2</span></li></ul>
   </aside>
 
 
@@ -333,7 +343,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/AngularJS/" style="font-size: 0.6em;">AngularJS</a> <a href="/tags/Docker/" style="font-size: 0.6em;">Docker</a> <a href="/tags/ElasticSearch/" style="font-size: 0.8em;">ElasticSearch</a> <a href="/tags/Linux/" style="font-size: 0.73em;">Linux</a> <a href="/tags/arthas/" style="font-size: 0.6em;">arthas</a> <a href="/tags/basis/" style="font-size: 0.67em;">basis</a> <a href="/tags/corn/" style="font-size: 0.6em;">corn</a> <a href="/tags/git/" style="font-size: 0.67em;">git</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/java/" style="font-size: 0.6em;">java</a> <a href="/tags/jprofiler/" style="font-size: 0.6em;">jprofiler</a> <a href="/tags/npm/" style="font-size: 0.6em;">npm</a> <a href="/tags/tcpdump/" style="font-size: 0.6em;">tcpdump</a> <a href="/tags/yarn/" style="font-size: 0.6em;">yarn</a>
+        <a href="/tags/AngularJS/" style="font-size: 0.6em;">AngularJS</a> <a href="/tags/Docker/" style="font-size: 0.6em;">Docker</a> <a href="/tags/ElasticSearch/" style="font-size: 0.8em;">ElasticSearch</a> <a href="/tags/Linux/" style="font-size: 0.73em;">Linux</a> <a href="/tags/arthas/" style="font-size: 0.6em;">arthas</a> <a href="/tags/basis/" style="font-size: 0.67em;">basis</a> <a href="/tags/corn/" style="font-size: 0.6em;">corn</a> <a href="/tags/git/" style="font-size: 0.67em;">git</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/java/" style="font-size: 0.6em;">java</a> <a href="/tags/jprofiler/" style="font-size: 0.6em;">jprofiler</a> <a href="/tags/liunx/" style="font-size: 0.6em;">liunx</a> <a href="/tags/npm/" style="font-size: 0.6em;">npm</a> <a href="/tags/tcpdump/" style="font-size: 0.6em;">tcpdump</a> <a href="/tags/yarn/" style="font-size: 0.6em;">yarn</a>
       </div>
   </aside>
 
@@ -344,9 +354,6 @@
   <div class="tab-content">
       <ul class="list-group">
         
-        
-          
-          
         
           
           
@@ -378,6 +385,8 @@
             
           
         
+          
+            
           
             
           
