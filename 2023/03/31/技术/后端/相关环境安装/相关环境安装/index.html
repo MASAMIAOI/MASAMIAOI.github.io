@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
+  <title>相关基础环境安装 | masamiaoi</title>
+  <meta name="author" content="masamiaoi" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="java" />
+  
+  <meta name="description" content="相关环境安装 记录相关环境安装基础步骤。   jdk-1.8 nginx  1 jdk 安装步骤1.1 创建目录存放 jdk 安装包12cd usr&#x2F;localmkdir java  1.2 去华为云找自己想要的jdk版本https:&#x2F;&#x2F;repo.huaweicloud.com&#x2F;java&#x2F;jdk&#x2F;1wget https:&#x2F;&#x2F;repo.huaweicloud.com&#x2F;java&#x2F;jdk&#x2F;8u201-b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="相关基础环境安装">
+<meta property="og:url" content="http://example.com/2023/03/31/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/%E7%9B%B8%E5%85%B3%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/%E7%9B%B8%E5%85%B3%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:site_name" content="masamiaoi">
+<meta property="og:description" content="相关环境安装 记录相关环境安装基础步骤。   jdk-1.8 nginx  1 jdk 安装步骤1.1 创建目录存放 jdk 安装包12cd usr&#x2F;localmkdir java  1.2 去华为云找自己想要的jdk版本https:&#x2F;&#x2F;repo.huaweicloud.com&#x2F;java&#x2F;jdk&#x2F;1wget https:&#x2F;&#x2F;repo.huaweicloud.com&#x2F;java&#x2F;jdk&#x2F;8u201-b">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
+<meta property="article:published_time" content="2023-03-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-31T11:31:10.076Z">
+<meta property="article:author" content="masamiaoi">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://unpkg.com/nprogress@0.2.0/nprogress.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  
+  
+    <link rel="stylesheet" href="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://unpkg.com/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="https://unpkg.com/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/bj1.webp');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bj1.webp');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>归档</a></li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">masamiaoi</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>masamiaoi</h2> <br />
+                        <span>Tomorrow is another day</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">相关基础环境安装</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2023-03-31</li>
+                <li><i class="fa fa-user"></i> 作者 masamiaoi</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~1.64K
+                    
+                    字
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1680262270076"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+            <hr />
+            <h1 id="相关环境安装"><a href="#相关环境安装" class="headerlink" title="相关环境安装"></a>相关环境安装</h1><blockquote>
+<p>记录相关环境安装基础步骤。</p>
+</blockquote>
+<ul>
+<li>jdk-1.8</li>
+<li>nginx</li>
+</ul>
+<h2 id="1-jdk-安装步骤"><a href="#1-jdk-安装步骤" class="headerlink" title="1 jdk 安装步骤"></a>1 jdk 安装步骤</h2><h3 id="1-1-创建目录存放-jdk-安装包"><a href="#1-1-创建目录存放-jdk-安装包" class="headerlink" title="1.1 创建目录存放 jdk 安装包"></a>1.1 创建目录存放 jdk 安装包</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> usr/local</span><br><span class="line"><span class="built_in">mkdir</span> java</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-去华为云找自己想要的jdk版本https-repo-huaweicloud-com-java-jdk"><a href="#1-2-去华为云找自己想要的jdk版本https-repo-huaweicloud-com-java-jdk" class="headerlink" title="1.2 去华为云找自己想要的jdk版本https://repo.huaweicloud.com/java/jdk/"></a>1.2 去华为云找自己想要的jdk版本<a target="_blank" rel="noopener" href="https://repo.huaweicloud.com/java/jdk/">https://repo.huaweicloud.com/java/jdk/</a></h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo.huaweicloud.com/java/jdk/8u201-b09/jdk-8u201-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-解压缩"><a href="#1-3-解压缩" class="headerlink" title="1.3 解压缩"></a>1.3 解压缩</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk-8u201-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-配置环境变量"><a href="#1-4-配置环境变量" class="headerlink" title="1.4 配置环境变量"></a>1.4 配置环境变量</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>添加以下内容</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#java enviroment</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/local/java/jdk1.8.0_201</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$&#123;JAVA_HOME&#125;</span>/jre/lib/rt.jar:<span class="variable">$&#123;JAVA_HOME&#125;</span>  </span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$&#123;JAVA_HOME&#125;</span>/bin</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-5-刷新环境变量"><a href="#1-5-刷新环境变量" class="headerlink" title="1.5 刷新环境变量"></a>1.5 刷新环境变量</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-6-查看是否安装成功"><a href="#1-6-查看是否安装成功" class="headerlink" title="1.6 查看是否安装成功"></a>1.6 查看是否安装成功</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-7-设置软连接"><a href="#1-7-设置软连接" class="headerlink" title="1.7 设置软连接"></a>1.7 设置软连接</h3><blockquote>
+<p>为什么要建这个超链接，因为一些自己注册的linux服务（如springboot的jar注册的服务），默认情况下从&#x2F;usr&#x2F;bin&#x2F;java路径使用java<br>yum安装的时候，这个超链接会自动创建，如果你自己下载包安装的话，这个超链接就需要你手动创建了。</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /user/local/java/jdk1.8.0_201/bin/java /usr/bin/java </span><br></pre></td></tr></table></figure>
+
+<h2 id="2-nginx-安装"><a href="#2-nginx-安装" class="headerlink" title="2 nginx 安装"></a>2 nginx 安装</h2><h3 id="2-1-创建路径"><a href="#2-1-创建路径" class="headerlink" title="2.1 创建路径"></a>2.1 创建路径</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local</span><br><span class="line"><span class="built_in">mkdir</span> nginx</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-安装-gcc"><a href="#2-2-安装-gcc" class="headerlink" title="2.2 安装 gcc"></a>2.2 安装 gcc</h3><blockquote>
+<p>因为Nginx依赖于gcc的编译环境，所以，需要安装编译环境来使Nginx能够编译起来。</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc-c++</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-安装相关依赖"><a href="#2-3-安装相关依赖" class="headerlink" title="2.3 安装相关依赖"></a>2.3 安装相关依赖</h3><blockquote>
+<p>Nginx的http模块需要使用pcre来解析正则表达式，需要安装pcre。<br>安装依赖的解压包。<br>ssl 功能需要 openssl 库，安装 openssl。</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install -y pcre pcre-devel</span><br><span class="line">yum install -y zlib zlib-devel</span><br><span class="line">yum install -y openssl openssl-devel</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-进入-nginx-官网，下载指定版本-nginx"><a href="#2-4-进入-nginx-官网，下载指定版本-nginx" class="headerlink" title="2.4 进入 nginx 官网，下载指定版本 nginx"></a>2.4 进入 nginx 官网，下载指定版本 nginx</h3><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://nginx.org/en/download.html</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Mainline version：Mainline 是 Nginx 目前主力在做的版本，可以说是开发版</li>
+<li>Stable version：最新稳定版，生产环境上建议使用的版本</li>
+<li>Legacy versions：遗留的老版本的稳定版</li>
+</ul>
+<p>我们选择Stable version，点击下载。<br>下载完成后，将Nginx压缩包移动到Linux的待安装目录中。我这里是 &#x2F;usr&#x2F;local&#x2F;nginx</p>
+<h3 id="2-5-进行解压"><a href="#2-5-进行解压" class="headerlink" title="2.5 进行解压"></a>2.5 进行解压</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf nginx*</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-6-执行相关命令"><a href="#2-6-执行相关命令" class="headerlink" title="2.6 执行相关命令"></a>2.6 执行相关命令</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/nginx/nginx*</span><br><span class="line"></span><br><span class="line">./configure --prefix=/usr/local/nginx</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-7-启动-nginx"><a href="#2-7-启动-nginx" class="headerlink" title="2.7 启动 nginx"></a>2.7 启动 nginx</h3><blockquote>
+<p>nginx 端口默认 80, 在 &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;nginx-1.22.1&#x2F;conf&#x2F;nginx.conf 中可以修改</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/nginx/sbin</span><br><span class="line"></span><br><span class="line">./nginx</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5>本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://example.com/2023/03/31/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/%E7%9B%B8%E5%85%B3%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/%E7%9B%B8%E5%85%B3%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://example.com/2023/03/31/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/%E7%9B%B8%E5%85%B3%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/%E7%9B%B8%E5%85%B3%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/";
+            const title         = "「相关基础环境安装」";
+            const excerpt       = `相关环境安装
+记录相关环境安装基础步骤。
+
+
+jdk-1.8
+nginx
+
+1 jdk 安装步骤1.1 创建目录存放 jdk 安装包12cd usr/localmkdir java
+
+1.2 去华为云找自己想要的jdk版本https:...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/java/" rel="tag">java</a>
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2023-03-31</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Docker-&gt;安装和基本命令" href="/2023/03/24/技术/后端/docker/docker的安装和基本命令/">&lt; 上一篇</a>
+            </div>
+            
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/tx.webp" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">勿因未候日光暖,擅自轻言世间寒。</p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix">
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar"></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="toc-text">相关环境安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-jdk-%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="toc-text">1 jdk 安装步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95%E5%AD%98%E6%94%BE-jdk-%E5%AE%89%E8%A3%85%E5%8C%85"><span class="toc-text">1.1 创建目录存放 jdk 安装包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%8E%BB%E5%8D%8E%E4%B8%BA%E4%BA%91%E6%89%BE%E8%87%AA%E5%B7%B1%E6%83%B3%E8%A6%81%E7%9A%84jdk%E7%89%88%E6%9C%AChttps-repo-huaweicloud-com-java-jdk"><span class="toc-text">1.2 去华为云找自己想要的jdk版本https:&#x2F;&#x2F;repo.huaweicloud.com&#x2F;java&#x2F;jdk&#x2F;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E8%A7%A3%E5%8E%8B%E7%BC%A9"><span class="toc-text">1.3 解压缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">1.4 配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E5%88%B7%E6%96%B0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">1.5 刷新环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-%E6%9F%A5%E7%9C%8B%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F"><span class="toc-text">1.6 查看是否安装成功</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-%E8%AE%BE%E7%BD%AE%E8%BD%AF%E8%BF%9E%E6%8E%A5"><span class="toc-text">1.7 设置软连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-nginx-%E5%AE%89%E8%A3%85"><span class="toc-text">2 nginx 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%88%9B%E5%BB%BA%E8%B7%AF%E5%BE%84"><span class="toc-text">2.1 创建路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%AE%89%E8%A3%85-gcc"><span class="toc-text">2.2 安装 gcc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E4%BE%9D%E8%B5%96"><span class="toc-text">2.3 安装相关依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E8%BF%9B%E5%85%A5-nginx-%E5%AE%98%E7%BD%91%EF%BC%8C%E4%B8%8B%E8%BD%BD%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC-nginx"><span class="toc-text">2.4 进入 nginx 官网，下载指定版本 nginx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E8%BF%9B%E8%A1%8C%E8%A7%A3%E5%8E%8B"><span class="toc-text">2.5 进行解压</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-%E6%89%A7%E8%A1%8C%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="toc-text">2.6 执行相关命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-%E5%90%AF%E5%8A%A8-nginx"><span class="toc-text">2.7 启动 nginx</span></a></li></ol></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/database/">database</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/liunx/">liunx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/versionControl/">versionControl</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">2</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/AngularJS/" style="font-size: 0.6em;">AngularJS</a> <a href="/tags/Docker/" style="font-size: 0.6em;">Docker</a> <a href="/tags/ElasticSearch/" style="font-size: 0.8em;">ElasticSearch</a> <a href="/tags/Linux/" style="font-size: 0.73em;">Linux</a> <a href="/tags/arthas/" style="font-size: 0.6em;">arthas</a> <a href="/tags/basis/" style="font-size: 0.67em;">basis</a> <a href="/tags/corn/" style="font-size: 0.6em;">corn</a> <a href="/tags/git/" style="font-size: 0.67em;">git</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/java/" style="font-size: 0.67em;">java</a> <a href="/tags/jprofiler/" style="font-size: 0.6em;">jprofiler</a> <a href="/tags/liunx/" style="font-size: 0.6em;">liunx</a> <a href="/tags/npm/" style="font-size: 0.6em;">npm</a> <a href="/tags/tcpdump/" style="font-size: 0.6em;">tcpdump</a> <a href="/tags/yarn/" style="font-size: 0.6em;">yarn</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2023/03/31/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/%E7%9B%B8%E5%85%B3%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/%E7%9B%B8%E5%85%B3%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/"><i class="fa  fa-book"></i> 相关基础环境安装</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/03/24/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/docker/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/"><i class="fa  fa-book"></i> Docker->安装和基本命令</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/14/%E6%8A%80%E6%9C%AF/other/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"><i class="fa  fa-book"></i> hexo->个人博客搭建</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/ElasticSearch/elasticsearch-theory/"><i class="fa  fa-book"></i> ES->进阶型原理</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/14/%E6%8A%80%E6%9C%AF/%E5%90%8E%E7%AB%AF/arthas/arthas_%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"><i class="fa  fa-book"></i> arthas -> 基本使用</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/MASAMIAOI"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 masamiaoi 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by masamiaoi.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://unpkg.com/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="https://unpkg.com/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="529030635"
+        order="list"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://unpkg.com/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
