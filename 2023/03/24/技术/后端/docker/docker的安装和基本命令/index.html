@@ -24,7 +24,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
 <meta property="article:published_time" content="2023-03-23T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-03-24T15:55:41.146Z">
+<meta property="article:modified_time" content="2023-05-26T10:53:18.014Z">
 <meta property="article:author" content="masamiaoi">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
@@ -150,7 +150,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~1.98K
+                        ~2.29K
                     
                     字
                 </li>
@@ -159,7 +159,7 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1679673341146"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1685098398014"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
@@ -192,6 +192,19 @@
 <h4 id="2-4-访问-ip-9001-即可。"><a href="#2-4-访问-ip-9001-即可。" class="headerlink" title="2.4 访问 ip:9001 即可。"></a>2.4 访问 ip:9001 即可。</h4><blockquote>
 <p>账户名： admin  密码： admin</p>
 </blockquote>
+<h3 id="3-confluence-安装"><a href="#3-confluence-安装" class="headerlink" title="3.confluence 安装"></a>3.confluence 安装</h3><blockquote>
+<p>前置条件: 注意已安装 mysql 镜像</p>
+</blockquote>
+<h4 id="3-1-docker-安装"><a href="#3-1-docker-安装" class="headerlink" title="3.1 docker 安装"></a>3.1 docker 安装</h4><blockquote>
+<p>–link 这里指向自己的 mysql 容器地址</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name confluence -p 8090:8090  --<span class="built_in">link</span> mysql01:db --user root:root cptactionhank/atlassian-confluence:latest</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="3-2-破解"><a href="#3-2-破解" class="headerlink" title="3.2 破解"></a>3.2 破解</h4><h4 id="3-3-数据库连接乱码修改"><a href="#3-3-数据库连接乱码修改" class="headerlink" title="3.3 数据库连接乱码修改"></a>3.3 数据库连接乱码修改</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-4-上传文件预览乱码"><a href="#3-4-上传文件预览乱码" class="headerlink" title="3.4 上传文件预览乱码"></a>3.4 上传文件预览乱码</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/weixin_48225168/article/details/114264012</span><br></pre></td></tr></table></figure>
+
 
         </div>
         
@@ -287,7 +300,7 @@
                     <a class="tag-none-link" href="/tags/Docker/" rel="tag">Docker</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2023-03-24</span>
+                <span>最后编辑：2023-05-26</span>
                 </div>
             </div>
         </footer>
@@ -344,7 +357,7 @@
         <span class="toc-progress-bar"></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#docker-%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">docker 的基本使用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85-rabbitmq"><span class="toc-text">1. 安装 rabbitmq</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E6%8B%89%E5%8F%96-rabbitmq-%E9%95%9C%E5%83%8F"><span class="toc-text">1.1 拉取 rabbitmq 镜像</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E5%90%AF%E5%8A%A8MQ%E5%AE%89%E8%A3%85management"><span class="toc-text">1.2 启动MQ安装management</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E8%AE%BF%E9%97%AE-ip-15672-%E5%8D%B3%E5%8F%AF%E3%80%82"><span class="toc-text">1.3 访问 ip:15672 即可。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85-kafka"><span class="toc-text">2. 安装 kafka</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E5%AE%89%E8%A3%85zookeeper"><span class="toc-text">2.1 安装zookeeper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E5%AE%89%E8%A3%85-kafka"><span class="toc-text">2.2 安装 kafka</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-kafka-map%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7"><span class="toc-text">2.3 kafka-map图形化管理工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-%E8%AE%BF%E9%97%AE-ip-9001-%E5%8D%B3%E5%8F%AF%E3%80%82"><span class="toc-text">2.4 访问 ip:9001 即可。</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#docker-%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">docker 的基本使用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85-rabbitmq"><span class="toc-text">1. 安装 rabbitmq</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E6%8B%89%E5%8F%96-rabbitmq-%E9%95%9C%E5%83%8F"><span class="toc-text">1.1 拉取 rabbitmq 镜像</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E5%90%AF%E5%8A%A8MQ%E5%AE%89%E8%A3%85management"><span class="toc-text">1.2 启动MQ安装management</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E8%AE%BF%E9%97%AE-ip-15672-%E5%8D%B3%E5%8F%AF%E3%80%82"><span class="toc-text">1.3 访问 ip:15672 即可。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85-kafka"><span class="toc-text">2. 安装 kafka</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E5%AE%89%E8%A3%85zookeeper"><span class="toc-text">2.1 安装zookeeper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E5%AE%89%E8%A3%85-kafka"><span class="toc-text">2.2 安装 kafka</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-kafka-map%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7"><span class="toc-text">2.3 kafka-map图形化管理工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-%E8%AE%BF%E9%97%AE-ip-9001-%E5%8D%B3%E5%8F%AF%E3%80%82"><span class="toc-text">2.4 访问 ip:9001 即可。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-confluence-%E5%AE%89%E8%A3%85"><span class="toc-text">3.confluence 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-docker-%E5%AE%89%E8%A3%85"><span class="toc-text">3.1 docker 安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E7%A0%B4%E8%A7%A3"><span class="toc-text">3.2 破解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E4%B9%B1%E7%A0%81%E4%BF%AE%E6%94%B9"><span class="toc-text">3.3 数据库连接乱码修改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E9%A2%84%E8%A7%88%E4%B9%B1%E7%A0%81"><span class="toc-text">3.4 上传文件预览乱码</span></a></li></ol></li></ol></li></ol>
     </div>
 </aside>
                 

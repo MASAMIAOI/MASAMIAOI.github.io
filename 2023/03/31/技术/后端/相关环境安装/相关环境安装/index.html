@@ -24,7 +24,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
 <meta property="article:published_time" content="2023-03-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-03-31T11:31:10.076Z">
+<meta property="article:modified_time" content="2023-04-09T16:00:39.814Z">
 <meta property="article:author" content="masamiaoi">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -150,7 +150,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~1.64K
+                        ~4.62K
                     
                     字
                 </li>
@@ -159,7 +159,7 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1680262270076"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1681056039814"></time> 前，其中的内容可能需要更新。
             </div>
             
             <hr />
@@ -221,7 +221,94 @@
 </blockquote>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/nginx/sbin</span><br><span class="line"></span><br><span class="line">./nginx</span><br></pre></td></tr></table></figure>
 
+<h2 id="3-liunx-下安装-maven"><a href="#3-liunx-下安装-maven" class="headerlink" title="3. liunx 下安装 maven"></a>3. liunx 下安装 maven</h2><h3 id="3-1-创建目录并进入"><a href="#3-1-创建目录并进入" class="headerlink" title="3.1 创建目录并进入"></a>3.1 创建目录并进入</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /usr/local/maven</span><br><span class="line"><span class="built_in">cd</span> /usr/local/maven</span><br></pre></td></tr></table></figure>
 
+<h3 id="3-2-下载-maven-安装包放入该目录下解压"><a href="#3-2-下载-maven-安装包放入该目录下解压" class="headerlink" title="3.2 下载 maven 安装包放入该目录下解压"></a>3.2 下载 maven 安装包放入该目录下解压</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-maven-3.6.3-bin.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-设置环境变量"><a href="#3-3-设置环境变量" class="headerlink" title="3.3 设置环境变量"></a>3.3 设置环境变量</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p>添加以下内容</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> MAVEN_HOME=/usr/local/maven/apache-maven-3.6.3</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$MAVEN_HOME</span>/bin</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-创建-ck-仓库存储目录"><a href="#3-4-创建-ck-仓库存储目录" class="headerlink" title="3.4 创建 ck 仓库存储目录"></a>3.4 创建 ck 仓库存储目录</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/maven/apache-maven-3.6.3</span><br><span class="line"><span class="built_in">mkdir</span> ck</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-5-修改-conf-的-setting-conf-配置文件"><a href="#3-5-修改-conf-的-setting-conf-配置文件" class="headerlink" title="3.5 修改 conf 的 setting.conf 配置文件"></a>3.5 修改 conf 的 setting.conf 配置文件</h3><blockquote>
+<p>添加 localRepository<br>    <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;localRepository&gt;/usr/local/maven/apache-maven-3.6.3/ck&lt;/localRepository&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>添加代理<br>    <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;mirror&gt;</span><br><span class="line">&lt;<span class="built_in">id</span>&gt;alimaven&lt;/id&gt;</span><br><span class="line">&lt;name&gt;aliyun maven&lt;/name&gt;</span><br><span class="line">&lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;</span><br><span class="line">&lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</span><br><span class="line">&lt;/mirror&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="4-linux-下安装-sonar"><a href="#4-linux-下安装-sonar" class="headerlink" title="4. linux 下安装 sonar"></a>4. linux 下安装 sonar</h2><h3 id="4-1-首先需要安装-jdk-和-maven，-可参考-1-步骤"><a href="#4-1-首先需要安装-jdk-和-maven，-可参考-1-步骤" class="headerlink" title="4.1 首先需要安装 jdk 和 maven， 可参考 1 步骤"></a>4.1 首先需要安装 jdk 和 maven， 可参考 1 步骤</h3><h3 id="4-2-创建目录"><a href="#4-2-创建目录" class="headerlink" title="4.2 创建目录"></a>4.2 创建目录</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /usr/local/sonar</span><br><span class="line"><span class="built_in">cd</span> /usr/local/sonar</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-下载sonarqube以及解压"><a href="#4-3-下载sonarqube以及解压" class="headerlink" title="4.3 下载sonarqube以及解压"></a>4.3 下载sonarqube以及解压</h3><blockquote>
+<p>注意下载版本， 7.7 以上版本不支持 mysql 数据库了。使用 mysql 可以使用 7.7 及以下</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -c  https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.2.zip</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-4-修改配置文件中的-mysql-指向"><a href="#4-4-修改配置文件中的-mysql-指向" class="headerlink" title="4.4 修改配置文件中的 mysql 指向"></a>4.4 修改配置文件中的 mysql 指向</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/local/sonar/sonarqube-7.2/conf/sonar.properties</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>例如： sonar.jdbc.url 、 sonar.jdbc.usernam 、 sonar.jdbc.password</p>
+</blockquote>
+<h3 id="4-5-修改配置文件并启动"><a href="#4-5-修改配置文件并启动" class="headerlink" title="4.5 修改配置文件并启动"></a>4.5 修改配置文件并启动</h3><blockquote>
+<p>&#x2F;etc&#x2F;sysctl.conf  添加如下配置 (es 的映射内容，避免 es 启动不起来)</p>
+</blockquote>
+<pre><code><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.max_map_count=655360</span><br></pre></td></tr></table></figure>
+</code></pre>
+<blockquote>
+<p>修该文件夹用户<br>    <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd sonar</span><br><span class="line"><span class="built_in">chown</span>  -R  sonar. /usr/local/sonar/sonarqube-7.2</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>启动服务<br>    <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su sonar ./bin/linux-x86-64/sonar.sh restart</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="4-5-访问是否可以成功"><a href="#4-5-访问是否可以成功" class="headerlink" title="4.5 访问是否可以成功"></a>4.5 访问是否可以成功</h3><blockquote>
+<p>访问<a target="_blank" rel="noopener" href="http://10.10.8.12:9000/">http://10.10.8.12:9000/</a></p>
+</blockquote>
+<h3 id="4-6-配合-maven-进行使用"><a href="#4-6-配合-maven-进行使用" class="headerlink" title="4.6 配合 maven 进行使用"></a>4.6 配合 maven 进行使用</h3><blockquote>
+<p>可以访问成功之后，在 maven 配置的 settings.xml 中添加 sonar 配置即可</p>
+</blockquote>
+<pre><code><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&lt;profile&gt;</span></span><br><span class="line">    <span class="attr">&lt;id&gt;sonar&lt;/id&gt;</span></span><br><span class="line">    <span class="attr">&lt;activation&gt;</span></span><br><span class="line">    <span class="attr">&lt;activeByDefault&gt;true&lt;/activeByDefault&gt;</span></span><br><span class="line">    <span class="attr">&lt;/activation&gt;</span></span><br><span class="line">    <span class="attr">&lt;properties&gt;</span></span><br><span class="line">    <span class="attr">&lt;sonar.jdbc.url&gt;jdbc</span>:<span class="string">mysql://110.40.135.78:3306/sonar?useUnicode=true&amp;amp;characterEncoding=utf8&lt;/sonar.jdbc.url&gt;</span></span><br><span class="line">    <span class="attr">&lt;sonar.jdbc.username&gt;sonar&lt;/sonar.jdbc.username&gt;</span></span><br><span class="line">    <span class="attr">&lt;sonar.jdbc.password&gt;sonar&lt;/sonar.jdbc.password&gt;</span></span><br><span class="line">    <span class="attr">&lt;sonar.host.url&gt;http</span>:<span class="string">//110.40.135.78:9000&lt;/sonar.host.url&gt;</span></span><br><span class="line">    <span class="attr">&lt;/properties&gt;</span></span><br><span class="line"><span class="attr">&lt;/profile&gt;</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<blockquote>
+<p>工程中添加 maven 指令</p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clean package sonar:sonar</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>整个流程完毕，在工程中执行上面 maven 命令即可。最后结束时会出现对应的 地址，可以查看代码质量。</p>
+<h3 id="4-7-安装-sonar-scanner"><a href="#4-7-安装-sonar-scanner" class="headerlink" title="4.7 安装 sonar-scanner"></a>4.7 安装 sonar-scanner</h3><blockquote>
+<p>该插件自己确定是否需要使用。不需要不用即可。</p>
+</blockquote>
+<blockquote>
+<p>下载安装包并解压<br>    <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-2.8.zip</span><br><span class="line">unzip sonar-scanner-2.8.zip</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>添加环境变量<br>    <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<pre><code><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#set sonar-scanner environment</span></span><br><span class="line"><span class="built_in">export</span> SONAR_SCANNER_HOME=/usr/local/sonarScanner/sonar-scanner-2.8</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;SONAR_SCANNER_HOME&#125;</span>/bin:<span class="variable">$&#123;PATH&#125;</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<blockquote>
+<p>修改完成，刷新一下<br>    <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>查看版本<br>    <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sonar-scanner -v</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="5-jenkins-安装"><a href="#5-jenkins-安装" class="headerlink" title="5. jenkins 安装"></a>5. jenkins 安装</h2><h3 id="5-1-下载-rpm-包"><a href="#5-1-下载-rpm-包" class="headerlink" title="5.1 下载 rpm 包"></a>5.1 下载 rpm 包</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo.huaweicloud.com/jenkins/redhat-stable/jenkins-2.346.3-1.1.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-安装"><a href="#5-2-安装" class="headerlink" title="5.2 安装"></a>5.2 安装</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh jenkins-2.346.3-1.1.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-后续可以参考"><a href="#5-3-后续可以参考" class="headerlink" title="5.3 后续可以参考"></a>5.3 后续可以参考</h3><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/dontYouWorry/article/details/129007966</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-4-相关命令-和-配置文件位置"><a href="#5-4-相关命令-和-配置文件位置" class="headerlink" title="5.4 相关命令 和 配置文件位置"></a>5.4 相关命令 和 配置文件位置</h3><blockquote>
+<p>配置文件</p>
+</blockquote>
+<ul>
+<li>&#x2F;etc&#x2F;sysconfig&#x2F;jenkins:  用户和端口</li>
+<li>&#x2F;etc&#x2F;init.d&#x2F;jenkins：添加 jdk 路径<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysconfig/jenkins</span><br><span class="line">vim /etc/init.d/jenkins</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>重启命令</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/jenkins restart</span><br></pre></td></tr></table></figure>
         </div>
         
             <div class="kratos-copyright text-center clearfix">
@@ -319,7 +406,7 @@ nginx
                     <a class="tag-none-link" href="/tags/java/" rel="tag">java</a>
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2023-03-31</span>
+                <span>最后编辑：2023-04-10</span>
                 </div>
             </div>
         </footer>
@@ -372,7 +459,7 @@ nginx
         <span class="toc-progress-bar"></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="toc-text">相关环境安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-jdk-%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="toc-text">1 jdk 安装步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95%E5%AD%98%E6%94%BE-jdk-%E5%AE%89%E8%A3%85%E5%8C%85"><span class="toc-text">1.1 创建目录存放 jdk 安装包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%8E%BB%E5%8D%8E%E4%B8%BA%E4%BA%91%E6%89%BE%E8%87%AA%E5%B7%B1%E6%83%B3%E8%A6%81%E7%9A%84jdk%E7%89%88%E6%9C%AChttps-repo-huaweicloud-com-java-jdk"><span class="toc-text">1.2 去华为云找自己想要的jdk版本https:&#x2F;&#x2F;repo.huaweicloud.com&#x2F;java&#x2F;jdk&#x2F;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E8%A7%A3%E5%8E%8B%E7%BC%A9"><span class="toc-text">1.3 解压缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">1.4 配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E5%88%B7%E6%96%B0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">1.5 刷新环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-%E6%9F%A5%E7%9C%8B%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F"><span class="toc-text">1.6 查看是否安装成功</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-%E8%AE%BE%E7%BD%AE%E8%BD%AF%E8%BF%9E%E6%8E%A5"><span class="toc-text">1.7 设置软连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-nginx-%E5%AE%89%E8%A3%85"><span class="toc-text">2 nginx 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%88%9B%E5%BB%BA%E8%B7%AF%E5%BE%84"><span class="toc-text">2.1 创建路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%AE%89%E8%A3%85-gcc"><span class="toc-text">2.2 安装 gcc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E4%BE%9D%E8%B5%96"><span class="toc-text">2.3 安装相关依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E8%BF%9B%E5%85%A5-nginx-%E5%AE%98%E7%BD%91%EF%BC%8C%E4%B8%8B%E8%BD%BD%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC-nginx"><span class="toc-text">2.4 进入 nginx 官网，下载指定版本 nginx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E8%BF%9B%E8%A1%8C%E8%A7%A3%E5%8E%8B"><span class="toc-text">2.5 进行解压</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-%E6%89%A7%E8%A1%8C%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="toc-text">2.6 执行相关命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-%E5%90%AF%E5%8A%A8-nginx"><span class="toc-text">2.7 启动 nginx</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="toc-text">相关环境安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-jdk-%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="toc-text">1 jdk 安装步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95%E5%AD%98%E6%94%BE-jdk-%E5%AE%89%E8%A3%85%E5%8C%85"><span class="toc-text">1.1 创建目录存放 jdk 安装包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%8E%BB%E5%8D%8E%E4%B8%BA%E4%BA%91%E6%89%BE%E8%87%AA%E5%B7%B1%E6%83%B3%E8%A6%81%E7%9A%84jdk%E7%89%88%E6%9C%AChttps-repo-huaweicloud-com-java-jdk"><span class="toc-text">1.2 去华为云找自己想要的jdk版本https:&#x2F;&#x2F;repo.huaweicloud.com&#x2F;java&#x2F;jdk&#x2F;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E8%A7%A3%E5%8E%8B%E7%BC%A9"><span class="toc-text">1.3 解压缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">1.4 配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E5%88%B7%E6%96%B0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">1.5 刷新环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-%E6%9F%A5%E7%9C%8B%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F"><span class="toc-text">1.6 查看是否安装成功</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-%E8%AE%BE%E7%BD%AE%E8%BD%AF%E8%BF%9E%E6%8E%A5"><span class="toc-text">1.7 设置软连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-nginx-%E5%AE%89%E8%A3%85"><span class="toc-text">2 nginx 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%88%9B%E5%BB%BA%E8%B7%AF%E5%BE%84"><span class="toc-text">2.1 创建路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%AE%89%E8%A3%85-gcc"><span class="toc-text">2.2 安装 gcc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E4%BE%9D%E8%B5%96"><span class="toc-text">2.3 安装相关依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E8%BF%9B%E5%85%A5-nginx-%E5%AE%98%E7%BD%91%EF%BC%8C%E4%B8%8B%E8%BD%BD%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC-nginx"><span class="toc-text">2.4 进入 nginx 官网，下载指定版本 nginx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E8%BF%9B%E8%A1%8C%E8%A7%A3%E5%8E%8B"><span class="toc-text">2.5 进行解压</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-%E6%89%A7%E8%A1%8C%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="toc-text">2.6 执行相关命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-%E5%90%AF%E5%8A%A8-nginx"><span class="toc-text">2.7 启动 nginx</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-liunx-%E4%B8%8B%E5%AE%89%E8%A3%85-maven"><span class="toc-text">3. liunx 下安装 maven</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95%E5%B9%B6%E8%BF%9B%E5%85%A5"><span class="toc-text">3.1 创建目录并进入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%B8%8B%E8%BD%BD-maven-%E5%AE%89%E8%A3%85%E5%8C%85%E6%94%BE%E5%85%A5%E8%AF%A5%E7%9B%AE%E5%BD%95%E4%B8%8B%E8%A7%A3%E5%8E%8B"><span class="toc-text">3.2 下载 maven 安装包放入该目录下解压</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E8%AE%BE%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">3.3 设置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%88%9B%E5%BB%BA-ck-%E4%BB%93%E5%BA%93%E5%AD%98%E5%82%A8%E7%9B%AE%E5%BD%95"><span class="toc-text">3.4 创建 ck 仓库存储目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E4%BF%AE%E6%94%B9-conf-%E7%9A%84-setting-conf-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">3.5 修改 conf 的 setting.conf 配置文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-linux-%E4%B8%8B%E5%AE%89%E8%A3%85-sonar"><span class="toc-text">4. linux 下安装 sonar</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E9%A6%96%E5%85%88%E9%9C%80%E8%A6%81%E5%AE%89%E8%A3%85-jdk-%E5%92%8C-maven%EF%BC%8C-%E5%8F%AF%E5%8F%82%E8%80%83-1-%E6%AD%A5%E9%AA%A4"><span class="toc-text">4.1 首先需要安装 jdk 和 maven， 可参考 1 步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95"><span class="toc-text">4.2 创建目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E4%B8%8B%E8%BD%BDsonarqube%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%8E%8B"><span class="toc-text">4.3 下载sonarqube以及解压</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84-mysql-%E6%8C%87%E5%90%91"><span class="toc-text">4.4 修改配置文件中的 mysql 指向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B9%B6%E5%90%AF%E5%8A%A8"><span class="toc-text">4.5 修改配置文件并启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-%E8%AE%BF%E9%97%AE%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E6%88%90%E5%8A%9F"><span class="toc-text">4.5 访问是否可以成功</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-%E9%85%8D%E5%90%88-maven-%E8%BF%9B%E8%A1%8C%E4%BD%BF%E7%94%A8"><span class="toc-text">4.6 配合 maven 进行使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-%E5%AE%89%E8%A3%85-sonar-scanner"><span class="toc-text">4.7 安装 sonar-scanner</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-jenkins-%E5%AE%89%E8%A3%85"><span class="toc-text">5. jenkins 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E4%B8%8B%E8%BD%BD-rpm-%E5%8C%85"><span class="toc-text">5.1 下载 rpm 包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E5%AE%89%E8%A3%85"><span class="toc-text">5.2 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E5%90%8E%E7%BB%AD%E5%8F%AF%E4%BB%A5%E5%8F%82%E8%80%83"><span class="toc-text">5.3 后续可以参考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4-%E5%92%8C-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE"><span class="toc-text">5.4 相关命令 和 配置文件位置</span></a></li></ol></li></ol></li></ol>
     </div>
 </aside>
                 
